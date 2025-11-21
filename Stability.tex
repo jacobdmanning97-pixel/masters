@@ -1,0 +1,943 @@
+\chapter{Part II: Asymptotic Decay of the FSI Systems}
+\section{Revisiting the Canonical FSI PDE Model}
+    We turn our attention now back to the PDE described in $(\ref{bmeq:2})-(\ref{bmeq:5})$ with the associated Hilbert space, inner product, and generator with domain ($(\ref{bmeq:6}),\:(\ref{bmeq:7}),\:(\ref{bmeq:10})$ and $(\ref{bmeq:11})$ respectively). In this framework the authors also showed strong stability for any initial data taken in the domain of the generator. This is summarized in the following theorem.
+    \begin{thrm}
+        For the modeling generator $\A:D(\A)\subseteq\BH\to\BH$ of $(\ref{bmeq:2})-(\ref{bmeq:5})$, one has $\sigma(\A)\cap i\R=\emptyset$. Consequently, the $C_0$-semigroup $\left \{e^{\A t}\right \}_{t\geq 0}$ given in Theorem $\ref{bmthrm:1}$ is strongly stable. That is, the solution $\Phi(t)$ of the PDE $(\ref{bmeq:2})-(\ref{bmeq:5})$ tends asymptotically to the zero state for all initial data $\Phi_0\in\BH$\label{bmthrm:2}
+    \end{thrm}
+    \noindent The proof of this theorem will be independent of the compactness or non-compactness of the resolvent of $\A$. It will hinge on an ultimate appeal to the following well known result from the paper by W. Arendt and C. J. K. Batty (1988)\cite{A-B}:
+    \begin{thrm}
+        Let $T(t)_{t\geq 0}$ be a bounded $C_0$-semigroup on a reflexive Banach space $X$, with generator $\A$. Assume that $\sigma_p(\A)\cap i\R=\emptyset$, where $\sigma_p(\A)$ is the point spectrum of $\A$. If $\sigma(\A)\cap i\R$ is countable then $T(t)_{t\geq 0}$ is strongly stable.\label{bmthrm:6}
+    \end{thrm}
+    \noindent The proof of Theorem $\ref{bmthrm:2}$ entails the elimination of all three parts of the spectrum of the generator $\A$ from the imaginary axis. For this, we will go through the necessary analysis done by the authors on the spectrum in the following section.
+\section{Main Result: Asymptotic Decay of the Solution}
+    \subsection{$\A$ is Boundedly Invertible}
+    In order to satisfy the conditions of Theorem $\ref{bmthrm:6}$, the authors will prove that $\sigma(\A)\cap i\R=\emptyset$ which is equivalent to show that
+    \begin{align*}
+        i\R\subseteq \rho(\A)
+    \end{align*}
+    To do this, start with the following proposition:
+    \begin{prop}
+        With generator $\A:D(\A)\subseteq\BH\to\BH$ given in $(\ref{bmeq:10})-(\ref{bmeq:11})$, the point $0\in\rho(\A)$. That is, $\A$ is boundedly invertible.\label{bmprop:7}
+    \end{prop}
+    \begin{proof}
+        Given $\Phi^*=[u_0^*,h_{01}^*,h_{11}^*,\dots,h_{0K}^*,h_{1K}^*,w_0^*,w_1^*]\in\BH$, the authors take up the task of finding $\Phi=[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in D(\A)$ which solves
+        \begin{align}
+            \A\Phi=\Phi^*\label{bmeq:42}
+        \end{align}
+        or,
+        \begin{align}
+            \begin{bmatrix}
+                \Delta u_0\\h_{11}\\ -\frac{\partial u_0}{\partial\nu}\big|_{\G_1}+(\Delta-I)h_{01}+\frac{\partial w_0}{\partial\nu}\big|_{\G_1}\\\vdots\\h_{1K}\\ -\frac{\partial u_0}{\partial\nu}\big|_{\G_K}+(\Delta-I)h_{0K}+\frac{\partial w_0}{\partial\nu}\big|_{\G_K}\\w_1\\\Delta w_0
+            \end{bmatrix}=
+            \begin{bmatrix}
+                u_0^*\\h_{01}^*\\h_{11}^*\\\vdots\\h_{0K}^*\\h_{1K}^*\\w_0^*\\w_1^*
+            \end{bmatrix}\label{bmeq:43}
+        \end{align}
+        From the thin and thick wave component of this equation note that
+        \begin{align}
+            w_1=w_0^*\in\HM{1}{\Om_s}\label{bmeq:44}\\
+            h_{1j}=h_{0j}^*\in\HM{1}{\G_j},\text{ for }1\leq j\leq K\label{bmeq:45}
+        \end{align}
+        Moreover, from the heat and thick wave components of $(\ref{bmeq:43})$, and the domain criterion $(\A.iii)$, the solution component $u_0$ should satisfy the following BVP:
+        \begin{align}
+            \begin{cases}
+                \Delta u_0=u_0^*\\
+                u_0|_{\G_f}=0\\
+                u_0|_{\G_s}=w_0^*|_{\G_s}
+            \end{cases}\label{bmeq:46}
+        \end{align}
+        Solving this BVP, and estimating its solution, in part by the Sobolev Trace Theorem, it follows
+        \begin{align}
+            \norm{u_0}{H_{\G_f}^1(\Om_f)}+\norm{\Delta u_0}{\Om_f}\leq C\left [\norm{u_0^*}{\Om_f}+\norm{w_0^*}{\HM{1}{\Om_s}}\right ].\label{bmeq:47}
+        \end{align}
+        In turn, the use of this estimate in an integration by parts gives
+        \begin{align}
+            \norm{\frac{\partial u_0}{\partial\nu}}{\HM{-1/2}{\G_f}}\leq C\left [\norm{u_0^*}{\Om_f}+\norm{w_0^*}{\HM{1}{\Om_s}}\right ].\label{bmeq:48}
+        \end{align}
+        In addition, with the space $\mathcal{V}$ as in $(\ref{bmeq:20})$, set
+        \begin{align}
+            \chi\equiv\set{[\psi,\xi]\in\mathcal{V}\times\HM{1}{\Om_s}}{\psi_j=\xi|_{\G_j}\text{ for }1\leq j\leq K}.\label{bmeq:49}
+        \end{align}
+        with this space in hand, and with the thin-wave and thick-wave components of equation $(\ref{bmeq:43})$ in mind, consider the variational relation
+        \begin{align}
+            &\IP{\nabla w_0,\nabla \xi}{\Om_s}+\sum_{j=1}^K[\IP{\nabla h_{0j},\nabla \psi_j}{\G_j}+\IP{h_{0j},\psi_j}{\G_j}]\nonumber\\
+            =&-\IP{w_1^*,\xi}{\Om_s}-\sum_{j=1}^K\left [\IP{h_{1j}^*,\psi_j}{\G_j}+\IP{\frac{\partial u_0}{\partial\nu},\psi_j}{\G_j}\right ],\label{bmeq:50}
+        \end{align}
+        for every $[\psi,\xi]\in\chi$ where the term $\frac{\partial u_0}{\partial\nu}\big|_{\G_s}$ is from $(\ref{bmeq:48})$. Since the bilinear form $b(\cdot,\cdot):\chi\to\R$, given by
+        \begin{align}
+            b\left ([\psi,\xi],\left [\widetilde{\psi},\widetilde{\xi} \right ]\right )=\IP{\nabla\xi,\nabla\widetilde{\xi}}{\Om_s}+\sum_{j=1}^K\left [\IP{\nabla\psi_j,\nabla\widetilde{\psi}_j}{\G_j}+\IP{\psi_j,\widetilde{\psi}_j}{\G_j}\right ]\label{bmeq:51}
+        \end{align}
+        for every $[\psi,\xi],\:\left [\widetilde{\psi},\widetilde{\xi} \right ]\in\chi$, is continuous and $\chi$-elliptic, then by Lax-Milgram (see Theorem $\ref{Lax}$), there exists a unique solution
+        \begin{align}
+            \varphi=[(h_{01},h_{02},\dots,h_{0K}),w_0]\in\chi\label{bmeq:52}
+        \end{align}
+        to the variational relation $(\ref{bmeq:50})$. To show that the obtained $[u_0,[h_{01},h_{11},\dots,h_{0K},h_{1K}],w_0,w_1]\in\BH$ is in $D(\A)$ and satisfies the equation $(\ref{bmeq:43})$:\\
+        Proceeding very much as in the proof of Theorem $\ref{bmthrm:1}$, take in $(\ref{bmeq:50})$
+        \begin{align*}
+            [\psi,\xi]=[[0,0,\dots,0],\varphi],
+        \end{align*}
+        where $\varphi\in\mathscr{D}(\Om_s)$. This gives
+        \begin{align*}
+            \IP{\nabla w_0,\nabla\xi}{\Om_s}=-\IP{w_1^*,\xi}{\Om_s},
+        \end{align*}
+        whence the authors obtain
+        \begin{align}
+            -\Delta w_0=-w_1^*\text{ in }\Om_s\label{bmeq:53}
+        \end{align}
+        with
+        \begin{align}
+            \norm{\Delta w_0}{\Om_s}+\norm{\frac{\partial w_0}{\partial\nu}}{\HM{-1/2}{\G_s}}&\leq C\left [\norm{w_1^*}{\Om_s}+\norm{w_0}{\HM{1}{\Om_s}} \right ]\nonumber\\
+            &\leq C \norm{[u_0^*,[h_{01}^*,h_{11}^*,\dots,h_{0K}^*,h_{1K}^*],w_0^*,w_1^*]}{\BH}\label{bmeq:54}
+        \end{align}
+        after using $(\ref{bmeq:52})$. In turn, using aforesaid right continuous inverse $\gamma_s^+\in\Lin(\HM{1/2}{\G_s},\HM{1}{\Om_s})$, let in $(\ref{bmeq:50})$, be the test functions
+        \begin{align*}
+            [\psi,\xi]=\left [[(\psi_1)_{\text{ext}},\dots,(\psi_K)_{\text{ext}}],\gamma_s^+\left (\sum_{j=1}^K (\psi_j)_{\text{ext}}\right )\right ]\in\chi,
+        \end{align*}
+        where each $\psi_j\in H_0^1(\G_j)$ for $1\leq j\leq K$ and each $(\psi_j)_{\text{ext}}$ is as in $(\ref{bmeq:33})$. Applying this function to $(\ref{bmeq:50})$, integrating by parts and invoking $(\ref{bmeq:53})$,
+        \begin{align*}
+            &-\IP{\Delta w_0,\xi}{\Om_s}-\IP{\frac{\partial w_0}{\partial\nu},\xi|_{\G_s}}{\G_s}+\sum_{j=1}^K\left [\IP{\nabla h_{0j},\nabla\psi_j}{\G_j}+\IP{h_{0j},\psi_j}{\G_j}\right ]\\
+            =&-\sum_{j=1}^K\left [\IP{\frac{\partial u_0}{\partial\nu},\psi_j}{\G_j}+\IP{h_{1j}^*,\psi_j}{\G_j}\right ]-\IP{w_1^*,\xi}{\Om_s}.
+        \end{align*}
+        Again, as each $\psi_j\in H_0^j(\G_j)$ is arbitrary, it is deduced that each $h_{0j}$ solves the thin-wave equation
+        \begin{align}
+            -\Delta h_{0j}+h_{0j}-\frac{\partial w_0}{\partial\nu}+\frac{\partial u_0}{\partial \nu}=-h_{1j}^*,\text{ in }\G_j,\:1\leq j\leq K.\label{bmeq:55}
+        \end{align}
+        A subsequent integration by parts, and invocation of $(\ref{bmeq:48}),\:(\ref{bmeq:52})$, and $(\ref{bmeq:54})$, give for $1\leq j\leq K$,
+        \begin{align}
+            \norm{\Delta h_{0j}}{\G_j}+\left |\left |\frac{\partial h_{0j}}{\partial n_j}\right |\right |_{\HM{-1/2}{\partial\G_j}}\leq C\norm{[u_0^*,[h_{01}^*,h_{11}^*,\dots,h_{0K}^*,h_{1K}^*],w_0^*,w_1^*]}{\BH}.\label{bmeq:56}
+        \end{align}
+        Now, proceeding as in the final stage of the proof of Theorem $\ref{bmthrm:1}$: Let fixed indices $j^*,\:l^*,\:1\leq j^*,\:l^*\leq K$ satisfy $\partial\G_{j^*}\cap\partial\G_{l^*}\neq \emptyset$. Given the function $g\in H_0^{1/2+\epsilon}(\partial\G_{j^*}\cap\partial\G_{l^*})$, invoke the associated functions $\psi_{j^*}\in\HM{1+\epsilon}{\G_{j^*}}$ and $\psi_{l^*}\in\HM{1+\epsilon}{\G_{l^*}}$ as in $(\ref{bmeq:38})$, also $\Upsilon\in\HM{1}{\G_s}$ as in $(\ref{bmeq:39})$. With these functions, and said continuous right inverse $\gamma_s^+\in\Lin(\HM{1/2}{\G_s},\HM{1}{\Om_s})$, consider the test function
+        \begin{align*}
+            [\psi,\xi]=[[0,\dots,\psi_{j^*},0,\dots,0,\psi_{l^*},\dots,0],\gamma_s^+(\Upsilon)]\in\chi.
+        \end{align*}
+        Applying this test function to the variational relation $(\ref{bmeq:50})$, and subsequently invoking $(\ref{bmeq:53})$, it follows
+        \begin{align*}
+            -\IP{\frac{\partial w_0}{\partial\nu},\xi|_{\G_s}}{\G_s}&+\IP{\nabla h_{0j^*},\nabla \psi_{j^*}}{\G_{j^*}}+\IP{h_{0j^*},\psi_{j^*}}{\G_{j^*}}+\IP{\nabla h_{0l^*},\nabla \psi_{l^*}}{\G_{l^*}}+\IP{h_{0l^*},\psi_{l^*}}{\G_{l^*}}\\
+            =&-\IP{h_{1j^*},\psi_{j^*}}{\G_{j^*}}-\IP{\frac{\partial u_0}{\partial\nu},\psi_{j^*}}{\G_{j^*}}-\IP{h_{1l^*},\psi_{l^*}}{\G_{l^*}}-\IP{\frac{\partial u_0}{\partial\nu},\psi_{l^*}}{\G_{l^*}}.
+        \end{align*}
+        Integrating by parts with respect to the thin wave components, and invoking $(\ref{bmeq:55})$ and $(\ref{bmeq:38})$, the authors get
+        \begin{align*}
+            \IP{\frac{\partial h_{0j^*}}{\partial n_{j^*}},g}{\partial \G_{j^*}\cap\partial\G_{l^*}}+\IP{\frac{\partial h_{0l^*}}{\partial n_{l^*}},g}{\partial \G_{j^*}\cap\partial\G_{l^*}}=0.
+        \end{align*}
+        Since $g\in H_0^{1/2+\epsilon}(\partial \G_{j^*}\cap\partial\G_{l^*})$ is arbitrary, a density argument yields
+        \begin{align}
+            \IP{\frac{\partial h_{0j^*}}{\partial n_{j^*}},g}{\partial \G_{j^*}\cap\partial\G_{l^*}}=-\IP{\frac{\partial h_{0l^*}}{\partial n_{l^*}},g}{\partial \G_{j^*}\cap\partial\G_{l^*}},\text{ for all }j^*,\:l^*\:,1\leq j^*,\:l^*\leq K\label{bmeq:57}
+        \end{align}
+        such that $\partial \G_{j^*}\cap\partial\G_{l^*}\neq\emptyset$. Collecting $(\ref{bmeq:44})$, $(\ref{bmeq:45})$, $(\ref{bmeq:47})$, $(\ref{bmeq:48})$, $(\ref{bmeq:52})$, $(\ref{bmeq:53})$, and $(\ref{bmeq:55})-(\ref{bmeq:57})$, it follows that the obtained $[u_0,[h_{01},h_{11},\dots,h_{0K},h_{1K}],w_0,w_1]\in D(\A)$ satisfies the equation $(\ref{bmeq:42})$ for arbitrary $\Phi^*\in\BH$. Since also $\A:D(\A)\subseteq \BH\to\BH$ is dissipative (and so injective), the authors conclude that $\A$ is boundedly invertible.
+    \end{proof}
+    \subsection{Analysis of the Continuous and Point Spectrum $\sigma_c(\A)$ and $\sigma_p(\A)$}
+    \begin{lemma}
+        The point $\sigma_p(\A)$ and continuous specta $\sigma_c(\A)$ of $\A$ have empty intersection with $i\R$.\label{bmlemma:9}
+    \end{lemma}
+    \begin{proof}
+        To prove this, it will be enough to show that $i\R\backslash \{0\}$ has empty intersection with the approximate spectrum of $\A$; see e.g., Theorem 2.27, pg. 128 of \cite{F}. To this end, given $\beta\neq 0$, suppose that $i\beta$ is in the approximate spectrum of $\A$. Then there exist sequences
+        \begin{align}
+            \{\Phi_n\}=\begin{Bmatrix}
+                \begin{bmatrix}
+                u_n\\h_{1n}\\\xi_{1n}\\\vdots\\h_{Kn}\\\xi_{Kn}\\w_{0n}\\w_{1n}
+                \end{bmatrix}
+            \end{Bmatrix}\subseteq D(\A);\quad
+            \{(i\beta I-\A)\Phi_n\}=\begin{Bmatrix}
+                \begin{bmatrix}
+                    u_n^*\\
+                    \varphi_{1n}^*\\\psi_{1n}^*\\\vdots\\\varphi_{Kn}^*\\\psi_{Kn}^*\\w_{0n}^*\\w_{1n}^*
+                \end{bmatrix}
+            \end{Bmatrix}\subseteq\BH,
+        \end{align}
+        which satisfy for $n\in\mathbb{N}$
+        \begin{align}
+            \norm{\Phi_n}{\BH}=1,\quad \norm{(i\beta I-\A)\Phi_n}{\BH}<\frac{1}{n}\label{bmeq:59}
+        \end{align}
+        As such, each $\Phi_n$ solves the following static system:
+        \begin{align}
+            \begin{cases}
+                i\beta u_n-\Delta u_n=u_n^*\text{ in }\Om_f\\
+                u_n|_{\G_f}=0\text{ on }\G_f
+            \end{cases}\label{bmeq:60}
+        \end{align}
+        For $1\leq j\leq K$,
+        \begin{align}
+            \begin{cases}
+                i\beta h_{jn}-\xi_{jn}=\varphi_{jn}^*\text{ in }\G_j\\
+                -\beta^2 h_{jn}-\Delta h_{jn}+h_{jn}+\frac{\partial u_{n}}{\partial\nu}-\frac{\partial w_{0n}}{\partial\nu}=\psi_{jn}^*+i\beta \varphi_{jn}^*\text{ in }\G_j
+            \end{cases}\label{bmeq:61}
+        \end{align}
+        Also
+        \begin{align}
+            \begin{cases}
+                i\beta w_{0n}-w_{1n}=w_{0n}^*\text{ in }\Om_s\\
+                -\beta^2 w_{0n}-\Delta w_{0n}=w_{1n}^*+i\beta w_{0n}^*\text{ in }\Om_s
+            \end{cases}\label{bmeq:62}
+        \end{align}
+        and again for $1\leq j\leq K$,
+        \begin{align}
+            \begin{cases}
+                u_n|_{\G_j}=\xi_{jn}=w_{1n}|_{\G_j}\\
+                \frac{\partial h_{nj}}{\partial n_j}\bigg |_{\partial\G_j\cap\partial\G_l}=-\frac{\partial h_{nl}}{\partial n_l}\bigg |_{\partial\G_j\cap\partial\G_l}\text{ for all }1\leq l\leq K\text{ such that }\partial\G_j\cap\partial\G_l\neq\emptyset.
+            \end{cases}\label{bmeq:63}
+        \end{align}
+        Now the left part of the proof of Lemma $\ref{bmlemma:9}$ will be given in five steps:\\
+        \textbf{\underline{Step 1:} (Estimating the heat component of $\Phi_n$)}\\
+        Proceeding as earlier in establishing the dissipativity of $\A: D(\A)\subseteq\BH\to\BH$, (see relations $(\ref{bmeq:12})$ and $(\ref{bmeq:14})$), denote
+        \begin{align*}
+            \Phi_n^*=(i\beta I-\A)\Phi_n
+        \end{align*}
+        then from the relation
+        \begin{align*}
+            \IP{(i\beta I-\A)\Phi_n,\Phi_n}{\BH}=\IP{\Phi_n^*,\Phi_n}{\BH},
+        \end{align*}
+        then
+        \begin{align}
+            \norm{\nabla u_n}{\Om_f}^2=\Real\IP{\Phi_n^*,\Phi_n}{\BH}.\label{bmeq:64}
+        \end{align}
+        From $(\ref{bmeq:59})$,
+        \begin{align}
+            \lim_{n\to\infty}u_n=0\text{ in }\HM{1}{\Om_f}.\label{bmeq:65}
+        \end{align}
+        In turn, via the thin wave resolvent condition in $(\ref{bmeq:61})$ and boundary conditions in $(\ref{bmeq:63})$, it follows for $1\leq j\leq K$
+        \begin{align*}
+            h_{jn}=\frac{i}{\beta}u_n|_{\G_j}-\frac{i}{\beta}\varphi_{jn}^*|_{\G_j}\text{ in }\G_j.
+        \end{align*}
+        From this relation, invoke $(\ref{bmeq:65})$, the Sobolev trace map, and $(\ref{bmeq:59})$, to have
+        \begin{align}
+            \lim_{n\to\infty}h_{jn}=0\text{ in }\HM{1/2}{\G_j}\label{bmeq:66}
+        \end{align}
+        for $1\leq j\leq K$. Moreover, an integration by parts, with respect to the heat equation $(\ref{bmeq:60})$, gives the estimate
+        \begin{align*}
+            \left |\left |\frac{\partial u_n}{\partial\nu}\right |\right |_{\HM{-1/2}{\G_f}}&\leq C[\norm{\nabla u_n}{\Om_f}+\norm{\Delta u_n}{\Om_f}]\\
+            &\leq C[\norm{\nabla u_n}{\Om_f}+\norm{i\beta u_n-u_n^*}{\Om_f}].
+        \end{align*}
+        Now, invoking $(\ref{bmeq:64})$ and $(\ref{bmeq:59})$ gives
+        \begin{align}
+            \lim_{n\to\infty}\frac{\partial u_n}{\partial\nu}=0\text{ in }\HM{-1/2}{\G_j}\label{bmeq:67}
+        \end{align}
+        \textbf{\underline{Step 2:}}\\
+        Start here by defining the ``Direchlet'' map $D_s:\LP{2}{\G_s}\to\LP{2}{\Om_s}$ via
+        \begin{align*}
+            D_s g=f\leftrightarrow \begin{cases}
+                \Delta f=0\text{ in }\Om_s\\
+                f|_{\G_s}=g\text{ on }\G_s
+            \end{cases}
+        \end{align*}
+        By the Lax-Milgram Theorem (see Theorem $\ref{Lax}$)
+        \begin{align}
+            D_s\in\Lin(\HM{1/2}{\G_s},\HM{1}{\Om_s}).\label{bmeq:68}
+        \end{align}
+        Therewith, considering the resolvent relations in $(\ref{bmeq:62})$, we set
+        \begin{align}
+            z_n\equiv w_{0n}+\frac{i}{\beta}D_s[u_n|_{\G_s}+w_{0n}^*|_{\G_s}],\label{bmeq:69}
+        \end{align}
+        and so from $(\ref{bmeq:62})$ $z_n$ satisfies the following BVP:
+        \begin{align}
+            \begin{cases}
+                -\beta^2z_n-\Delta z_n=w_{1n}^*+i\beta w_{0n}^*-i\beta D_s[u_n|_{\G_s}+w_{0n}^*|_{\G_s}]\text{ in }\Om_s\\
+                z_n|_{\G_s}=0\text{ on }\G_s.
+            \end{cases}\label{bmeq:70}
+        \end{align}
+        Since $\Om_s$ is convex, then $z_n\in\HM{2}{\Om_S}$ (See Theorem 3.2.1.2, pg. 147 of \cite{GV}). In consequence, the authors can apply the static version of the well-known wave identity which is often used in PDE control theory - see (Proposition 7 (ii) of \cite{uniform}), \cite{chen}, \cite{trigg}. To wit, let $m(x)$ by any $[C^2(\overline{\Om_s})]^3$-vector field with associated Jacobian matrix
+        \begin{align*}
+            [M(x)]_{ij}=\frac{\partial m_i(x)}{\partial x_j},\:1\leq i,\:j\leq 3
+        \end{align*}
+        Therewith, it follows that
+        \begin{align}
+            \int_{\Om_s}M\nabla z_n\cdot \nabla z_n d\Om_s&=-\Real\int_{\G_s}\frac{\partial z_n}{\partial\nu}m\cdot \nabla \overline{z_n} d\G_s-\frac{\beta^2}{2}\int_{\G_s}|z_n|^2m\cdot\nu d\G_s\nonumber\\
+            &+\frac{1}{2}\int_{\G_s}|\nabla z_n|^2m\cdot\nu d\G_s+\frac{1}{2}\int_{\Om_s}[|\nabla z_n|^2-\beta^2|z_n|^2]\diver(m)d\Om_s\nonumber\\
+            &+\Real\int_{\Om_s}\left [F_\beta^*-i\beta D_s[u_n|_{\G_s}+w_{0n}^*|_{\G_s}]  \right ]m\cdot\nabla\overline{z_n} d\Om_s,\label{bmeq:71}
+        \end{align}
+        where
+        \begin{align}
+            F_\beta^*=(\Real\:w_{1n}^*-\beta I_m w_{0n}^*)+i(I_m w_{1n}^*+\beta\Real\:w_{0n}^*)\label{bmeq:72}
+        \end{align}
+        Again, relation $(\ref{bmeq:21})$ holds for any $C^2$-vector field $m(x)$. The authors now specify it to be the smooth vector field of Lemma 1.5.1.9, pg. 40 of \cite{GV}. Namely, for some $\delta>0$, the $C^\infty$ vector field $m(x)$ satisfies
+        \begin{align}
+            -m(x)\cdot \nu\geq \delta\text{ a.e. on }\G_s\label{bmeq:73}
+        \end{align}
+        Specifying this vector field in $(\ref{bmeq:71})$, and considering that $z_n|_{\G_s}=0$, it follows that
+        \begin{align}
+            -\frac{1}{2}\int_{\G_s}\left |\frac{\partial z_n}{\partial\nu}\right |^2 m\cdot\nu d\G_s=&\int_{\Om_s}M\nabla z_n\cdot \nabla z_n d\Om_s+\frac{1}{2}\int_{\Om_s}[\beta^2|z_n|^2-|\nabla z_n|^2]d\Om_s\nonumber\\
+            &-\Real\int_{\Om_s}\left [F_\beta^*-i\beta D_s[u_n|_{\G_s}+w_{0n}^*|_{\G_s}]  \right ]m\cdot\nabla\overline{z_n} d\Om_s.\label{bmeq:74}
+        \end{align}
+        Estimating this relation via $(\ref{bmeq:59})$, $(\ref{bmeq:65})$, $(\ref{bmeq:69})$, and $(\ref{bmeq:68})$ and the Sobolev trace map,
+        \begin{align}
+            \int_{\G_s}\left |\frac{\partial z_n}{\partial\nu}\right |^2 d\G_s\leq C_{\delta,\beta,m},\label{bmeq:75}
+        \end{align}
+        where positive constant $C_{\delta,\beta,m}$ is independent of $n\in\mathbb{N}$.\\
+        \textbf{\underline{Step 3:} (An energy estimate for $h_{jn}$)}\\
+        By multiplying both sides of the thin wave $h_{jn}$-equation $(\ref{bmeq:61})$ by $h_{jn}$, integrating and subsequently integrating by parts it follows for $1\leq j\leq K$,
+        \begin{align}
+            \int_{\G_j}|\nabla h_{jn}|^2d\G_j=&\int_{\G_j}\frac{\partial w_{0n}}{\partial\nu}h_{jn}d\G_j+(\beta^2-1)\int_{\G_j}|h_{jn}|^2 d\G_j-\int_{\G_j}\frac{\partial u_n}{\partial\nu} h_{jn}d\G_j\nonumber\\
+            &+\int_{\G_j}(\psi_{jn}^*+i\beta\varphi_{jn}^*)h_{jn}d\G_j\label{bmeq:76}
+        \end{align}
+        Here, the authors are also implicitly using $D(\A)$-criterion $\textbf{(A.iv)}$. For the first term on the right hand side: upon combining the regularity for $D_s$ in $(\ref{bmeq:68})$ with an integration by parts, it follows that
+        \begin{align}
+            \frac{\partial}{\partial\nu}D_s\in\Lin(\HM{1/2}{\G_s},\HM{-1/2}{\Om_s})\label{bmeq:77}
+        \end{align}
+        This gives the estimate, via the decomposition $(\ref{bmeq:69})$,
+        \begin{align}
+            \left |\left | \frac{\partial w_{0n}}{\partial\nu}\right |\right |_{\HM{-1/2}{\G_s}}\leq C\left [\left |\left | \frac{\partial z_n}{\partial\nu}\right |\right |_{\HM{-1/2}{\G_s}}+\left |\left | i\beta\frac{\partial}{\partial\nu}D_s[u_n|_{\G_s}+w_{0n}^*|_{\G_s}]\right |\right |_{\HM{-1/2}{\G_s}}\right ]\leq C_\beta\label{bmeq:78}
+        \end{align}
+        after also using $(\ref{bmeq:59})$, $(\ref{bmeq:65})$, the Sobolev trace map, and $(\ref{bmeq:75})$. Applying this estimate to the right hands side of $(\ref{bmeq:76})$, along with $(\ref{bmeq:66})$, $(\ref{bmeq:67})$, and $(\ref{bmeq:59})$
+        \begin{align}
+            \lim_{n\to\infty}h_{jn}=0\text{ in }\HM{1}{\G_j},\:1\leq j\leq K.\label{bmeq:79}
+        \end{align}\\
+        \textbf{\underline{Step 4:}}\\
+        From the previous step the limit in $(\ref{bmeq:79})$ when applied to the equation
+        \begin{align*}
+            \frac{\partial w_{0n}}{\partial\nu}\bigg |_{\G_j}=-\Delta h_{jn}+(1-\beta^2)h_{jn}+\frac{\partial u_n}{\partial\nu}-(\psi_{jn}^*+i\beta\varphi_{jn}^*)\text{ in }\G_j,\:1\leq j\leq K,
+        \end{align*}
+        gives
+        \begin{align}
+            \lim_{n\to\infty}\frac{\partial w_{0n}}{\partial\nu}\bigg |_{\G_j}=0\text{ in }\HM{-1}{\G_j}.\label{bmeq:80}
+        \end{align}
+        In obtaining this limit, along with $(\ref{bmeq:79})$, the authors are also using $(\ref{bmeq:67})$ and $(\ref{bmeq:59})$. In turn, via an interpolation it follows for $1\leq j\leq K$,
+        \begin{align}
+            \left |\left |\frac{\partial z_n}{\partial\nu}\right |\right |_{\HM{-1/2}{\G_j}}&\leq C\left |\left |\frac{\partial z_n}{\partial\nu}\right |\right |_{\HM{-1}{\G_j}}^{1/2}\left |\left |\frac{\partial z_n}{\partial\nu}\right |\right |_{\LP{2}{\G_j}}^{1/2}\nonumber\\
+            &=C\left |\left | i\beta\frac{\partial}{\partial\nu}D_s[u_n|_{\G_s}+w_{0n}^*|_{\G_s}]\right |\right |_{\HM{-1}{\G_s}}^{1/2}\left |\left |\frac{\partial w_{0n}}{\partial\nu}+\frac{\partial z_n}{\partial\nu}\right |\right |_{\LP{2}{\G_j}}^{1/2}\label{bmeq:81}
+        \end{align}
+        Applying $(\ref{bmeq:77})$, $(\ref{bmeq:59})$, $(\ref{bmeq:80})$, and $(\ref{bmeq:75})$ to the right hand side of $(\ref{bmeq:81})$, and upon summing up over $j$,
+        \begin{align}
+            \lim_{n\to\infty}\frac{\partial z_n}{\partial\nu}=0\text{ in }\HM{-1/2}{\G_s}\label{bmeq:82}
+        \end{align}\\
+        \textbf{\underline{Step 5:}}\\
+        By $(\ref{bmeq:59})$ it is shown that $\{z_n\}$ of $(\ref{bmeq:69})$ converges weakly to, say, $z$ in $H_0^1(\Om_s)$. With this limit in mind, by multiplying both sides of the wave equation in $(\ref{bmeq:70})$ by given $\eta\in\HM{1}{\Om_s}$ and integrating by parts, it follows
+        \begin{align*}
+            -\beta^2\IP{z_n,\eta}{\Om_s}+&\IP{\nabla z_n,\nabla \eta}{\Om_s}+\IP{\frac{\partial z_n}{\partial\nu},\eta}{\G_s}\\
+            =&\IP{w_{1n}^*+i\beta w_{0n}^*-i\beta D_s[u_n|_{\G_s}+w_{0n}^*|_{\G_s}],\eta}{\Om_s}\text{ for all }\eta\in\HM{1}{\Om_s}.
+        \end{align*}
+        Taking the limit of both sides of this equation, while taking into account $(\ref{bmeq:59})$, $(\ref{bmeq:65})$, $(\ref{bmeq:68})$, the Sobolev trace map, and $(\ref{bmeq:82})$, it follows that $z\in H_0^1(\Om_s)$ satisfies the variational problem
+        \begin{align*}
+            -\beta^2\IP{z,\eta}{\Om_s}+\IP{\nabla z,\nabla \eta}{\Om_s}=0,\text{ for all }\eta\in\HM{1}{\Om_s}
+        \end{align*}
+        That is, $z$ satisfies the overdetermined eigenvalue problem
+        \begin{align*}
+            \begin{cases}
+                -\Delta z=\beta^2 z\text{ in }\Om_s\\
+                z|_{\G_s}=\frac{\partial z}{\partial\nu}\bigg |_{\G_s}=0
+            \end{cases}
+        \end{align*}
+        which gives that
+        \begin{align*}
+            z=0\text{ in }\Om_s
+        \end{align*}
+        Combining this convergence with $(\ref{bmeq:69})$, $(\ref{bmeq:65})$, $(\ref{bmeq:59})$, and $(\ref{bmeq:68})$,
+        \begin{align}
+            \lim_{n\to\infty}w_{0n}=0\text{ in }\HM{1}{\Om_s}\label{bmeq:83}
+        \end{align}\\
+        \textbf{Completion of the Proof of Lemma \ref{bmlemma:9}}\\
+        The resolvent relations in $(\ref{bmeq:61})$, $(\ref{bmeq:62})$ and the convergences $(\ref{bmeq:66})$, $(\ref{bmeq:83})$ give also
+        \begin{align}
+            \begin{cases}
+                \lim_{n\to\infty}\xi_{jn}=0\text{ in }\LP{2}{\G_j},\: 1\leq j\leq K\\
+                \lim_{n\to\infty} w_{1n}=0\text{ in }\HM{1}{\Om_s}
+            \end{cases}\label{bmeq:84}
+        \end{align}
+        Collecting now $(\ref{bmeq:65})$, $(\ref{bmeq:79})$, $(\ref{bmeq:83})$, and $(\ref{bmeq:84})$ it follows that
+        \begin{align*}
+            \lim_{n\to\infty}\Phi_n=0\text{ in }\BH,
+        \end{align*}
+        which contradicts $(\ref{bmeq:59})$ and finishes the proof of Lemma $\ref{bmlemma:9}$.
+    \end{proof}
+    \subsection{Analysis of the Residual Spectrum $\sigma_r(\A)$}
+    In what follows, the Hilbert space adjoint of $\A: D(\A)\subseteq \BH\to\BH$ will be important which can be readily computed:
+    \begin{prop}
+        The Hilbert space adjoint $\A^*:D(\A^*)\subseteq\BH\to\BH$ of the thick wave-thin wave-heat generator is given as,
+        \begin{align*}
+            \A^*=\begin{bmatrix}
+                \Delta&0&0&\dots&0&0&0&0\\
+                0&0&-I&\dots&0&0&0&0\\
+                -\frac{\partial}{\partial \nu}|_{\G_1}&(I-\Delta)&0&\dots&0&0&-\frac{\partial}{\partial \nu}|_{\G_1}&0\\
+                \vdots&\vdots&\vdots&\ddots&\vdots&\vdots&\vdots&\vdots\\
+                0&0&0&\dots&0&-I&0&0\\
+                -\frac{\partial}{\partial \nu}|_{\G_K}&0&0&\dots&(I-\Delta)&0&-\frac{\partial}{\partial \nu}|_{\G_K}&0\\
+                0&0&0&\dots&0&0&0&-I\\
+                0&0&0&\dots&0&0&-\Delta&0
+            \end{bmatrix};
+        \end{align*}
+        where
+        \begin{align*}
+            D(&\A^*)=\{[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in\BH:\\
+            (&\A^*\textbf{.i})\:u_0\in\HM{1}{\Om_f},\:h_{1j}\in\HM{1}{\G_j}\text{ for }1\leq j\leq K,\:w_1\in\HM{1}{\Om_s};\\
+            (&\A^*\textbf{.ii})(a)\:\Delta u_0\in\LP{2}{\Om_f},\:\Delta w_0\in\LP{2}{\Om_s},\:(b)\:\Delta h_{0j}-\frac{\partial u_0}{\partial \nu}\bigg|_{\G_j}-\frac{\partial w_0}{\partial\nu}\bigg|_{\G_j}\in\LP{2}{\G_j}\\
+            &\text{ for } 1\leq j\leq K; \text{(c) }\frac{\partial h_{0j}}{\partial n_j}\bigg |_{\partial\G_j}\in \HM{-1/2}{\partial\G_j},\text{ for }1\leq j\leq K;\\
+            (&\A^*\textbf{.iii})\:u_0|_{\G_f}=0,u_0|_{\G_j}=h_{1j}=w_1|_{\G_j},\text{ for }1\leq j\leq K;\\
+            (&\A^*\textbf{.iv}) \text{ For }1\leq j\leq K:\\
+            &(a)\:h_{1j}|_{\partial \G_j\cap\partial\G_l}=h_{1l}|_{\partial\G_j\cap\partial\G_l}\text{ on }\partial\G_j\cap\partial\G_l,\text{ for all }1\leq l\leq K\text{ such that }\partial\G_j\cap\partial\G_l\neq \emptyset;\\
+            &(b)\:\frac{\partial h_{0j}}{\partial n_j}\bigg |_{\partial\G_j\cap\partial\G_l}=-\frac{\partial h_{0l}}{\partial n_l}\bigg |_{\partial\G_j\cap\partial\G_l}\text{ on }\partial\G_j\cap\partial\G_l,\text{ for all }1\leq l\leq K\text{ such that }\partial\G_j\cap\partial\G_l\neq\emptyset\}.
+        \end{align*}\label{bmprop:8}
+    \end{prop}
+    \noindent Lastly, consider the following corollary regarding the residual spectrum $\sigma_r(\A)$:
+    \begin{cor}
+        The residual spectrum $\sigma_r(\A)$ of $\A$ does not intersect the imaginary axis.\label{bmcor:10}
+    \end{cor}
+    \begin{proof}
+        Given the form of the adjoint operator $\A^*:D(\A^*)\subseteq\BH\to\BH$ in Proposition $\ref{bmprop:8}$, then proceeding identically as in the proof of Lemma $\ref{bmlemma:9}$ it follows that
+        \begin{align*}
+            \sigma_p(\A^*)\cap i\R=\sigma_c(\A^*)\cap i\R=\emptyset
+        \end{align*}
+        which finishes the proof of Corollary $\ref{bmcor:10}$.
+    \end{proof}
+    \noindent Now having established the above results for the spectrum of $\A$, the authors finish the proof of Theorem $\ref{bmthrm:2}$:\\
+    \textbf{Proof of Theorem $\ref{bmthrm:2}$}\\
+    Then by combining the above results, Proposition $\ref{bmprop:7}$, Lemma $\ref{bmlemma:9}$, and Corollary $\ref{bmcor:10}$ and remembering that $\left \{e^{\A t}\right \}_{t\geq 0}$ is a contraction semigroup, the strong stability result follows immediately from the application of Theorem $\ref{bmthrm:6}$.
+\section{Revisiting the Stokes-Wave-Lam\'e FSI PDE Model}
+    We turn our attention now back to the PDE described in $(\ref{sweq:1})-(\ref{sweq:4})$ with the associated Hilbert space, inner product, and generator with domain ($(\ref{sweq:14}),\:(\ref{sweq:5}),\text{ and }(\ref{sweq:6})$ respectively). In order to establish the strong stability result, one of the key tools that the author uses to show that zero is the resolvent set of the operator $\{\A|_{\textbf{N}^\perp}\}$ is the Babuska-Brezzi Theorem (see Theorem $\ref{BB}$). Here $\textbf{N}$ represents the zero eigenspace of the semigroup generator which is associated to the above PDE system (see the definition of $\A:\BH\to\BH$ in $(\ref{sweq:14})$ above.) Also, $\lambda=0$ is indeed an eigenvalue of $\A$, see Theorem $\ref{ssthrm:6}$ below. Moreover, the orthogonal complement $\textbf{N}^\perp$ is characterized as
+    \begin{align}
+        \textbf{N}^\perp=\set{[u_0,h_0,h_1,w_0,w_1]\in\BH}{\int_{\G_s}(\nu\cdot h_0)d\G_s=0},\label{sseq:5}
+    \end{align}
+    We note that the author splits $\BH$ in $\ref{sweq:5}$ into the two subspaces $\textbf{N}$ and $\textbf{N}^\perp$.
+    \begin{note}
+        Given the form of the adjoint $\A^*:D(\A^*)\subseteq\BH\to\BH$, in Proposition $\ref{ssprop:9}$ below, it is readily seen that $\lambda>0$ is also an eigenvalue of $\A^*$ with
+        \begin{align*}
+            Null(\A^*)=Null(\A)=\textbf{N}.
+        \end{align*}
+        Consequently, one has ``invariance of the flow'' on $\textbf{N}^\perp$. That is, if $\Phi_0\in\textbf{N}^\perp$, then
+        \begin{align*}
+            e^{\A t}\Phi_0\in C([0,T];\textbf{N}^\perp).
+        \end{align*}
+    \end{note}
+
+\section{Main Result: Asymptotic Decay of Solution}
+    This section is devoted to addressing the issue of asymptotic behavior of the solution whose existence-uniqueness is guaranteed by Theorem $\ref{swthrm:2}$. In this regard, it is shown that the system given in $(\ref{sweq:1})-(\ref{sweq:4})$ is strongly stable in the space $\textbf{N}^\perp$ (see $(\ref{sseq:5})$ for definition). Before giving the main result, the author states the following assumption which is crucial in the proof:
+    \begin{sump}
+        Given a fixed $\beta\neq 0$, suppose that the function $w_0\in\BH^{1}({\Om_s})$ satisfies the following static PDE problem:
+        \begin{align*}
+            \begin{cases}
+                -\beta^2 w_0-\diver \sigma(w_0)+w_0=0&\text{ in }\Om_s\\
+                w_0|_{\G_s}=0&\text{ on }\G_s\\
+                \nu\cdot\sigma(w_0)=-c_0\nu&\text{ on }\G_s.
+            \end{cases}
+        \end{align*}
+        Then, the solution of this overdetermined problem is $w_0=0$, and so necessarily $c_0=0$\label{sssump:1}
+    \end{sump}
+    \noindent Such overdetermined eigenvalue boundary value problems also play a part in considering stability properties of other fluid-structure PDE systems. See, e.g. \cite{Av, av-trig, AvalosTriggiani09}. Now, we give the stability result:
+    \begin{thrm}
+        Let Assumption $\ref{sssump:1}$ hold. Then, with reference to the dynamical system $(\ref{sweq:1})-(\ref{sweq:4})$, for any $[\widetilde{u}_0,\widetilde{h}_0,\widetilde{h}_1,\widetilde{w}_0,\widetilde{w}_1]\in\textbf{N}^\perp$, the corresponding solution $[u(t),h(t),h_t(t),w(t),w_t(t)]\in C([0,T];\textbf{N}^\perp)$ of $(\ref{sweq:1})-(\ref{sweq:4})$ satisfies
+        \begin{align*}
+            \lim_{t\to\infty}\norm{[u(t),h(t),h_t(t),w(t),w_t(t)]}{\textbf{N}^\perp}=0.
+        \end{align*}\label{ssthrm:5}
+    \end{thrm}
+    \noindent The domain $D(\A)$ of the semigroup generator is not compactly embedded in $\BH$, and so classical weak stability approaches are inapplicable here. See e.g., (\cite{bench} page 378, Corollary 3.1). The proof of Theorem $\ref{ssthrm:5}$ is based on the well known spectral criterion given by W. Arendt and C.J.K. Batty \cite{A-B} (See Theorem $\ref{bmthrm:6}$). The application of Theorem $\ref{bmthrm:6}$ on the dynamical system $(\ref{sweq:1})-(\ref{sweq:4})$ relies on analyzing the spectral properties of the operator $\A$ defined in $(\ref{sweq:14})$. The analysis will be given in a few steps:
+    \subsection{Zero Eigenvalue for the Generator $\A$ and Explicit Characterization of $\textbf{N}=Null(\A)$}
+    \noindent In order to analyze the long term dynamics of the system $(\ref{sweq:1})-(\ref{sweq:4})$ and apply Theorem $\ref{bmthrm:6}$ it is important to avoid steady states so as to reasonably consider the possibility of finite energy solutions, tending to the zero state at infinity. For this reason, in the process of applying Theorem $\ref{bmthrm:6}$, it is shown that zero is an eigenvalue for the operator $\A$. Moreover, the author gives an explicit characterization for the corresponding zero eigenspace $\textbf{N}=Null(\A)$ and its orthogonal complement $\textbf{N}^\perp=Null(\A)^\perp$.
+    \begin{thrm}
+        With reference to the PDE system $(\ref{sweq:1})-(\ref{sweq:4})$ and the corresponding generator $\A$ defined in $(\ref{sweq:14})$, the point zero is an eigenvalue for $\A$. Moreover, the following explicit characterizations follow:
+        \begin{align}
+            \textbf{N}=Null(\A)=span\set{\phi\in\BH}{\phi=[0,h_0(1),0,w_0(1),0]^T}\label{sseq:17}
+        \end{align}
+        Here, for any scalar $\alpha$, the pair
+        \begin{align*}
+            [h_0(\alpha),w_0(\alpha)]\in\textbf{S}=\set{[f,g]\in\BH^{1}({\G_s})\times\BH^{1}({\Om_s})}{f=g|_{\G_s}}
+        \end{align*}
+        satisfies the variational relation
+        \begin{align*}
+            \IP{\nabla_{\G_s}(h_0),\nabla_{\G_s}(f)}{\G_s}+\IP{\sigma(w_0),\epsilon(g)}{\Om_s}+\IP{w_0,g}{\Om_s}=\alpha\IP{\nu,f}{\G_s},\text{ for all }[f,g]\in\textbf{S}
+        \end{align*}
+        Also,
+        \begin{align}
+            \textbf{N}^\perp=Null(\A)^\perp=\set{\widetilde{\phi}=[\widetilde{u}_0,\widetilde{h}_0,\widetilde{h}_1,\widetilde{w}_0,\widetilde{w}_1]^T\in\BH}{\int_{\G_s}(\nu\cdot\widetilde{h}_0)d\G_s=0}\label{sseq:18}
+        \end{align}\label{ssthrm:6}
+    \end{thrm}
+    \begin{proof}
+    Suppose $\Phi=[u_0,h_0,h_1,w_0,w_1]\in D(\A)$ is a solution of
+    \begin{align}
+        \A\phi=0,\label{sseq:19}
+    \end{align}
+    where $\A$, is as given in $(\ref{sweq:14})$. With pressure term $p_0$ as defined in $(\ref{sweq:15})$, this equation generates the following PDEs:
+    \begin{align}
+        \begin{cases}
+            \diver(\nabla u_0+\nabla^T u_0)-\nabla p_0=0&\text{ in }\Om_f\\
+            \diver(u_0)=0&\text{ in } \Om_f\\
+            h_1=0&\text{ in }\G_s\\
+            -[\nu\cdot(\nabla u_0+\nabla^T u_0)]|_{\G_s}+\Delta_{\G_s}(h_0)+[\nu\cdot\sigma(w_0)]|_{\G_s}+p_0\nu=0&\text{ in }\G_s\\
+            w_1=0&\text{ in }\Om_s\\
+            \diver\sigma(w_0)-w_0=0&\text{ in }\Om_s\\
+            u_0|_{\G_f}=0,\:u_0|_{\G_s}=h_1=0.
+        \end{cases}\label{sseq:20}
+    \end{align}
+    Multiplying $(\ref{sseq:19})$ by $\Phi$,
+    \begin{align*}
+        \IP{\A\Phi,\Phi}{\BH}&=\IP{\diver(\nabla(u_0)+\nabla^T(u_0)),u_0}{\Om_f}+\IP{\nabla_{\G_s}(h_1),\nabla_{\G_s}(h_0)}{\G_s}\\
+        &+\IP{-(\nabla u_0+\nabla^T u_0)\cdot\nu|_{\G_s},h_1}{\G_s}+\IP{\Delta_{\G_s}(h_0),h_1}{\G_s}+\IP{\sigma(w_0)\cdot\nu|_{\G_s},h_1}{\G_s}\\
+        &+\IP{\sigma(w_1),\epsilon(w_0)}{\Om_s}+\IP{w_1,w_0}{\Om_s}+\IP{\diver\sigma(w_0),w_1}{\Om_s}-\IP{w_0,w_1}{\Om_s}\\
+        &-\IP{[\nabla\mathcal{P}_1(u_0)+\nabla\mathcal{P}_2(h_0)+\nabla\mathcal{P}_3(w_0)],u_0}{\Om_f}\\
+        &+\IP{[\mathcal{P}_1(u_0)\cdot\nu+\mathcal{P}_2(h_0)\cdot\nu+\mathcal{P}_3(w_0)\cdot\nu],h_1}{\G_s}=0.
+    \end{align*}
+    Applying Green's Theorem, using the fact that $u_0$ is solenoidal, $u_0=0$ on $\G_f$, and $h_1=w_1|_{\G_s}=0$ on $\G_s$ the author concludes
+    \begin{align*}
+        \IP{\A\Phi,\Phi}{\BH}&=-\frac{1}{2}\norm{\nabla(u_0)+\nabla^T(u_0)}{}^2+\IP{\sigma(w_1),\epsilon(w_0)}{\Om_s}+\IP{w_1,w_0}{\Om_s}-\IP{\sigma(w_0),\epsilon(w_1)}{\Om_s}\\
+        &-\IP{w_0,w_1}{\Om_s}=0,
+    \end{align*}
+    or,
+    \begin{align*}
+        \IP{\A\Phi,\Phi}{\BH}=-\frac{1}{2}\norm{\nabla(u_0)+\nabla^T(u_0)}{}^2+2i\Imag\{\IP{\sigma(w_1),\epsilon(w_0)}{\Om_s}+\IP{w_1,w_0}{\Om_s}\}=0.
+    \end{align*}
+    Hence
+    \begin{align}
+        \Real\IP{\A\Phi,\Phi}{\BH}=-\frac{1}{2}\norm{\nabla(u_0)+\nabla^T(u_0)}{}^2\label{sseq:21}
+    \end{align}
+    which, considering also the boundary condition $u_0|_{\G_f}=0$, gives
+    \begin{align}
+        u_0=0\text{ in }\Om_f\label{sseq:22}
+    \end{align}
+    In turn, from $(\ref{sseq:20})_1$ it follows that
+    \begin{align*}
+        p_0=c_0\text{ (constant)}.
+    \end{align*}
+    Now, define the space
+    \begin{align*}
+        \textbf{S}=\set{[f,g]\in\BH^{1}({\G_s})\times\BH^{1}({\Om_s})}{f=g|_{\G_s}}.
+    \end{align*}
+    Multiplying $(\ref{sseq:20})_4$ by $f$ and $(\ref{sseq:20})_6$ by $g$,
+    \begin{align}
+        -\IP{\nabla_{\G_s}(h_0),\nabla_{\G_s}(f)}{\G_s}+\IP{\nu\cdot\sigma(w_0)|_{\G_s},f}{\G_s}+\IP{c_0\nu,f}{\G_s}\nonumber\\
+        -\IP{\sigma(w_0)\cdot\nu|_{\G_s},g}{\G_s}-\IP{\sigma(w_0),\epsilon(g)}{\Om_s}-\IP{w_0,g}{\Om_s}=0.\label{sseq:23}
+    \end{align}
+    Using the fact that $f=g|_{\G_s}$, and taking the variational form in terms of the solution variables $\{h_0,w_0\}:$
+    \begin{align}
+        \textbf{a}([h_0,w_0],[f,g])=\textbf{F}([f,g])\text{ for all }[f,g]\in\textbf{S},\label{sseq:24}
+    \end{align}
+    where the bilinear form $\textbf{a}(\cdot,\cdot):\textbf{S}\times\textbf{S}\to\R$ is defined as
+    \begin{align*}
+        \textbf{a}([h_0,w_0],[f,g])=\IP{\nabla_{\G_s}(h_0),\nabla_{\G_s}(f)}{\G_s}+\IP{\sigma(w_0),\epsilon(g)}{\Om_s}+\IP{w_0,g}{\Om_s}
+    \end{align*}
+    and
+    \begin{align*}
+        \textbf{F}([f,g])=c_0\IP{\nu,f}{\G_s}.
+    \end{align*}
+    Since it can easily be seen that the bilinear form $\textbf{a}(\cdot,\cdot)$ is continuous and $\textbf{S}$-elliptic, the application of Lax-Milgram Theorem (see Theorem $\ref{Lax}$) gives the existence and uniqueness of a solution $[h_0,w_0]\in\textbf{S}$ to the variational equation $(\ref{sseq:24})$. To conclude the proof of Theorem $\ref{ssthrm:6}$, it is important to show that the derived solution $[h_0,w_0]\in D(\A)$ and satisfies the equations in $(\ref{sseq:20})$. To this end, by taking $g\in \D(\Om_s)$, and $f=0$ in $(\ref{sseq:23})$ then
+    \begin{align*}
+        \IP{-\diver(w_0)+w_0,g}{\Om_s}=0,\text{ for all }g\in\D(\Om_s),
+    \end{align*}
+    and hence
+    \begin{align*}
+        -\diver\sigma(w_0)+w_0=0,\text{ in }\LP{2}{\Om_s}.
+    \end{align*}
+    In consequence, it follows
+    \begin{align}
+        \norm{\sigma(w_0)\cdot\nu}{\HM{-1/2}{\G_s}}\leq C\norm{w_0}{\HM{1}{\Om_s}}\leq C|c_0|.\label{sseq:25}
+    \end{align}
+    In turn: let $\gamma_0^+\in\Lin(\HM{1/2}{\G_s},\HM{1}{\Om_s})$ be the right inverse of the Dirichlet trace map $\gamma_0:\HM{1}{\Om_s}\to\HM{1/2}{\G_s}$. Therewith, setting
+    \begin{align*}
+        [f,g]\equiv [f,\gamma_0^+(f)]
+    \end{align*}
+    in $(\ref{sseq:23})$ where $f\in\BH^{1}({\G_s})$,
+    \begin{align*}
+        \IP{\nabla_{\G_s}(h_0),\nabla_{\G_s}(f)}{\G_s}+\IP{\sigma(w_0),\epsilon(\gamma_0^+(f))}{\Om_s}+\IP{w_0,\gamma_0^+(f)}{\Om_s}=c_0\IP{\nu,f}{\G_s.}
+    \end{align*}
+    or
+    \begin{align*}
+        \IP{\nabla_{\G_s}(h_0),\nabla_{\G_s}(f)}{\G_s}+\IP{\sigma(w_0),\epsilon(\gamma_0^+(f))}{\Om_s}+\IP{w_0,\gamma_0^+(f)}{\Om_s}+\IP{\diver\sigma(w_0)-w_0,\gamma_0^+(f)}{\G_s}=c_0\IP{\nu,f}{\G_s.}
+    \end{align*}
+    Application of the Green's Theorem gives then
+    \begin{align*}
+        \IP{-\Delta_{\G_s}(h_0)+\nu\cdot\sigma(w_0)}{\G_s}=c_0\IP{\nu,f}{\G_s}=0
+    \end{align*}
+    or
+    \begin{align}
+        -\Delta_{\G_s}(h_0)+\nu\cdot\sigma(w_0)=c_0\nu\text{ in }\LP{2}{\G_s}\label{sseq:26}
+    \end{align}
+    In sum, it follows that the vector $\phi=[0,h_0(1),0,w_0(1),0]^T\in D(\A)$ solves
+    \begin{align*}
+        \A\Phi=0,
+    \end{align*}
+    and is indeed the zero eigenvector with the corresponding zero eigenspace $\textbf{N}=Null(\A)$ could be characterized as in $(\ref{sseq:17})$. Subsequently, recalling the inner product introduced in $(\ref{sweq:6})$, and using the relations $(\ref{sseq:25})-(\ref{sseq:26})$, the orthogonal complement $\textbf{N}^\perp$ follows as in $(\ref{sseq:18})$. This completes the proof of Theorem $\ref{ssthrm:6}$.
+    \end{proof}
+    The proof of Theorem $\ref{ssthrm:5}$ will rely on the ultimate application of the spectral criterion of W. Arendt and C. Batty for strong decay (see Theorem $\ref{bmthrm:6}$). This will entail the elimination of all three parts of the spectrum of the generator $\A$ from the imaginary axis: In this connection, the author now proceeds with the analysis of the point spectrum $\sigma_p(\A)$.
+    \subsection{Analysis of the Point Spectrum $\sigma_p(\A)$}
+    \begin{lemma}
+        Let Assumption $\ref{sssump:1}$ hold. With reference to the PDE system $(\ref{sweq:1})-(\ref{sweq:4})$ and the corresponding generator $\A$ defined in $(\ref{sweq:14})$, given for $\beta\neq 0,\:i\beta\not\in\sigma_p(\A)$\label{sslemma:7}
+    \end{lemma}
+    \begin{proof}
+    Suppose $\Phi=[u_0,h_0,h_1,w_0,w_1]\in D(\A)$ satisfies the relation
+    \begin{align}
+        (i\beta I-\A)\Phi=0.\label{sseq:27}
+    \end{align}
+    In PDE terms, it follows then
+    \begin{align}
+        &\begin{cases}
+            i\beta u_0-\diver(\nabla u_0+\nabla^T u_0)+\nabla p_0=0&\text{ in }\Om_f\\
+            \diver(u_0)=0&\text{ in }\Om_f\\
+            u_0|_{\G_f}=0&\text{ on }\G_f
+        \end{cases}\label{sseq:28}\\
+        &\begin{cases}
+            i\beta h_0-h_1=0 &\text{ in }\G_s\\
+            i\beta h_1+[\nu\cdot(\nabla u_0+\nabla^T u_0)]|_{\G_s}-\Delta_{\G_s}(h_0)-[\nu\cdot\sigma(w_0)]|_{\G_s}-p_0\nu=0 &\text{ in }\G_s
+        \end{cases}\label{sseq:29}\\
+        &\begin{cases}
+            i\beta w_0-w_1=0&\text{ in }\Om_s\\
+            i\beta w_1-\diver\sigma(w_0)+w_0=0&\text{ in }\Om_s\\
+            w_1|_{\G_s}=h_1=u_0|_{\G_s}&\text{ on }\G_s
+        \end{cases}\label{sseq:30}
+    \end{align}
+    with $p_0$ being the associated pressure of the PDE system. Therewith, the usual energy method and the relation $(\ref{sseq:21})$ gives
+    \begin{align}
+        \Real\IP{(i\beta I-\A)\Phi,\Phi}{\BH}=-\Real\IP{\A\Phi,\Phi}{\BH}=\frac{1}{2}\norm{\nabla(u_0)+\nabla^T(u_0)}{}^2=0\label{sseq:31}
+    \end{align}
+    which, considering also the boundary condition $u_0|_{\G_f}=0$, gives
+    \begin{align}
+        u_0=0\text{ in }\Om_f.\label{sseq:32}
+    \end{align}
+    Also, taking into account $(\ref{sseq:32})$ in $(\ref{sseq:30})_3$,
+    \begin{align}
+        w_1|_{\G_s}=h_1=0\text{ on }\G_s.\label{sseq:33}
+    \end{align}
+    Let $p_0=q_0+c_0$, where $q_0\in\hat{L}^2(\Om_f)$, where
+    \begin{align}
+        \hat{L}^2(\Om_f)=\set{f\in\LP{2}{\Om_f}}{\int_{\Om_f}fd\Om_f=0},\label{sseq:34}
+    \end{align}
+    and $c_0$ is a constant. Then by $(\ref{sseq:32})$ and $(\ref{sseq:28})_1$,
+    \begin{align}
+        q_0=0\text{ in }\Om_f.\label{sseq:35}
+    \end{align}
+    Also, from $(\ref{sseq:33})$ and $(\ref{sseq:29})_1$, it follows
+    \begin{align}
+        h_0=0\text{ in }\G_s.\label{sseq:36}
+    \end{align}
+    Now, consider $(\ref{sseq:33})$ and $(\ref{sseq:36})$ in the thin layer equation $(\ref{sseq:29})_2$, as well as $(\ref{sseq:30})_1$ and $(\ref{sseq:30})_2$, it follows that if $\Phi=[u_0,h_0,h_1,w_0,w_1]\in D(\A)$ is an eigenfunction corresponding to the eigenvalue $i\beta\:(\beta\neq 0)$, then $w_0$ solves the following overdetermined eigenvalue problem:
+    \begin{align}
+        \begin{cases}
+            -\beta^2 w_0-\diver\sigma(w_0)+w_0=0&\text{ in }\Om_s\\
+            w_0|_{\G_s}=0&\text{ on }\G_s\\
+            \nu\cdot\sigma(w_0)=-c_0\nu\text{ on }\G_s.
+        \end{cases}\label{sseq:37}
+    \end{align}
+    Exploiting Assumption $\ref{sssump:1}$ for the problem $(\ref{sseq:37})$ gives that $w_0=0$ and $c_0=0$, which then yield that $\sigma_p(\A)\cap i\R=\emptyset.$ This completes the proof of Lemma $\ref{sslemma:7}$.
+    \end{proof}
+    \subsection{Analysis of the Residual Spectrum $\sigma_r(\A)$}
+    \begin{lemma}
+        Let Assumption $\ref{sssump:1}$ hold. With reference to the PDE system $(\ref{sweq:1})-(\ref{sweq:4})$ and the corresponding generator $\A$ defined in $(\ref{sweq:14})$, given $\beta\neq 0,\:i\beta\not\in\sigma_r(\A)$.\label{sslemma:8}
+    \end{lemma}
+    \begin{proof}
+    The proof of Lemma $\ref{sslemma:8}$ relies on the wellknown fact that for any closed, densely defined operator $\A$, if $\lambda\in\sigma_r(\A)$ then $\overline{\lambda}\in\sigma_p(\A^*)$. (See e.g., \cite{F}, page 127). Accordingly, the author first gives a representation of the adjoint operator $\A^*: D(\A^*)\to\BH$. In fact, a standard computation yields:
+    \begin{prop}
+        For the generator operator $\A$ defined in $(\ref{sweq:14})$, the Hilbert space adjoint $\A^*: D(\A^*)\to\BH$ is given by
+        \begin{align}
+            \A^*=&\begin{bmatrix}
+                \diver(\nabla (\cdot)+\nabla^T(\cdot))&0&0&0&0\\
+                0&0&-I&0&0\\
+                -[\nu\cdot(\nabla(\cdot)+\nabla^T(\cdot))]|_{\G_s}&-\Delta_{\G_s}(\cdot)&0&-\nu\cdot\sigma(\cdot)|_{\G_s}&0\\
+                0&0&0&0&-I\\
+                0&0&0&-\diver\sigma(\cdot)+I&0
+            \end{bmatrix}+\nonumber\\
+            &\begin{bmatrix}
+                -\nabla \mathcal{P}_1(\cdot)&\nabla \mathcal{P}_2(\cdot)&0&\nabla \mathcal{P}_3(\cdot)&0\\
+                0&0&0&0&0\\
+                \mathcal{P}_1(\cdot)\nu&-\mathcal{P}_2(\cdot)\nu&0&-\mathcal{P}_3(\cdot)\nu&0\\
+                0&0&0&0&0\\
+                0&0&0&0&0\\
+            \end{bmatrix}\label{sseq:38}
+        \end{align}
+        The domain $D(\A^*)$ of $\A^*$ is characterized as follows $[\widetilde{u}_0,\widetilde{h}_0,\widetilde{h}_1,\widetilde{w}_0,\widetilde{w}_1]\in D(\A^*) \Leftrightarrow$\\
+        (\textbf{A.i}) $\widetilde{u}_0\in\BH^{1}({\Om_f}),\:\widetilde{h}_{1}\in\BH^{1}({\G_s})\:\widetilde{w}_1\in\BH^{1}({\Om_s});$\\
+        (\textbf{A.ii}) There exists an associated $\LP{2}{\Om_f}$-function $\widetilde{p}_0=\widetilde{p}_0(\widetilde{u}_0,\widetilde{h}_0,\widetilde{w}_0)$ such that
+        \begin{align*}
+            [\diver(\nabla \widetilde{u}_0+\nabla^T \widetilde{u}_0)-\nabla \widetilde{p}_0]\in\LP{2}{\Om_f}
+        \end{align*}
+        Consequently, $\widetilde{p}_0$ is harmonic and so\\
+        \textbf{(a)} $\left [\widetilde{p}_0|_{\G_f},\frac{\partial \widetilde{p}_0}{\partial\nu}\big |_{\G_f}\right ]\in\HM{-1/2}{\G_f}\times\HM{-3/2}{\G_f};$\\
+        \textbf{(b)} $(\nabla \widetilde{u}_0+\nabla^T \widetilde{u}_0)\cdot\nu\in\HM{-3/2}{\G_f}$,\\
+        (\textbf{A.iii}) $\diver\sigma(\widetilde{w}_0)\in\LP{2}{\Om_s}$; consequently, $\nu\cdot\sigma(\widetilde{w}_0)\in\HM{-1/2}{\G_s}$,\\
+        (\textbf{A.iv}) $-\Delta_{\G_s}(\widetilde{h}_0)+[\nu\cdot\sigma(\widetilde{w}_0)]_{\G_s}-[(\nabla \widetilde{u}_0+\nabla^T \widetilde{u}_0)\cdot\nu]|_{\G_s}+[\widetilde{p}_0\nu]|_{\G_s}\in\LP{2}{\G_s}$,\\
+        (\textbf{A.v}) $\widetilde{u}_0|_{\G_f}=0,\:\widetilde{u}_0|_{\G_s}=\widetilde{h}_1=\widetilde{w}_1|_{\G_s}$\label{ssprop:9}
+    \end{prop}
+    \noindent It is readily discerned that $Null(\A)=Null(\A^*)$. In turn, $\lambda=0$ is an eigenvalue of $\A^*$. Moreover, under Assumption $\ref{sssump:1}$, $i\beta\:(\beta\neq 0)$ is not an eigenvalue for the adjoint operator $\A^*$ and hence it is not in the residual spectrum of $\A$. This completes the proof of Lemma $\ref{sslemma:8}$.
+    \end{proof}
+    \subsection{Analysis of the Continuous Spectrum $\sigma_c(\A)$}
+    \begin{lemma}
+        Let Assumption $\ref{sssump:1}$ hold. With reference to the PDE system $(\ref{sweq:1})-(\ref{sweq:4})$ and the corresponding generator $\A$ defined in $(\ref{sweq:14})$, for a given $\beta\neq 0,\:i\beta\not\in\sigma_c(\A)$.\label{sslemma:10}
+    \end{lemma}
+    \begin{proof}
+    The proof is based on a contradiction argument. To start with, assume that $i\beta\:(\beta\neq 0)$ is in the continuous spectrum $\sigma_c(\A)$ of $\A$. Since $\sigma_c(\A)\subseteq \sigma_{app}(\A)$ (approximate spectrum) (see e.g., \cite{F}, page 128) then there exist sequences
+    \begin{align}
+        &\{\Phi_n\}=\{[u_{0n},h_{0n},h_{1n},w_{0n},w_{1n}]^T\}\subseteq D(\A);\nonumber\\
+        &\{(i\beta I-A)\Phi_n\}\equiv \{\Phi_n^*\}=\{[u_{0n}^*,h_{0n}^*,h_{1n}^*,w_{0n}^*,w_{1n}^*]^T\}\subseteq \BH,\label{sseq:39}
+    \end{align}
+    which satisfy for $n=1,2,\dots,$
+    \begin{align}
+        \norm{\Phi_n}{\BH}=1\text{ and }\norm{(i\beta I-A)\Phi_n}{\BH}<\frac{1}{n}.\label{sseq:40}
+    \end{align}
+    In PDE terms, each $\Phi_n$ solves the following static system, where again $p_n$ is given via $(\ref{sweq:15})$:
+    \begin{align}
+        &\begin{cases}
+            i\beta u_{0n}-\diver(\nabla u_{0n}+\nabla^T u_{0n})+\nabla p_n=u_{0n}^*&\text{ in }\Om_f\\
+            \diver(u_{0n})=0&\text{ in }\Om_f\\
+            u_{0n}|_{\G_f}=0&\text{ on }\G_f
+        \end{cases}\label{sseq:41}\\
+        &\begin{cases}
+            i\beta h_{0n}-h_{1n}&\text{ in }\G_s\\
+            i\beta h_{1n}+[\nu\cdot(\nabla u_{0n}+\nabla^T u_{0n})]|_{\G_s}-\Delta_{\G_s}(h_{0n})-[\nu\cdot\sigma(w_{0n})]|_{\G_s}-p_n\nu=h_{1n}^*&\text{ in }\G_s\\
+        \end{cases}\label{sseq:42}\\
+        &\begin{cases}
+            i\beta w_{0n}-w_{1n}=w_{0n}^*&\text{ in }\Om_s\\
+            i\beta w_{1n}-\diver\sigma(w_{0n})+w_{0n}=w_{1n}^*&\text{ in }\Om_s\\
+            w_{1n}|_{\G_s}=h_{1n}=u_{0n}|_{\G_s}&\text{ on }\G_s
+        \end{cases}\label{sseq:43}
+    \end{align}
+    \textbf{\underline{Step I:} Estimates for the fluid variable $\{u_{0n}\}$ and thin-layer solution variables $\{h_{0n},h_{1n}\}$}\\
+    To start, via the integration by parts, dissipativity relation $(\ref{sseq:21})$, and $(\ref{sseq:40})$,
+    \begin{align}
+        \Real\IP{\Phi_n^*,\Phi_n}{\BH}=\Real\IP{(i\beta I-\A)\Phi_n,\Phi_n}{\BH}=\frac{1}{2}\norm{\nabla (u_{0n})+\nabla^T(u_{0n})}{}^2=\mathcal{O}\left (\frac{1}{n}\right ),\label{sseq:44}
+    \end{align}
+    and hence
+    \begin{align}
+        \norm{u_{0n}}{\HM{1}{\Om_f}}\to 0.\label{sseq:45}
+    \end{align}
+    In turn, by $(\ref{sseq:43})-(\ref{sseq:44})$ and the Sobolev Trace Theorem
+    \begin{align}
+        u_{0n}|_{\G_s}=w_{1n}|_{\G_s}=h_{1n}=\mathcal{O}\left (\frac{1}{n}\right ).\label{sseq:46}
+    \end{align}
+    Let $p_n=q_n+c_n$, where $q_n\in\hat{L}^2(\Om_f)$ (as defined in $(\ref{sseq:34})$), and $c_n$ is a constant. Then, by the Stokes theory \cite{temam}, $\{u_{0n},q_n\}\in\BH^{1}({\Om_f})\times\hat{L}^2(\Om_f)$ uniquely solve
+    \begin{align}
+        \begin{cases}
+            -\diver (\nabla u_{0n}+\nabla^T u_{0n})+\nabla q_n=-i\beta u_{0n}+u_{0n}^*&\text{ in }\Om_f\\
+            \diver(u_{0n})=0&\text{ in }\Om_f\\
+            u_{0n}|_{\G_s}=u_{0n}^*|_{\G_s}&\text{ on }\G_s\\
+            u_{0n}|_{\G_f}=0&\text{ on }\G_f,
+        \end{cases}\label{sseq:47}
+    \end{align}
+    and so the following estimate holds:
+    \begin{align}
+        \norm{q_n}{\LP{2}{\Om_f}}\leq C[\norm{\Phi_n^*}{\BH}+\norm{u_{0n}}{\HM{1}{\Om_f}}]=\mathcal{O}\left (\frac{1}{n}\right ).\label{sseq:48}
+    \end{align}
+    Subsequently, an energy method yields that
+    \begin{align}
+        \{\nu\cdot (\nabla u_{0n}+\nabla^T u_{0n})-q_n\cdot\nu\}\in\HM{-1/2}{\G_f}\label{sseq:49}
+    \end{align}
+    with
+    \begin{align}
+        \norm{\nu\cdot (\nabla u_{0n}+\nabla^T u_{0n})-q_n\cdot\nu}{\HM{-1/2}{\G_f}}\leq C[\norm{u_{0n}^*-i\beta u_{0n}}{\HM{1}{\Om_f}}+\norm{u_{0n}}{\HM{1}{\Om_f}}]=\mathcal{O}\left (\frac{1}{n}\right ),\label{sseq:50}
+    \end{align}
+    after using $(\ref{sseq:40})$ and $(\ref{sseq:44})$. Moreover, since by the thin-layer resolvent relation in $(\ref{sseq:42})_1$ and the boundary condition $(\ref{sseq:43})_3$
+    \begin{align}
+        h_{0n}=-\frac{i}{\beta}h_{1n}-\frac{i}{\beta}h_{0n}^*=-\frac{i}{\beta}u_{0n}-\frac{i}{\beta}h_{0n}^*.\label{sseq:51}
+    \end{align}
+    Using again $(\ref{sseq:40})$ and $(\ref{sseq:44})$,
+    \begin{align}
+        \norm{h_{0n}}{\HM{1/2}{\G_s}}=\mathcal{O}\left (\frac{1}{n}\right ).\label{sseq:52}
+    \end{align}
+    \textbf{\underline{Step II:} Estimates for the term $\{\nu\cdot\sigma(w_{0n})\}$}\\
+    Start by invoking the ``Dirichlet'' map $D_s:\LP{2}{\G_s}\to\LP{2}{\Om_s}$ via
+    \begin{align*}
+        D_s g=f\Leftrightarrow\begin{cases}
+            \diver\sigma(f)=0&\text{ in }\Om_s\\
+            f|_{\G_s}=g&\text{ on }\G_s.
+        \end{cases}
+    \end{align*}
+    By the Lax-Milgram Theorem (see Theorem $\ref{Lax}$)
+    \begin{align}
+        D_s\in\Lin(\HM{1/2}{\G_s},\HM{1}{\Om_s}).\label{sseq:53}
+    \end{align}
+    Now, with the Dirichlet map $D_s$ in hand, make the change of variable
+    \begin{align}
+        z_n\equiv w_{0n}+\frac{i}{\beta} D_s[u_{0n}+w_{0n}^*|_{\G_s}].\label{sseq:54}
+    \end{align}
+    Considering the resolvent relations in $(\ref{sseq:43})_{1-2}$, $z_n$ then solves the following boundary value problem (BVP):
+    \begin{align}
+        -\beta^2 z_n-\diver\sigma(z_n)=F_\beta&\text{ in }\Om_s\nonumber\\
+        z_n|_{\G_s}=0&\text{ on }\G_s\label{sseq:55}
+    \end{align}
+    where
+    \begin{align}
+        F_\beta=w_{1n}^*+i\beta w_{0n}^*-w_{0n}-i\beta D_s[u_{0n}+w_{0n}^*|_{\G_s}]\label{sseq:56}
+    \end{align}
+    Since this BVP has homogeneous boundary data the author then has the estimate (see e.g., \cite{ciarlet}, page 296, Theorem 6.3-6):
+    \begin{align}
+        \norm{z_n}{\HM{2}{\Om_s}}\leq\norm{w_{1n}^*+i\beta w_{0n}^*-w_{0n}-i\beta D_s[u_{0n}+w_{0n}^*|_{\G_s}]}{\Om_s}\leq C_{1,\beta}\label{sseq:57}
+    \end{align}
+    after using $(\ref{sseq:40})$. Consequently, there is the trace mapping - see, e.g. \cite{Necas},
+    \begin{align}
+        \norm{\frac{\partial z_n}{\partial\nu}}{\G_s}\leq C\norm{z_n}{\HM{2}{\Om_s}}\leq C_{2,\beta}\label{sseq:58}
+    \end{align}
+    (again, after using $(\ref{sseq:57})$.) With this trace estimate in hand, invoke the following known expression for $\{\sigma(z_n)\cdot\nu|_{\G_s}\}$ in terms of the normal and tangential derivatives (see \cite{GR}, page 18, Proposition A.1):
+    \begin{align}
+        \sigma(z_n)\cdot\nu&=\lambda\left [\frac{\partial z_n}{\partial\nu}\cdot\nu+\frac{\partial z_n}{\partial\tau}\cdot\tau+\frac{\partial z_n}{\partial e}\cdot e\right ]\nu+2\mu\frac{\partial z_n}{\partial\nu}\nonumber\\
+        &+\mu\left [\frac{\partial z_n}{\partial\tau}\cdot\nu-\frac{\partial z_n}{\partial\nu}\cdot\tau\right ]\tau+\mu\left [\frac{\partial z_n}{\partial e}\cdot \nu-\frac{\partial z_n}{\partial\nu}\cdot e\right ]e\label{sseq:59}
+    \end{align}
+    Here, unit (tangent) vectors $\{e,\tau\}$ and $\nu$ constitute an orthonormal system on $\R^3$. Since $z_n=0$ on $\G_s$ then $(\ref{sseq:59})$ is simplified to
+    \begin{align}
+        \sigma(z_n)\cdot\nu=\lambda\left (\frac{\partial z_n}{\partial\nu}\cdot\nu\right )+2\mu\frac{\partial z_n}{\partial\nu}-\mu\left (\frac{\partial z_n}{\partial\nu}\cdot\tau\right )\tau-\mu\left (\frac{\partial z_n}{\partial\nu}\cdot e\right )e.\label{sseq:60}
+    \end{align}
+    Applying the estimate $(\ref{sseq:58})$ to the RHS of $(\ref{sseq:60})$ now yields
+    \begin{align}
+        \norm{\sigma(z_n)\cdot\nu}{\G_s}\leq C_{3,\beta}.\label{sseq:61}
+    \end{align}
+    Moreover, an integration by parts yields the inference that
+    \begin{align*}
+        \nu\cdot\sigma(D_s(\cdot))\in\Lin(\HM{1/2}{\G_s},\HM{-1/2}{\G_s}).
+    \end{align*}
+    Combining this boundedness with $(\ref{sseq:40})$, and $(\ref{sseq:44})$ it follows that
+    \begin{align}
+        \norm{\nu\cdot(D_s[u_{0n}|_{\G_s}+w_{0n}^*|_{\G_s}])}{\HM{-1/2}{\G_s}}=\mathcal{O}\left (\frac{1}{n}\right )\label{sseq:62}
+    \end{align}
+    Applying now $(\ref{sseq:61})-(\ref{sseq:62})$ to the relation $(\ref{sseq:54})$,
+    \begin{align}
+        \norm{\nu\cdot\sigma(w_{0n})}{\HM{-1/2}{\G_s}}\leq C.\label{sseq:63}
+    \end{align}
+    \textbf{\underline{Step III:} Estimates for the term $\{c_n\}$}\\
+    At this step, recall the definition of the pressure term $p_n=q_n+c_n$, and read off the equation $(\ref{sseq:42})_2$ to have
+    \begin{align*}
+        \norm{-c_n\nu}{\HM{-1}{\G_s}}&=||-i\beta h_{1n}+h_{1n}^*-[\nu\cdot(\nabla u_{0n}+\nabla^T u_{0n})]|_{\G_s}+\Delta_{\G_s}(h_{0n})+[\nu\cdot\sigma(w_{0n})]|_{\G_s}\\
+        &+q_n\nu||_{\HM{-1}{\G_s}},
+    \end{align*}
+    whence it follows via $(\ref{sseq:40})$, $(\ref{sseq:48})$, $(\ref{sseq:50})$, and $(\ref{sseq:63})$
+    \begin{align}
+        |c_n|\leq C,\label{sseq:64}
+    \end{align}
+    where again $C>0$ depends on $\lambda,\beta,\mu$.\\
+    \textbf{\underline{Step IV:} Estimate for $\{\nabla_{\G_s}h_{0n}\}$}\\
+    By multiplying both sides of equation $(\ref{sseq:42})_2$ by $h_{0n}$, integrating in space, and then using the integration by parts to get
+    \begin{align*}
+        \norm{\nabla_{\G_s}h_{0n}}{\G_s}^2&=-i\beta\IP{h_{1n},h_{0n}}{\G_s}+\IP{h_{1n}^*,h_{0n}}{\G_s}-\IP{[\nu\cdot(\nabla u_{0n}+\nabla^T u_{0n})]|_{\G_s},h_{0n}}{\G_s}\\
+        &+\IP{[\nu\cdot\sigma(w_{0n})]|_{\G_s},h_{0n}}{\G_s}+\IP{p_n\nu,h_{0n}}{\G_s}.
+    \end{align*}
+    Invoking again $(\ref{sseq:40})$, $(\ref{sseq:44})$, $(\ref{sseq:46})$, $(\ref{sseq:48})$, $(\ref{sseq:63})-(\ref{sseq:64})$, and moreover using the resolvent relation $(\ref{sseq:42})_1$ for the second term on the RHS of the last equality, it follows
+    \begin{align}
+        \norm{\nabla_{\G_s}h_{0n}}{\G_s}^2=\mathcal{O}\left (\frac{1}{n}\right ).\label{sseq:65}
+    \end{align}
+    Now, collecting all the estimates obtained in $(\ref{sseq:45})$, $(\ref{sseq:46})$, $(\ref{sseq:48})$, and $(\ref{sseq:65})$ it follows
+    \begin{align}
+        \begin{cases}
+            u_{0n}\to 0&\text{ in }\BH^{1}({\Om_f})\\
+            q_n\to 0&\text{ in }\LP{2}{\Om_f}\\
+            q_n|_{\G_s}\to 0&\text{ in }\HM{-1/2}{\G_s}\\
+            w_{0n}|_{\G_s}\to 0&\text{ in }\BH^{1/2}({\G_s})\\
+            h_{0n}\to 0&\text{ in }\BH^{1}({\G_s})\\
+            h_{1n}\to 0&\text{ in }\BH^{1/2}({\G_s}).
+        \end{cases}\label{sseq:66}
+    \end{align}
+    Moreover, from $(\ref{sseq:61})$, the sequence $\{\nu\cdot\sigma(z_n)\}$ has a weakly convergent subsequence (still denoted as itself) such that $\{\nu\cdot\sigma(z_n)\}$ converges (weakly) in $\LP{2}{\G_s}$ and since $\LP{2}{\G_s}\hookrightarrow \HM{-1}{\G_s}$ is compact, it follows that $\{\nu\cdot\sigma(z_n)\}$ converges strongly in $\HM{-1}{\G_s}$.\\
+    Lastly, from $(\ref{sseq:64})$, it is shown that $\{c_n\}$ converges strongly to, say $c^*$. Recall the definition of $z_n$ given in $(\ref{sseq:54})$ and by invoking the resolvent relation $(\ref{sseq:42})_2$ together with the limits in $(\ref{sseq:66})$, the author concludes
+    \begin{align}
+        \lim_{n\to\infty}\nu\cdot\sigma(z_n)=-c^*\nu.\label{sseq:67}
+    \end{align}
+    To finish the proof, consider again the BVP, given in $(\ref{sseq:55})$: Initially, the relations $(\ref{sseq:40})$ and $(\ref{sseq:54})$ provide for the weak convergence to say $z$, i.e.
+    \begin{align*}
+        z_n\to z\text{ in }\BH^{1}({\Om_s}).
+    \end{align*}
+    Hence, if by passing to the limit in $(\ref{sseq:55})$ when $n\to\infty$, then it follows that $z\in\BH^{1}({\Om_s})$ satisfies the following problem:
+    \begin{align*}
+        -\beta^2\IP{z,\Psi}{\Om_s}+\IP{\sigma(z),\epsilon(\Psi)}{\Om_s}+\IP{c^*\nu,\Psi}{\Om_s}+\IP{z,\Psi}{\Om_s}=0,\text{ for all }\Psi\in\BH^{1}({\Om_s}).
+    \end{align*}
+    That is, $\{-\beta^2,z\}$ solves the following overdetermined eigenvalue problem:
+    \begin{align}
+        \begin{cases}
+            -\beta^2 z-\diver\sigma(z)+z=0&\text{ in }\Om_s\\
+            z=0&\text{ on }\G_s\\
+            \frac{\partial z}{\partial\nu}=-c^*\nu&\text{ on }\G_s.
+        \end{cases}.\label{sseq:68}
+    \end{align}
+    Now, under Assumption $\ref{sssump:1}$, the only solution to problem $(\ref{sseq:68})$ is $z=0$ for $c^*=0$. Then from $(\ref{sseq:54})$, $(\ref{sseq:45})$, and $(\ref{sseq:40})$, we see that $w_{0n}\to 0$. This convergence, and those in $(\ref{sseq:66})$, contradicts the assumption that
+    \begin{align}
+        \norm{\Phi_n}{\BH}=1.\label{sseq:69}
+    \end{align}
+    As a result, for any $\beta\neq 0,\:i\beta\not\in\sigma_c(\A)$, and this completes the proof of Lemma $\ref{sslemma:10}$.
+    \end{proof}
+    To proceed with the proof of Theorem $\ref{ssthrm:5}$, recall by Theorem $\ref{ssthrm:6}$ that zero is an eigenvalue for the generator $\A$. It is shown in fact that $\lambda=0$ is in the resolvent set of $\A|_{\textbf{N}^\perp}$:
+    \begin{lemma}
+    $\lambda=0$ is in the resolvent set $\rho(\A|_{\textbf{N}^\perp})$ of $\A|_{\textbf{N}^\perp}: D(\A|_{\textbf{N}^\perp})\to\textbf{N}^\perp$. That is
+    \begin{align*}
+        \left ( \A|_{\textbf{N}^\perp} \right )^{-1}\in\Lin(\textbf{N}^\perp).
+    \end{align*}\label{sslemma:11}
+    \end{lemma}
+    \begin{proof}
+    As before, the author uses the denotations
+    \begin{align*}
+        \Phi=[u_0,h_0,h_1,w_0,w_1]\in D(\A)\cap\textbf{N}^\perp,\quad \Phi^*=[u_0^*,h_0^*,h_1^*,w_0^*,w_1^*]\in\textbf{N}^\perp.
+    \end{align*}
+    and consider solving the following relation
+    \begin{align}
+        \A\Phi=\Phi^*.\label{sseq:70}
+    \end{align}
+    Then, in PDE terms, this equation generates the following static system
+    \begin{align}
+        \begin{cases}
+            \diver(\nabla u_0+\nabla^T u_0)-\nabla q=u_0^*&\text{ in }\Om_f\\
+            \diver(u_0)=0&\text{ in }\Om_f\\
+            h_1=h_0^*&\text{ in }\G_s\\
+            -[\nu\cdot(\nabla u_0+\nabla^T u_0)]|_{\G_s}+\Delta_{\G_s}(h_0)+[\nu\cdot\sigma(w_0)]|_{\G_s}+(q+c_0^*)\nu=h_1^*&\text{ in }\G_s\\
+            w_1=w_0^*&\text{ in }\Om_s\\
+            \diver\sigma(w_0)-w_0=w_1^*&\text{ in }\Om_s\\
+            u_0|_{\G_f}=0,\:u_0|_{\G_s}=h_1=w_1|_{\G_s}
+        \end{cases}\label{sseq:71}
+    \end{align}
+    where $p=q+c_0^*$ is the associated pressure as described in $D(\A)$. Firstly, the fluid component $u_0$ of $(\ref{sseq:71})$ and the pressure term $q$ can be recovered via the Stokes theory y (See \cite{temam}, pg 22, Theorem 2.4) and the pair $\{u_0,q\}\in[\BH^{1}({\Om_f})\cap Null(\text{div})]\times\hat{L}^2(\Om_f)$ solves the following static problem
+    \begin{align}
+        \begin{cases}
+            -\diver(\nabla u_0+\nabla^T u_0)+\nabla q=-u_0^*&\text{ in }\Om_f\\
+            \diver(u_0)=0&\text{ in }\Om_f\\
+            u_0|_{\G_s}=h_0^*\label{sseq:72}
+        \end{cases}
+    \end{align}
+    with the estimate
+    \begin{align}
+        \norm{\nu\cdot(\nabla u_0+\nabla^T u_0)-q\nu}{\HM{-1/2}{\G_s}}+\norm{\nabla u_0+\nabla^T u_0}{\Om_f}+\norm{q}{\Om_f}\leq C\norm{\Phi^*}{\BH}.\label{sseq:73}
+    \end{align}
+    Now, with the associated pressure $p=q+c_0^*$, the constant component $c_0^*$ is to be determined. Now the author turns their attention to the thick and thin elastic PDE component in $(\ref{sseq:71})$. Define the space
+    \begin{align*}
+        \textbf{S}=\set{(\varphi,\psi)\in\BH^{1}({\G_s})\times\BH^{1}({\Om_s})}{\varphi=\psi|_{\G_s}}.
+    \end{align*}
+    In order to generate a mixed variational formulation for the static ``thin'' and ``thick'' solution variables in $(\ref{sseq:71})$, by respectively multiplying $(\ref{sseq:71})_4$ and $(\ref{sseq:71})_6$ by functions $\varphi\in\BH^1(\G_s)$, and $\psi\in\BH^1(\Om_s)$ in the space $\textbf{S}$, use Green's Theorem, and add the subsequent relations to get:
+    \begin{align}
+        -\IP{\nabla_{\G_s}h_0,\nabla_{\G_s}\varphi}{\G_s}+\IP{\nu\cdot\sigma(w_0)|_{\G_s},\varphi}{\G_s}+\IP{c_0^*\nu,\varphi}{\G_s}\nonumber\\
+        -\IP{\nu\cdot\sigma(w_0)|_{\G_s},\psi}{\G_s}-\IP{\sigma(w_0),\epsilon(\psi)}{\Om_s}-\IP{w_0,\psi}{\Om_s}\nonumber\\
+        =\IP{h_1^*,\varphi}{\G_s}+\IP{w_1^*,\psi}{\Om_s}+\IP{\nu\cdot(\nabla u_0+\nabla^T u_0)|_{\G_s},\varphi}{\G_s}-\IP{q\nu,\varphi}{\G_s}.\label{sseq:74}
+    \end{align}
+    The last relation now gives the following mixed variational formulation in terms of the variables $h_0$ and $w_0$: Namely,
+    \begin{align}
+        \begin{cases}
+            \textbf{a}([h_0,w_0],[\varphi,\psi])+\textbf{b}([\varphi,\psi],c_0^*)=\textbf{F}([\varphi,\psi])&\text{ for all }[\varphi,\psi]\in\textbf{S}\\
+            \textbf{b}([h_0,w_0],r)=0&\text{ for all }r\in\R.
+        \end{cases}\label{sseq:75}
+    \end{align}
+    Here, the bilinear forms $\textbf{a}(\cdot,\cdot):\textbf{S}\times\textbf{S}\to\R$ and $\textbf{b}(\cdot,\cdot):\textbf{S}\times\R\to\R$ are respectively given as
+    \begin{align*}
+        \textbf{a}([\phi,\xi],[\widetilde{\phi},\widetilde{\xi}])&=\IP{\nabla_{\G_s}h_0,\nabla_{\G_s}\varphi}{\G_s}-\IP{\nu\cdot\sigma(w_0)|_{\G_s},\varphi}{\G_s}\\
+        &+\IP{\nu\cdot\sigma(w_0)|_{\G_s},\psi}{\G_s}+\IP{\sigma(w_0),\epsilon(\psi)}{\Om_s}+\IP{w_0,\psi}{\Om_s}\\
+        \textbf{b}([\widetilde{\phi},\widetilde{\xi}],r)&=-r\int_{\G_s}\nu\cdot\widetilde{\phi}d\G_s,
+    \end{align*}
+    and the functional $\textbf{F}(\cdot)$ is defined as
+    \begin{align*}
+        \textbf{F}([\widetilde{\phi},\widetilde{\xi}])=-\IP{h_1^*,\varphi}{\G_s}-\IP{w_1^*,\psi}{\Om_s}-\IP{\nu\cdot(\nabla u_0+\nabla^T u_0)|_{\G_s},\varphi}{\G_s}+\IP{q\nu,\varphi}{\G_s}.
+    \end{align*}
+    In order to solve this variational formulation, the author appeals to the Babuska-Brezzi Theorem (see Theorem $\ref{BB}$). It is clear that the bilinear forms $\textbf{a}(\cdot,\cdot)$ and $\textbf{b}(\cdot,\cdot)$ are continuous, and moreover $\textbf{a}(\cdot,\cdot)$ is $\textbf{S}$-elliptic. In order to conclude that the variational problem $(\ref{sseq:75})$ has a unique solution, it is important to show that the bilinear form $\textbf{b}(\cdot,\cdot)$ satisfies the ``inf-sup'' condition given in Theorem $\ref{BB}$. For this, consider the following problem:\\
+    Given $r\in\R$, let $\eta\in\BH^{1}({\G_s})$ satisfy
+    \begin{align*}
+        \Delta_{\G_s}\eta=sgn(r)\nu\text{ in }\G_s
+    \end{align*}
+    It is easily seen that $\norm{\nabla_{\G_s}\eta}{\G_s}\leq C\norm{\nu}{\G_s}$. Now, taking into account that $\gamma:\BH^{1}({\Om_s})\to\BH^{1/2}({\G_s})$ is a surjective map, and so it has a continuous right inverse $\gamma^+(\eta)$,
+    \begin{align*}
+        \sup_{[\theta,\varsigma]\in\textbf{S}}\frac{\textbf{b}([\theta,\varsigma],r)}{\norm{[\theta,\varsigma]}{\textbf{S}}}&\geq \frac{\textbf{b}([\theta,\gamma^+(\eta)],r)}{\norm{[\theta,\gamma^+(\eta)]}{\textbf{S}}}\\
+        &=\frac{-r\int_{\G_s}\nu\cdot\eta d\G_s}{\norm{[\theta,\gamma^+(\eta)]}{\textbf{S}}}\\
+        &=-r\:sgn(r)\frac{\int_{\G_s}\Delta_{\G_s}\eta\cdot\eta d\G_s}{\norm{[\theta,\gamma^+(\eta)]}{\textbf{S}}}\\
+        &=|r|\frac{\int_{\G_s}|\nabla_{\G_s}\eta|^2 d\G_s}{\norm{[\theta,\gamma^+(\eta)]}{\textbf{S}}}\\
+        &\geq C|r|\frac{\int_{\G_s}|\nabla_{\G_s}\eta|^2 d\G_s}{\norm{\eta}{\BH^{1}({\G_s})}}\\
+        &=C|r|\:\norm{\eta}{\BH^{1}({\G_s})}
+    \end{align*}
+    which yields that the inf-sup condition holds with the constant $\beta=C\norm{\eta}{\BH^{1}({\G_s})}$. Consequently, the existence and uniqueness of the solution $[h_0,w_0]\in\textbf{S}$ and $c_0^*\in\R$ to the mixed variational problem $(\ref{sseq:75})$ follows from Theorem $\ref{BB}$, and satisfy
+    \begin{align}
+        \norm{[h_0,w_0]}{\textbf{S}}+|c_0^*|\leq C\norm{\Phi^*}{\BH}.\label{sseq:76}
+    \end{align}
+    Subsequently, by taking $[\varphi,\psi]=[0,\psi]$ in $(\ref{sseq:75})$ where $\psi\in[\D(\Om_s)]^3$, and can infer that the obtained $w_0$ solves:
+    \begin{align}
+        -\diver\sigma(w_0)+w_0=-w_1^*\text{ in }\Om_s.\label{sseq:77}
+    \end{align}
+    In turn, via an energy method,
+    \begin{align}
+        \norm{\nu\cdot\sigma(w_0)}{\HM{-1/2}{\G_s}}\leq C\norm{\Phi_0^*}{\BH}.\label{sseq:78}
+    \end{align}
+    With this estimate in hand, $\{[h_0,w_0],c_0^*\}$ solves
+    \begin{align*}
+        \IP{\nabla_{\G_s}h_0,\nabla_{\G_s}\varphi}{\G_s}+\IP{\sigma(w_0),\epsilon(\psi)}{\Om_s}+\IP{w_0,\psi}{\Om_s}-\IP{c_0^*\nu,\varphi}{\G_s}\\
+        =-\IP{h_1^*,\varphi}{\G_s}-\IP{w_1^*,\psi}{\Om_s}-\IP{\nu\cdot(\nabla u_0+\nabla^T u_0)|_{\G_s},\varphi}{\G_s}+\IP{q\nu,\varphi}{\G_s}.
+    \end{align*}
+    An integration by parts and consideration of $(\ref{sseq:77})$ then yields
+    \begin{align*}
+        -\Delta_{\G_s}(h_0)+[\nu\cdot(\nabla u+\nabla^T u_0)]|_{\G_s}-[\nu\cdot\sigma(w_0)]|_{\G_s}-p\nu=h_1^*\text{ in }\G_s.
+    \end{align*}
+    By reading off the last equation it follows
+    \begin{align*}
+        \norm{-\Delta_{\G_s}(h_0)+[\nu\cdot(\nabla u+\nabla^T u_0)]|_{\G_s}-[\nu\cdot\sigma(w_0)]|_{\G_s}-p\nu}{\G_s}\leq C\norm{\Phi^*}{\BH}.
+    \end{align*}
+    Finally, the pressure term $p$ can be reconstructed via the maps $(\mathcal{P}_i)$'s, as defined in $(\ref{sweq:15})$, which then yields that $\Phi=[u_0,h_0,h_1,w_0,w_1]\in D(\A)\cap\textbf{N}^\perp$ indeed solves $(\ref{sseq:70})$. Hence $0\in\rho(\A|_{\textbf{B}^\perp})$.
+    \end{proof}
+    As a result, combining Theorem $\ref{ssthrm:6}$, Lemma $\ref{sslemma:7}$, Lemma $\ref{sslemma:8}$, Lemma $\ref{sslemma:10}$, and $\ref{sslemma:11}$, it follows that $\sigma(\A|_{\textbf{N}^\perp})\cap i\R=\emptyset$. Thus, by the spectral criteria for stability in Theorem $\ref{bmthrm:6}$, the proof of Theorem $\ref{ssthrm:5}$ is complete.

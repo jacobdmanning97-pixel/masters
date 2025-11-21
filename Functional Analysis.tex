@@ -1,0 +1,49 @@
+\section{Functional Analysis}
+\begin{define}[4.1.1 Kreyszig]
+    \begin{itemize}
+        \item A linear operator $A:D(A)\subseteq X\to Y$ is said to be \textbf{bounded} if there exists a $C>0$ such that
+        \begin{align*}
+            ||Au||_Y\leq C||u||_X,\quad \text{for every } u\in D(A)
+        \end{align*}
+        Otherwise it is said to be \textbf{unbounded}.
+        \item A linear operator $A:D(A)\subseteq X\to Y$ is said to be \textbf{densely defined} if $\overline{D(A)}=X$
+        \item A linear operator $A:D(A)\subseteq X\to Y$ is said to be \textbf{closed} if the \textbf{graph}
+        \begin{align*}
+            G(A)=\set{(u,Au)}{u\in D(A)}\subseteq X\times Y
+        \end{align*}
+        is closed as a subspace of $X\times Y$
+    \end{itemize}
+\end{define}
+
+\begin{define}[7.2 Kreyszig]
+    Let $X\neq \{0\}$ be a complex normed space and $T:\D(T)\subseteq X\to X$ be a linear operator. With $T$ we associate the operator
+    \begin{align*}
+        T_\lambda =T-\lambda I
+    \end{align*}
+    where $\lambda$ is a complex number and $I$ is the identity operator on $\D(T)$. If $T_\lambda$ has an inverse, we denote it by $R_\lambda (T)$ and call it the \textit{resolvent operator} of $T$ or, simply, the \textbf{resolvent} of $T$. If it is clear which operator we are discussing, we will write $R_\lambda$.
+\end{define}
+
+\begin{define}[7.2-1 (Regular value, resolvent set, spectrum)]
+    Let $X\neq \{0\}$ be a complex normed space and $T:\D(T)\subseteq X\to X$ be a linear operator. A \textit{regular value} $\lambda$ of $T$ is a complex number such that
+    \begin{itemize}
+        \item $R_\lambda (T)$ exists,\\
+        \item $R_\lambda (T)$ is bounded,\\
+        \item $R_\lambda (T)$ is densely defined.
+    \end{itemize}
+    The \textit{resolvent set} $\rho(T)$ of $T$ is the set of all regular values $\lambda$ of $T$. Its complement $\sigma (T)=\mathbb{C}\backslash\rho(T)$ in the complex plane $\mathbb{C}$ is called the \textit{spectrum} of $T$, and a $\lambda \in \sigma (T)$ is called a \textit{spectral value} of $T$. Furthermore, the spectrum $\sigma(T)$ is partitioned into three disjoint sets as follows.\\
+    The \textbf{point spectrum} or \textit{discrete spectrum} $\sigma_p(T)$ is the set such that $R_\lambda(T)$ does not exist. A $\lambda\in\sigma_p(T)$ is called an \textit{eigenvalue} of $T$.\\
+    The \textbf{continuous spectrum} $\sigma_c(T)$ is the set such that $R_\lambda (T)$ exists and is densely defined, but it unbounded.\\
+    The \textbf{residual spectrum} $\sigma_r(T)$ is the set such that $R_\lambda(T)$ exists, but is not densely defined (may or may not be bounded).
+\end{define}
+
+\begin{thrm}[3.1.4 (Lax-Milgram)]
+    Let $V$ be a Hilbert space and $a(\cdot,\cdot)$ a continuous $V$-elliptic bilinear form. Then given $f\in V$, there exists a unique $u\in V$ such that
+    \begin{align*}
+        a(u,v)=(f,v),\quad \text{for every }v\in V.
+    \end{align*}
+    If $a(\cdot,\cdot)$ is also symmetric then the functional $J:V\to \R$ defined by
+    \begin{align*}
+        J(v)=\frac{1}{2}a(v,v)-(f,v)
+    \end{align*}
+    attains its minimum at $u$.\label{Lax}
+\end{thrm}

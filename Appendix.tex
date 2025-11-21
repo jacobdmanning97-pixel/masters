@@ -1,0 +1,477 @@
+\chapter{Appendix}
+Below are a few foundational definitions and theorems that are related to the work covered in this project. The material was sourced from S. Kesavan's ``Topics in Functional Analysis and Applications'' \cite{kesavan}, Amon Pazy's ``Semigroups of linear operators and applications to partial differential equations'' \cite{pazy}, and Erwin Kreyszig's ``Introductory functional analysis with applications'' \cite{krey}.
+\subsection*{Operations with Distributions}
+\begin{define}
+    The space of $\textbf{test-functions}$ denoted as $\D(\Om)$, where $\Om$ is any open set in $\R^n$, is a subset of $C^\infty(\Om)$ that have compact support contained within $\Om$.
+\end{define}
+
+\begin{define}
+    A sequence of functions $\{\phi_m\}$ in $\D(\Om)$ is said to converge to $0$ if there exists a \textit{fixed} compact set $K\subset \Om$ such that supp$(\phi_m)\subset K$ for all $m$ and $\phi_m$ and all its derivatives converge \textit{uniformly} to zero on $K$.
+\end{define}
+
+\begin{define}
+    A linear functional $T$ on $\D(\Om)$ is said to be a \textbf{distribution} on $\Om$ if whenever $\phi_m\to 0$ in $\D(\Om)$, we have $T(\phi_m)\to 0$.\\
+    The space of distributions, which is the dual of the space of test-functions, is denoted by $\D'(\Om)$. In the case $\Om=\R^n$, the symbol $\D'$ will also be used.
+\end{define}
+
+\begin{define}
+    Let $x\in \R^n$ with coordinates $(x_1,...,x_n)$. A \textit{multi-index} is a $n$-tuple
+    \begin{align*}
+        \alpha=(\alpha_1,...,\alpha_n), \quad \alpha_i\geq 0,\quad \alpha_i \text{ integers.}
+    \end{align*}
+    Associated to a multi-index $\alpha$, we have the following symbols
+    \begin{align*}
+        |\alpha|&=\alpha_1+...+\alpha_n\\
+        \alpha !&=\alpha_1!...\alpha_n!\\
+        x^\alpha&=x_1^{\alpha_1}...x_n^{\alpha_n},\quad x\in\R^n
+    \end{align*}
+    We say that two multi-indices $\alpha$ and $\beta$ are related by $\alpha\leq\beta$ if $\alpha_i\leq\beta_i$ for all $1\leq i\leq n$. Finally we set
+    \begin{align*}
+        D^\alpha=\frac{\partial^{|\alpha|}}{\partial x_1^{\alpha_1}...\partial x_n^{\alpha_n}}
+    \end{align*}
+\end{define}
+
+\begin{define}
+    Let $T\in \D'(\R)$. If $T=T_f$, $f$ a $C^1$ function, then $f'$ is locally integrable. Thus for $\phi\in\D(\R)$
+    \begin{align*}
+        T_{f'}(\phi)=\int_\R f'\phi=-\int_\R f\phi '=-T_f(\phi ')
+    \end{align*}
+    Generalizing this, define for any $T\in \D'(\R)$,
+    \begin{align*}
+        T'(\phi)=-T(\phi '),\quad \phi\in\D(\R)
+    \end{align*}
+    Thus $T'\in \D'(\R)$. For if $\phi_n\to 0$ in $\D(\R)$ then $\{\phi_n\}$ is also a sequence in $\D(\R)$ converging to zero. Hence $T'(\phi_n)=-T(\phi'_n)$ converges to zero. Upon iterating this:
+    \begin{align*}
+        T''(\phi)=-T'(\phi')=T(\phi'')
+    \end{align*}
+    and more generally
+    \begin{align*}
+        T^{(k)}(\phi)=(-1)^kT(\phi^{(k)})
+    \end{align*}
+    In general if $T\in \D'(\Om)$, $\Om\subset \R^n$ an open set, then we define, for any multi-index $\alpha$, the distribution $D^\alpha T$ by 
+    \begin{align*}
+        (D^\alpha T)(\phi)=(-1)^{|\alpha|}T(D^\alpha \phi),\quad \phi\in\D(\Om)
+    \end{align*}
+\end{define}
+
+\subsection*{Definitions and Basic Properties}
+\begin{define}
+    Let $m>0$ be an integer and let $1\leq p\leq \infty$. The \textbf{Sobolev space} $\W{m,p}{\Om}$ is defined by\\
+    \begin{align*}
+        \W{m,p}{\Om}=\set{u \in \LP{p}{\Om}}{D^\alpha u\in \LP{p}{\Om} \: \forall\: |\alpha|\leq m}
+    \end{align*}
+    We provide the norm
+    \begin{align*}
+        ||u||_{m,p,\Om}=\sum_{|\alpha|\leq m}||D^\alpha u||_{\LP{p}{\Om}}
+    \end{align*}
+    Equivalently $1<p<\infty$ (Note not equal equivalent)
+    \begin{align*}
+        ||u||_{m,p,\Om}=\bigg (\sum _{|\alpha|\leq m} \int _\Om |D^\alpha u|^p \bigg )^{1/p} =\bigg(\sum_{|\alpha|\leq m}||D^\alpha u||_{\LP{p}{\Om}}^p\bigg)^{1/p}
+    \end{align*}
+\end{define}
+
+\begin{note}
+    As new notation is added the logical extension of previous notation will be assumed.
+    \begin{itemize}
+        \item In the case $p=2$, the spaces are Hilbert spaces with notation as follows,
+        \begin{align*}
+            \HM{m}{\Om}&=\W{m,2}{\Om}\\
+            ||u||_{m,\Om}&=||u||_{m,2,\Om}
+        \end{align*}
+        \item A \textit{semi-norm} consists of the $L^p$-norms of the highest order derivatives with notation as follows,
+        \begin{align*}
+            |u|_{m,p,\Om}=\sum_{|\alpha|=m}||D^\alpha u||_{\LP{p}{\Om}}
+        \end{align*}
+        \item The space $\LP{p}{\Om}$ can be seen as a special case of the Sobolev class. We denote the $\LP{p}{\Om}$ norm as the semi-norm by $|\cdot|_{0,p,\Om}$ (as they are the same).
+        \item In $\HM{m}{\Om}$ there is a natural inner-product defined as
+        \begin{align*}
+            (u,v)_{m,\Om}=\sum_{|\alpha|\leq m}\int_\Om D^\alpha uD^\alpha v, \quad \text{for } u,v\in \HM{m}{\Om}
+        \end{align*}
+        \item When $\Om=\R^n$ the space $\HM{m}{\R^n}$ can be defined via the Fourier transform. Let $u\in \HM{m}{\R^n}$. By definition $D^\alpha u \in \LP{2}{\R^n}\quad \forall |\alpha|\leq m$. Hence the Fourier transform of $D^\alpha u$ is well defined as follows
+        \begin{align*}
+            \widehat{D^\alpha u}=(2\pi i)^{|\alpha|} \xi ^\alpha \hat{u}.
+        \end{align*}
+        Thus $\xi ^\alpha \hat{u}\in \LP{2}{\R^n}$ for all $|\alpha|\leq m$. Conversely if $u\in \LP{2}{\R^n}\ni\xi ^\alpha \hat{u}\in \LP{2}{\R^n}$ for all $|\alpha|\leq m$, we have $D^\alpha u\in \LP{2}{\R^n}$ for all $|\alpha|\leq m$ and so $u\in \HM{m}{\R^n}$
+    \end{itemize}
+\end{note}
+
+\begin{lemma}
+    There exists positive constants $M_1$ and $M_2$ depending only on $m$ and $n$ such that
+    \begin{align*}
+        M_1(1+|\xi|^2)^m\leq \sum_{|\alpha|\leq m}|\xi ^\alpha |^2\leq M_2(1+|\xi|^2)^m
+    \end{align*}
+    for all $\xi \in \R^n$
+\end{lemma}
+
+\begin{thrm}
+    For every $1\leq p\leq \infty$, the space $\W{1,p}{\Om}$ is a Banach space. If $1<p<\infty$, it is reflexive and if $1\leq p< \infty$, it is separable. In particular $\HM{1}{\Om}$ is a separable Hilbert space.
+\end{thrm}
+
+\begin{note}\
+    \begin{itemize}
+        \item The results of this theorem can be proved by the same way for any integer $m\geq 2$. In the future, unless absolutely necessary, theorems for the spaces $\W{1,p}{\Om}$ will be covered. The extensions to higher order spaces will often be obvious.
+        \item In the course of the proof of the preceding theorem it was shown: "if $u_m\to u$ in $\LP{p}{\Om}$ and $\frac{\partial u_m}{\partial x_i}\to v_i$ in $\LP{p}{\Om}$ for each $1\leq i\leq n$, then $u\in \W{1,p}{\Om}$ and $\frac{\partial u}{\partial x_i}=v_i$". Indeed, we can weaken the hypotheses even further. What was needed to pass to the limit in the second set of integrals and obtain the first set of integrals was only the weak convergence of $\left \{\frac{\partial u_m}{\partial x_i}\right \}$ (weak $\ast$ if $p=\infty$). Since bounded sequences have weakly convergent (weak $\ast$ convergent when $p=\infty$) subsequences, it is enough to know that $u_m\to u$ in $\LP{p}{\Om}$ and $\left \{\frac{\partial u_m}{\partial x_i}\right \}$ are bounded $(1<p\leq \infty)$ to deduce $u\in \W{1,p}{\Om}$.
+        \item $\LP{p}{\Om}$ is made up of equivalence classes of functions. Thus by saying "$u$ is a continuous function" in $\LP{p}{\Om}$ it is meant that the corresponding equivalence class has a continuous representative function. 
+    \end{itemize}
+\end{note}
+
+\begin{note}
+    If $1\leq p<\infty$, we know that $\D(\Om)$ is dense in $\LP{p}{\Om}$. Also, if $\phi\in\D(\Om)$ then every derivative of $\phi$ is also in $\D(\Om)\subset \W{m,p}{\Om}$ for any $m$ and $p$. We define $\WO{m,p}{\Om}$ as the closure of $\D$ in $\W{m,p}{\Om}$. Thus $\WO{m,p}{\Om}$ is a closed subspace and its elements can be approximated in the $\W{m,p}{\Om}$ norm by $C^\infty$ functions with compact support. Generally this is a strict subspace unless $\Om =\R^n$.
+\end{note}
+
+\begin{thrm}
+    Let $1\leq p<\infty$. Then for any integer $m\geq 0$,
+    \begin{align*}
+        \W{m,p}{\R^n}=\WO{m,p}{\R^n}.
+    \end{align*}
+\end{thrm}
+
+\begin{thrm}
+    Let $1\leq p< \infty$. Then $\D(\R^n)$ is dense in $\LP{p}{\R^n}$.
+\end{thrm}
+
+\subsection*{Extension Theorems}
+\begin{define}
+    Let $x\in\R^n,\quad x=(x_1,...,x_n).$ We set $x'=(x_1,...,x_{n-1})$ and write $x=(x',x_n)$.\\
+    Define the sets
+    \begin{align*}
+        Q_+&=\set{x\in\R^n}{|x'|<1,0<x_n<1}\\
+        Q&=\set{x\in\R^n}{|x'|<1,|x_n|<1}
+    \end{align*}
+    Where $|x'|$ is the Euclidean norm of $|x'|$ in $\R^{n-1}$
+\end{define}
+
+\begin{define}
+    We say that an open set $\Om$ is of class $C^k$ ($k$ an integer $\geq$ 1) if for every $x\in\partial\Om$, there exists a neighborhood $U$ of $x$ in $\R^n$ and a map $T:Q\to U$ such that
+    \begin{itemize}
+        \item $T$ is a bijection
+        \item $T\in C^k(\bar{Q}),\quad T^{-1}\in C^k(\bar{U})$
+        \item $T(Q_+)=U\cap\Om,\quad T(Q_0)=U\cap\partial\Om$
+    \end{itemize}
+    Where $Q_+,Q$ are defined above and
+    \begin{align*}
+        Q_0=\set{x\in Q}{ x_n=0}
+    \end{align*}
+    We say that $\Om$ is of class $C^\infty$ if it is of class $C^k$ for every integer $k\geq 1$.
+\end{define}
+
+\begin{cor}
+    If $\Om$ is of class $C^1$ and has $\partial\Om$ bounded, then $C^\infty(\bar{\Om})$ is dense in $\W{1,p}{\Om}$, $1\leq p<\infty$.
+\end{cor}
+
+\begin{thrm}[Poincaré's Inequality]
+    Let $\Om$ be a \textit{bounded} open set in $\R^n$. Then there exists a positive constant $C=C(\Om,p)$ such that
+    \begin{align*}
+        |u|_{0,p,\Om}\leq C|u|_{1,p,\Om}\quad \text{for every } u\in \WO{1,p}{\Om}.
+    \end{align*}
+    In particular, $u\to |u|_{1,p,\Om}$ defines a \textit{norm} on $\WO{1,p}{\Om}$, which is equivalent to the norm $||\cdot||_{1,p,\Om}$. On $H^1_0(\Om)$, the bilinear form
+    \begin{align*}
+        (u,v)\mapsto \int_\Om \sum_{i=1}^n\frac{\partial u}{\partial x_l}\frac{\partial v}{\partial x_i},
+    \end{align*}
+    defines an inner-product giving rise to the norm $|\cdot|_{1,\Om}$, equivalent to the norm $||\cdot||_{l,\Om}$.
+\end{thrm}
+
+\subsection*{Embedding Theorems}
+\begin{thrm}
+    Let $m\geq 1$ be an integer and $1\leq p<\infty$. Then
+    \begin{itemize}
+        \item if $\frac{1}{p}-\frac{m}{n}>0,\: \W{m,p}{\Om}\subset \LP{q}{\Om},\:\frac{1}{q}=\frac{1}{p}-\frac{m}{n},$
+        \item if $\frac{1}{p}-\frac{m}{n}=0,\: \W{m,p}{\Om}\subset \LP{q}{\Om},\text{ for } q\in[p,\infty)$,
+        \item if $\frac{1}{p}-\frac{m}{n}<0,\: \W{m,p}{\Om}\subset L^\infty(\Om),$
+    \end{itemize}
+    and in the latter case, i.e. when $m>(n/p)$ if we set
+    \begin{align*}
+        k=\bigg [m-\frac{n}{p}\bigg],\:\theta=\bigg (m-\frac{n}{p}\bigg )-k,
+    \end{align*}
+
+    $[\cdot]$, denoting the integral part of a real number, we have
+    \begin{align*}
+        |D^\alpha u|_{0,\infty,\R^n}\leq C||u||_{m,p,\R^n}\quad \text{for } |\alpha|\leq k
+    \end{align*}
+    and
+    \begin{align*}
+        |D^\alpha u(x)-D^\alpha (y)|\leq C|x-y|^\theta||u||_{m,p,\R^n}\text{ a.e. } (x,y),
+    \end{align*}
+    for $|\alpha|=k$. (If $|\alpha|<k$, the previous inequality holds with $\theta=1$ by virtue of the previous inequality. In particular we have the continuous inclusion
+    \begin{align*}
+        \W{m,p}{\Om}\to C^k(\Om),\:m>(n/p).
+    \end{align*}
+\end{thrm}
+
+\subsection*{Compactness Theorems}
+\begin{define}
+    Let $1\leq p< n.$ Then we define the exponent $p^*$ by
+    \begin{align*}
+        \frac{1}{p^*}=\frac{1}{p}-\frac{1}{n}\text{ or } p^*=\frac{np}{n-p}
+    \end{align*}
+\end{define}
+
+\begin{thrm}[Rellich-Kondrasov]
+    Let $\Om\subset\R^n$ be a bounded open set of class $C^1$. Then the following inclusions are compact.
+    \begin{itemize}
+        \item if $p<n,\:\W{1,p}{\Om}\to\LP{q}{\Om},\quad 1\leq q <p^*$,
+        \item if $p=n,\:\W{1,n}{\Om}\to\LP{q}{\Om},\quad 1\leq q <\infty$,
+        \item if $p>n,\:\W{1,p}{\Om}\to C(\bar{\Om})$.
+    \end{itemize}
+\end{thrm}
+
+\subsection*{Dual Spaces, Fractional Order Spaces and Trace Spaces}
+\begin{define}
+    Let $1\leq p<\infty$. Let $p'$ be the conjugate exponent of $p$. The dual of the space $\WO{m,p}{\Om}$ where $m\geq 1$ is an integer, is denoted by $\W{-m,p'}{\Om}$. If $p=2, \HM{-m}{\Om}$ is the dual of the space $H_0^m(\Om)$. 
+\end{define}
+
+\begin{thrm}
+    Let $F\in\W{-1,p'}{\Om}$. Then there exist functions $f_0,f_1,...,f_n\in \LP{p'}{\Om}$ such that
+    \begin{align*}
+        F(v)=\int_\Om f_0v+\sum_{i=1}^n\int_\Om f_i \frac{\partial v}{\partial x_i},\:v\in \WO{1,p}{\Om}
+    \end{align*}
+    and
+    \begin{align*}
+        ||F||=\max_{0\leq i\leq n}|f_i|_{0,p',\Om}
+    \end{align*}
+    Further, if $\Om$ is bounded, we assume $f_0=0$.
+\end{thrm}
+
+\subsection*{Trace Theory}
+\begin{thrm}
+    (This was switched from $\R^n$ to $\Om$) Let $s>0$ be a real number. Then
+    \begin{align*}
+        \HM{-s}{\Om}=\set{u\in \Sch'(\Om)}{(1+|\xi|^2)^{-s/2}\hat{u}(\xi)\in\LP{2}{\Om}}
+    \end{align*}
+\end{thrm}
+
+\begin{thrm}
+    (This was switched from $\R^n$ to $\Om$) Let $s_1<s_2$ and $s=\theta s_1+(1-\theta)s_2,\quad \theta\in(0,1)$. If $u\in\HM{s_2}{\Om}$, then
+    \begin{align*}
+        ||u||_{\HM{s}{\Om}}\leq ||u||^\theta_{\HM{s_1}{\Om}}||u||^{1-\theta}_{\HM{s_2}{\Om}}
+    \end{align*}
+\end{thrm}
+
+\begin{note}\
+    (This was switched from $\R^n$ to $\Om$) Let $s_1<s_2$ and $t_1<t_2$. Let $\theta\in(0,1)$ and set $s=\theta s_1+(1-\theta)s_2,\:t=\theta t_1+(1-\theta)t_2$. Assume that $T$ is a linear operator such that
+    \begin{align*}
+        T\in\Lin(\HM{s_1}{\Om},\HM{t_1}{\Om})\cap \Lin(\HM{s_2}{\Om},\HM{t_2}{\Om})
+    \end{align*}
+    Then it is true that $T\in \Lin(\HM{s}{\Om},\HM{t}{\Om})$ and we also have
+    \begin{align*}
+        ||T||_{\Lin(\HM{s}{\Om},\HM{t}{\Om})}\leq ||T||_{\Lin(\HM{s_1}{\Om},\HM{t_1}{\Om})}^\theta ||T||_{\Lin(\HM{s_2}{\Om},\HM{t_2}{\Om})}^{1-\theta}
+    \end{align*}
+\end{note}
+
+\begin{define}
+    Let $V=(\HM{1}{\Om})^3$, where $\Om\subset \R^3$ is a bounded open set of class $C^1$. If $v\in V$, let $v=(v_1,v_2,v_3)$ be its components. For $1\leq i,j\leq 3$ we define
+    \begin{align*}
+        \epsilon_{ij}(v)=\frac{1}{2}\bigg (\frac{\partial v_i}{\partial x_j}+\frac{\partial v_j}{\partial x_i}\bigg ).
+    \end{align*}
+    We denote by $||\cdot||_V$ the usual product norm on $V$.
+\end{define}
+
+\begin{thrm}[Korn's Inequality]
+    Let $\Om$ be a bounded open subset of $\R^3$, of class $C^1$. Then there exists a constant $C>0$, depending only on $\Om$, such that
+    \begin{align*}
+        \int_\Om \sum_{i,j=1}^3|\epsilon_{ij}(v)|^2+\int_\Om \sum_{i=1}^3|v_i|^2\geq C||v||_V^2
+    \end{align*}
+    for every $v\in V$.
+\end{thrm}
+
+\begin{thrm}
+    (This was changed from $\R$ case to $\Om$) Let $\Om\subset\R^n$ be bounded. Then there exists a continuous linear map $\gamma_0:\HM{1}{\Om}\to \LP{2}{\R^{n-1}}$ which is such that if $v$ is continuous on $\Om$ then
+    \begin{align*}
+        \gamma_0(v)=v|_{\R^{n-1}}
+    \end{align*}
+\end{thrm}
+
+\begin{thrm}
+    The range of the map $\gamma_0$ is the space $\HM{1/2}{\R^{n-1}}$.
+\end{thrm}
+
+\begin{note}
+    (This was changed from $\R$ case to $\Om$) Similarly we can prove that $\gamma_0$ maps $\HM{m}{\Om}$ onto $\HM{m-1/2}{\R^{n-1}}$. Also if $u\in\HM{2}{\Om}$ we can show that $\frac{\partial u}{\partial x_n}(x',0)$ is in $\LP{2}{\R^{n-1}}$ and again $\frac{\partial u}{\partial x_n}(x',0)\in\HM{1/2}{\R^{n-1}}$. We can then extend $-\frac{\partial u}{\partial x_n}(x',0)$ to a continuous linear map $\gamma_1:\HM{2}{\Om}\to\LP{2}{\R^{n-1}}$ whose range is $\HM{1/2}{\R^{n-1}}$. More generally we have a series of continuous linear maps $\{\gamma_i\}$ into $\LP{2}{\R^{n-1}}$. such that the map $\gamma=(\gamma_0,\gamma_1,...,\gamma_{m-1})$ maps $\HM{m}{\Om}$ into $(\LP{2}{\R^{n-1}})^m$ and the range in the space
+    \begin{align*}
+        \prod_{j=0}^{m-1}\HM{m-j-1/2}{\R^{n-1}}
+    \end{align*}
+    Looking at the kernel of the map $\gamma_0$. If $u$ is continuous on $\bar{\Om}$ and $u$ vanishes on $\Gamma$, then $u\in H_0^1(\Om)$. A few steps not included here lead to $H_0^1(\Om)=\ker (\gamma_0)$
+
+\end{note}
+
+\begin{thrm}[Trace Theorem]
+    Let $\Om\subset \R^n$ be a bounded open set of class $C^{m+1}$ with boundary $\Gamma$. Then there exists a trace map $\gamma=(\gamma_0,\gamma_1,...,\gamma_{m-1})$ from $\HM{m}{\Om}$ into $(\LP{2}{\Om})^m$ such that
+    \begin{itemize}
+        \item 
+            If $v\in C^\infty (\bar{\Om})$, then $\gamma_0(v)=v|_\Gamma,\:\gamma_1(v)=\frac{\partial v}{\partial \nu}|_\Gamma$,..., and $\gamma_{m-1}(v)=\frac{\partial^{m-1}}{\partial \nu^{m-1}}(v)|_\Gamma$, where $\nu$ is the unit exterior normal to the boundary $\Gamma$.
+        \item 
+            The range of $\gamma$ is the space
+            \begin{align*}
+                \prod_{j=0}^{m-1}\HM{m-j-1/2}{\Gamma}
+            \end{align*}
+        \item 
+            The kernel of $\gamma$ is $H_0^m(\Om)$.
+    \end{itemize}
+\end{thrm}
+
+\begin{thrm}[Green's Theorem, or, Green's Formula]
+    Let $\Om$ be a bounded open set of $\R^n$ set of class $C^1$ lying on the same side of its boundary $\Gamma$. Let $u,v\in\HM{1}{\Om}$. Then for $1\leq i\leq n$,
+    \begin{align*}
+        \int_\Om u\frac{\partial v}{\partial x_i}=-\int_\Om \frac{\partial u}{\partial x_i}v+\int_\Gamma (\gamma_0u)(\gamma_0v)\nu_i.
+    \end{align*}
+\end{thrm}
+
+\subsection*{$C_0$ Semigroups}
+\begin{define}
+        Let $X$ be a Banach space and $\{S(t)\}_{t\geq 0}$ be a family of bounded linear operators on $X$. It is said to be a $C_0$ semigroup if the following are true:
+        \begin{itemize}
+            \item $S(0)=I$, the identity of $X$\\
+            \item $S(t+s)=S(t)S(s)$, for all $t,s\geq 0$\\
+            \item For every $u\in X$
+                \begin{align*}
+                    S(t)u\to u \quad \text{as } t\downarrow 0
+                \end{align*}
+        \end{itemize}
+    \end{define}
+
+\begin{thrm}
+    Let $\{S(t)\}_{t\geq 0}$ be a $C_0$-semigroup on $X$. Then there exists $M\geq 1$ and $\omega$ such that
+    \begin{align*}
+        ||S(t)||\leq Me^{\omega t},\quad \text{for all } t\geq 0
+    \end{align*}
+\end{thrm}
+
+\begin{define}
+    If $M=1$ and $\omega = 0$, so that $||S(t)||\leq 1$ for all $t\geq 0$, we say that $\{S(t)\}$ is a \textbf{contraction semigroup}.
+\end{define}
+
+\begin{define}
+    Let $\{S(t)\}_{t\geq 0}$ be a $C_0$ semigroup on $X$. The \textbf{infinitesimal generator} of the semigroup is a linear operator $A$ given by
+    \begin{align*}
+        D(A)&=\bigg \{u\in X\:|\: \lim_{t\downarrow0} \frac{S(t)u-u}{t} \:\text{exists}\bigg \}\\
+        Au&=\lim_{t\downarrow0} \frac{S(t)u-u}{t},\: u\in D(A)
+    \end{align*}
+\end{define}
+
+\begin{thrm}
+    Let $\{S(t)\}_{t\geq 0}$ be a $C_0$ semigroup and let $A$ be its infinitesimal generator. Let $u\in D(A)$. Then
+    \begin{align*}
+        S(t)u\in C^1([0,\infty);X)\cap C([0,\infty);X)
+    \end{align*}
+    and
+    \begin{align*}
+        \frac{d}{dt}(S(t)u)=AS(t)u=S(t)Au
+    \end{align*}
+\end{thrm}
+
+\begin{note}
+    If $A$ is the infinitesimal generator of a $C_0$ semigroup $\{S(t)\}$ then we know by the above theorem that
+    \begin{align*}
+        u(t)=S(t)u_0
+    \end{align*}
+    defines the unique solution of the initial value problem
+    \begin{align*}
+        \begin{rcases}
+        \frac{du(t)}{dt}&=Au(t),\:t\geq 0\\
+        u(0)&=u_0
+        \end{rcases}
+    \end{align*}
+\end{note}
+
+\subsection*{Crucial Existence and Uniqueness Theorems}
+\begin{thrm}[Hille Yosida]
+    A linear unbounded operator $A$ on a Banach space $X$ is the infinitesimal generator of a contraction semigroup if and only if
+    \begin{itemize}
+        \item $A$ is closed
+        \item $A$ is densely defined
+        \item For every $\lambda>0,\: (\lambda I-A)^{-1}$ is a bounded linear operator and
+        \begin{align*}
+            ||(\lambda I-A)^{-1}||\leq \frac{1}{\lambda}
+        \end{align*}
+    \end{itemize}
+\end{thrm}
+
+\begin{thrm}[Lax-Milgram]
+    Let $V$ be a Hilbert space and $a(\cdot,\cdot)$ a continuous $V$-elliptic bilinear form. Then given $f\in V$, there exists a unique $u\in V$ such that
+    \begin{align*}
+        a(u,v)=(f,v),\quad \text{for every }v\in V.
+    \end{align*}
+    If $a(\cdot,\cdot)$ is also symmetric then the functional $J:V\to \R$ defined by
+    \begin{align*}
+        J(v)=\frac{1}{2}a(v,v)-(f,v)
+    \end{align*}
+    attains its minimum at $u$.\label{Lax}
+\end{thrm}
+
+\begin{thrm}[(Babuska-Brezzi)]
+    Let $\Sigma,\:V$ be Hilbert spaces and $a:\Sigma\times\Sigma\to\R,\:b:\Sigma\times V\to\R$, bilinear forms which are continuous. Let 
+    \begin{align*}
+        Z=\set{\sigma\in\Sigma}{b(\sigma,v)=0,\quad\text{for every }v\in V}.
+    \end{align*}
+    Assume that $a(\cdot,\cdot)$ is $Z$-elliptic, i.e. there exists a constant $\alpha>0$ such that
+    \begin{align*}
+        a(\sigma,\sigma)\geq \alpha||\sigma||_\Sigma^2,\quad\text{for every }\sigma\in Z.
+    \end{align*}
+    Assume further that there exists a constant $\beta>0$ such that
+    \begin{align*}
+        \sup_{\tau\in\Sigma}\frac{b(\tau,v)}{||\tau||_\Sigma}\geq \beta||v||_V.
+    \end{align*}
+    Then if $\kappa\in\Sigma$ and $l\in V$, there exists a unique pair $(\sigma,u)\in\Sigma\times V$ such that
+    \begin{align}
+        a(\sigma,\tau)+b(\tau,u)=(\kappa,\tau),\quad\text{for every }\tau\in\Sigma\nonumber\\
+        b(\sigma,v)=(l,v),\quad\text{for every }v\in V.\label{sweq:16}
+    \end{align}\label{BB}
+\end{thrm}
+
+\begin{define}
+    Let $X$ be a Banach space with dual space $X'$. Denote $x'\in X'$ at $x\in X$ by $\langle x',x\rangle$ or $\langle x,x'\rangle$. Define the following set $F(x)\subseteq X'$ as
+    \begin{align*}
+        F(x)=\set{x'}{\langle x',x\rangle=||x||^2=||x'||^2}
+    \end{align*}
+    (This set is non-empty by the Hahn-Banach theorem.)
+\end{define}
+
+\begin{define}[Dissipativity]
+    A linear operator $A$ is dissipative if for every $x\in D(A)$ there is a $x'\in F(x)$ such that $Re\langle Ax,x'\rangle\leq 0$
+\end{define}
+
+\begin{define}[Maximal Dissipativity]
+    A linear operator $A$ is called maximally dissipative if it is dissipative and $R(I-A)=X$.
+\end{define}
+
+\begin{thrm}[Lumer-Phillips]
+    If $A$ is dissipative and there is a $\lambda _0 >0$ such that $R(\lambda _0 I-A)=X$, then $A$ is the infinitesimal generator of a $C_0$ semigroup of contractions on $X$. If $A$ is the infinitesimal generator of a $C_0$ semigroup of contractions on $X$ then $R(\lambda I-A)=X$ for all $\lambda >0$ and A is dissipative.\label{LP}
+\end{thrm}
+
+\subsection*{Operator and Spectrum Definitions}
+\begin{define}\ 
+    \begin{itemize}
+        \item A linear operator $A:D(A)\subseteq X\to Y$ is said to be \textbf{bounded} if there exists a $C>0$ such that
+        \begin{align*}
+            ||Au||_Y\leq C||u||_X,\quad \text{for every } u\in D(A)
+        \end{align*}
+        Otherwise it is said to be \textbf{unbounded}.
+        \item A linear operator $A:D(A)\subseteq X\to Y$ is said to be \textbf{densely defined} if $\overline{D(A)}=X$
+        \item A linear operator $A:D(A)\subseteq X\to Y$ is said to be \textbf{closed} if the \textbf{graph}
+        \begin{align*}
+            G(A)=\set{(u,Au)}{u\in D(A)}\subseteq X\times Y
+        \end{align*}
+        is closed as a subspace of $X\times Y$
+    \end{itemize}
+\end{define}
+
+\begin{define}
+    Let $X\neq \{0\}$ be a complex normed space and $T:\D(T)\subseteq X\to X$ be a linear operator. With $T$ we associate the operator
+    \begin{align*}
+        T_\lambda =T-\lambda I
+    \end{align*}
+    where $\lambda$ is a complex number and $I$ is the identity operator on $\D(T)$. If $T_\lambda$ has an inverse, we denote it by $R_\lambda (T)$ and call it the \textit{resolvent operator} of $T$ or, simply, the \textbf{resolvent} of $T$. If it is clear which operator we are discussing, we will write $R_\lambda$.
+\end{define}
+
+\begin{define}[Regular value, resolvent set, spectrum]
+    Let $X\neq \{0\}$ be a complex normed space and $T:\D(T)\subseteq X\to X$ be a linear operator. A \textit{regular value} $\lambda$ of $T$ is a complex number such that
+    \begin{itemize}
+        \item $R_\lambda (T)$ exists,
+        \item $R_\lambda (T)$ is bounded,
+        \item $R_\lambda (T)$ is densely defined.
+    \end{itemize}
+    The \textit{resolvent set} $\rho(T)$ of $T$ is the set of all regular values $\lambda$ of $T$. Its complement $\sigma (T)=\mathbb{C}\backslash\rho(T)$ in the complex plane $\mathbb{C}$ is called the \textit{spectrum} of $T$, and a $\lambda \in \sigma (T)$ is called a \textit{spectral value} of $T$. Furthermore, the spectrum $\sigma(T)$ is partitioned into three disjoint sets as follows.\\
+    The \textbf{point spectrum} or \textit{discrete spectrum} $\sigma_p(T)$ is the set such that $R_\lambda(T)$ does not exist. A $\lambda\in\sigma_p(T)$ is called an \textit{eigenvalue} of $T$.\\
+    The \textbf{continuous spectrum} $\sigma_c(T)$ is the set such that $R_\lambda (T)$ exists and is densely defined, but it unbounded.\\
+    The \textbf{residual spectrum} $\sigma_r(T)$ is the set such that $R_\lambda(T)$ exists, but is not densely defined (may or may not be bounded).
+\end{define}
