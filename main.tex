@@ -1,37 +1,19 @@
-\documentclass{beamer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Do not change the next few lines. 
-\usepackage{amsmath,amssymb,bigints,amsthm,mathrsfs,mathtools,biblatex,xcolor,multicol}
+\documentclass{article}
 
-\addbibresource{bib.bib}
+\usepackage{amsmath,amssymb,bigints,amsthm,mathrsfs,mathtools,biblatex}
 
-\newcommand{\singleslidebig}[1]{\begin{frame}
-\begin{center}
-\textcolor{red}{\Huge{#1}}
-\end{center}
-\end{frame}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usetheme{Warsaw}
+\addbibresource{Bibliography.bib}
 
 \newtheorem{thrm}{Theorem}
-\newtheorem{cor}[thrm]{Corollary}
-%\newtheorem{lemma}[thrm]{Lemma}
-\newtheorem{define}[thrm]{Definition}
-\newtheorem{prop}[thrm]{Proposition}
-%\newtheorem{note}[thrm]{Remark}
-\newtheorem{sump}[thrm]{Assumption}
+\newtheorem{cor}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{define}{Definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{note}{Remark}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\D}{\mathscr{D}}
 \newcommand{\E}{\mathscr{E}}
-\newcommand{\G}{\Gamma}
-\newcommand{\A}{\textbf{A}}
-\newcommand{\BH}{\textbf{H}}
-\newcommand{\BW}{\textbf{W}}
-\newcommand{\Real}{\text{Re}}
-\newcommand{\Imag}{\text{Im}}
 \newcommand{\Sch}{\mathcal{S}}
 \newcommand{\Lin}{\mathscr{L}}
 \newcommand{\Om}{\Omega}
@@ -39,862 +21,620 @@
 \newcommand{\WO}[2]{W_0^{#1}(#2)}
 \newcommand{\HM}[2]{H^{#1}(#2)}
 \newcommand{\LP}[2]{L^{#1}(#2)}
-\newcommand{\set}[2]{\left\{#1\:|\:#2\right\}}
-\newcommand{\diver}{\text{div }}
-\newcommand{\IP}[2]{\left \langle #1\right \rangle_{#2}}
-\newcommand{\norm}[2]{\left |\left |#1\right |\right |_{#2}}
+\newcommand{\set}[2]{\{#1\:|\:#2\}}
 
-\setbeamertemplate{enumerate items}[default]
-\definecolor{myor}{RGB}{245,102,0}
-\definecolor{mypur}{RGB}{82,45,128}
-
-\setbeamercolor{structure}{fg=myor!90!mypur}
-%\setbeamercolor*{block title example}{fg=white, bg= violet!90}
-%\setbeamercolor*{block body example}{bg= violet!20}
-
-\newtheorem*{model}{\footnotesize{Hodgkin-Huxley Model}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Now Start entering your information.
-\title[Properties of Multilayered Structure Coupled PDE Systems]{MASTER PROJECT: Qualitative Properties of the Multilayered Structure - Fluid Interactions Coupled PDE Systems}
-\author[Manning]{\textbf{Jacob Manning}\\ 
-                Advisor: Dr. Pelin Guven Geredeli}
-\institute[Clemson University]{Clemson University}
-\date{October 16, 2025}
+\title{Sobolev Spaces}
+\author{Jacob Manning}
+\date{February 2025}
 
 \begin{document}
+\tableofcontents
+\newpage
 
-\maketitle
+\section{Notation}
+This might need some material added
+\newpage
 
-\begin{frame}{Motivation}
-    \includegraphics[width=5cm,height=3.5cm]{Screenshot 2025-09-11 122320.png}
-    \includegraphics[width=5cm,height=3.5cm]{Screenshot 2025-09-11 122431.png}\\
-    \centering
-    \includegraphics[width=5cm,height=3.5cm]{Screenshot 2025-09-11 122413.png}
-\end{frame}
-
-\begin{frame}{Introduction of Model}
-    \Large\underline{Geometry}
-    \center\begin{itemize}
-        \item $\Om_f\subseteq \R^3$, Lipschitz bounded domain
-        \item$\Om_s\subseteq \R^3$, $\Om_s\subset\subset \Om_f$
-        \item$\partial\Om_s=\G_s$
-        \item$\partial\Om_f=\G_s\cup\G_f$
-    \end{itemize}
-    \includegraphics[width=5cm,height=3.5cm]{Screenshot 2025-05-01 075848.png}
-\end{frame}
-
-\begin{frame}{Introduction of First Model}
-    \scriptsize
-    \begin{align}
-        &\begin{cases}
-            u_t-\Delta u=0\text{ in } (0,T)\times \Om_f\\
-            u|_{\G_f}=0\text{ on } (0,T)\times\G_f\label{bmeq:2};
-        \end{cases}\\
-        &\begin{cases}
-            \frac{\partial^2}{\partial t^2}h_j-\Delta h_j+h_j=\frac{\partial w}{\partial \nu}|_{\G_j}-\frac{\partial u}{\partial \nu}|_{\G_j}\text{ on } (0,T)\times \G_j\\
-            h_j|_{\partial{\G_j}\cap\partial{\G_l}}=h_l|_{\partial{\G_j}\cap\partial{\G_l}}\text{ on } (0,T)\times (\partial\G_j\cap\partial\G_l),\text{ for all } 1\leq l\leq K\\
-            \text{ such that } \partial\G_j\cap\partial\G_l\neq\emptyset\\
-            \frac{\partial h_j}{\partial n_j}\bigg |_{\partial\G_j\cap\partial\G_l}=-\frac{\partial h_l}{\partial n_l}\bigg |_{\partial\G_j\cap\partial\G_l}\text{ on }(0,T)\times(\partial\G_j\cap\partial\G_l)\text{, for all }1\leq l\leq K\\
-            \text{ such that }\partial\G_j\cap\partial\G_l\neq \emptyset\label{bmeq:3}
-        \end{cases}\\
-        &\begin{cases}
-            w_{tt}-\Delta w=0\text{ on } (0,T)\times\Om_s\\
-            w_t|_{\G_j}=\frac{\partial}{\partial t}h_j=u|_{\G_j}\text{ on } (0,T)\times\G_j\text{, for }j=1,\dots,K\label{bmeq:4}
-        \end{cases}
-    \end{align}
-    \begin{align}
-        \nonumber[u(0),h_1(0),\frac{\partial}{\partial t}h_1(0),\dots,h_K(0),\frac{\partial}{\partial t}&h_K(0),w(0),w_t(0)]\\
-        &=[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\label{bmeq:5}
-    \end{align}
-    where $\G_s=\cup_{j=1}^K \overline{\G_j}$ and $\G_i\cap\G_j=\emptyset$, for $i\neq j$.
-\end{frame}
-
-\begin{frame}{Earlier Works}
-    Generally, single layered or moving boundary FSI Systems
-    \begin{itemize}
-        \item George Avalos
-        \item Lorena Bociu
-        \item Scott Hansen
-        \item Igor Kukavica
-        \item Irena Lasiecka
-        \item Hyesuk Lee
-        \item Roberto Triggiani
-        \item Amjad Tuffaha
-        \item Justin Webster
-        \item Enrique Zuazua
-        \item etc.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Pioneer Paper Buka\u c, B. Muha, S. \u Cani\'c}
-    \begin{columns}[t]
-        \column{0.5\textwidth}
-        \centering
-        \includegraphics[width=5cm,height=3.5cm]{Screenshot 2025-09-11 122220.png}
-    \end{columns}
-    \begin{itemize}
-        \item 2014, Fluid-Multi-layered-structure Interaction, Existence of weak solutions\\
-        \item 2015, Regularity and Regularization effects of the same problem\\
-        \item 2015, Numerical Results: unconditional stability for the same problem
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Functional Settings}
-    \scriptsize
-    \begin{align}
-        \BH=&\{[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in \LP{2}{\Om_f}\times\HM{1}{\G_1}\times\LP{2}{\G_1}\times\dots\nonumber\\
-        &\times\HM{1}{\G_K}\times\LP{2}{\G_K}\times\HM{1}{\Om_s}\times\LP{2}{\Om_s}\text{, such that for each } 1\leq j\leq K:\nonumber\\
-        &(i) w_0|_{\G_j}=h_{0j};\nonumber\\
-        &\nonumber(ii)h_{0j}|_{\partial\G_j\cap\partial\G_l}=h_{0l}|_{\partial\G_j\cap\partial\G_l}\text{ on } \partial\G_j\cap\partial\G_l\text{, for all } 1\leq l\leq K\text{ such that }\\ 
-        &\qquad \partial\G_j\cap\partial\G_l\neq \emptyset\}\label{bmeq:6}
-    \end{align}
-    With the accompanying inner product
-    \begin{align}
-        \IP{\Phi_0,\widetilde{\Phi}_0}{\BH}=\IP{u_0,\widetilde{u}_0}{\Om_f}&+\sum_{j=1}^K \IP{\nabla h_{0j},\nabla \widetilde{h}_{0j}}{\G_j}+\sum_{j=1}^K\IP{h_{0j},\widetilde{h}_{0j}}{\G_j}\nonumber\\
-        &+\sum_{j=1}^K \IP{h_{1j},\widetilde{h}_{1j}}{\G_j}+\IP{\nabla w_0,\nabla\widetilde{w}_0}{\Om_s}+\IP{w_1,\widetilde{w}_1}{\Om_s}\label{bmeq:7}
-    \end{align}
-    where \\
-    $\Phi_0=[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in\BH$ and $ \widetilde{\Phi}_0=[\widetilde{u}_0,\widetilde{h}_{01},\widetilde{h}_{11},\dots,\widetilde{h}_{0K},\widetilde{h}_{1K},\widetilde{w}_0,\widetilde{w}_1]\in\BH.$
-\end{frame}
-
-\begin{frame}{Functional Settings}
-    For the PDE system given in ($\ref{bmeq:2})-(\ref{bmeq:5}$) if $\Phi(t)=[u,h_1,\frac{\partial}{\partial t}h_1,\dots,h_K,\frac{\partial}{\partial t}h_K,w,w_1]\in C([0,T];\BH)$ then for $\A:D(\A)\subseteq \BH\to\BH$,
-    \begin{align}
-        \frac{d}{dt}\Phi(t)=\A\Phi(t); \quad \Phi(0)=\Phi_0\label{bmeq:9}.
-    \end{align}
-    where $\A$ is given as
-    \begin{align}
-        \A=\begin{bmatrix}
-            \Delta&0&0&\dots&0&0&0&0\\
-            0&0&I&\dots&0&0&0&0\\
-            -\frac{\partial}{\partial \nu}|_{\G_1}&(\Delta-I)&0&\dots&0&0&\frac{\partial}{\partial \nu}|_{\G_1}&0\\
-            \vdots&\vdots&\vdots&\ddots&\vdots&\vdots&\vdots&\vdots\\
-            0&0&0&\dots&0&I&0&0\\
-            -\frac{\partial}{\partial \nu}|_{\G_K}&0&0&\dots&(\Delta-I)&0&\frac{\partial}{\partial \nu}|_{\G_K}&0\\
-            0&0&0&\dots&0&0&0&I\\
-            0&0&0&\dots&0&0&\Delta&0
-        \end{bmatrix};\label{bmeq:10}
-    \end{align}
-\end{frame}
-
-\begin{frame}{Introduction of First Model}
-    Where the Domain of $\A$ is given as follows
-    \scriptsize
-    \begin{align}
-        D(&\A)=\{[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in\BH:\nonumber\\
-        (&\textbf{A.i})\:u_0\in\HM{1}{\Om_f},\:h_{1j}\in\HM{1}{\G_j}\text{ for }1\leq j\leq K,\:w_1\in\HM{1}{\Om_s};\nonumber\\
-        (&\textbf{A.ii})(a)\:\Delta u_0\in\LP{2}{\Om_f},\:\Delta w_0\in\LP{2}{\Om_s},\:(b)\:\Delta h_{0j}-\frac{\partial u_0}{\partial \nu}\bigg|_{\G_j}+\frac{\partial w_0}{\partial\nu}\bigg|_{\G_j}\in\LP{2}{\G_j}\nonumber\\
-        &\text{ for } 1\leq j\leq K; \text{(c) }\frac{\partial h_{0j}}{\partial n_j}\bigg |_{\partial\G_j}\in \HM{-1/2}{\partial\G_j},\text{ for }1\leq j\leq K;\nonumber\\
-        (&\textbf{A.iii})\:u_0|_{\G_f}=0,u_0|_{\G_j}=h_{1j}=w_1|_{\G_j},\text{ for }1\leq j\leq K;\nonumber\\
-        (&\textbf{A.iv}) \text{ For }1\leq j\leq K:\nonumber\\
-        &\nonumber(a)\:h_{1j}|_{\partial \G_j\cap\partial\G_l}=h_{1l}|_{\partial\G_j\cap\partial\G_l}\text{ on }\partial\G_j\cap\partial\G_l,\text{ for all }1\leq l\leq K\text{ such that }\\
-        &\qquad \partial\G_j\cap\partial\G_l\neq \emptyset;\nonumber\\
-        &\nonumber (b)\:\frac{\partial h_{0j}}{\partial n_j}\bigg |_{\partial\G_j\cap\partial\G_l}=-\frac{\partial h_{0l}}{\partial n_l}\bigg |_{\partial\G_j\cap\partial\G_l}\text{ on }\partial\G_j\cap\partial\G_l,\text{ for all }1\leq l\leq K\\
-        &\qquad \text{ such that }\partial\G_j\cap\partial\G_l\neq\emptyset\}.\label{bmeq:11}
-    \end{align}
-\end{frame}
-
-\begin{frame}{Wellposedness}
-    \center\Huge Part I
-\end{frame}
-
-\begin{frame}{Wellposedness}
-    \begin{thrm}[{(Wellposedness) G. Avalos, PGG, B. Muha [JDE, 2020]}]
-        The operator $\A:D(\A)\subseteq\BH\to\BH$ defined above generates a $C_0$-semigroup of contractions. Consequently, the solution $\Phi(t)=[u,h_1,\frac{\partial}{\partial t}h_1,\dots,h_K,\frac{\partial}{\partial t}h_K,w,w_1]$ of the PDE model is given by
-        \begin{align*}
-            \Phi(t)=e^{\A t}\Phi_0\in C([0,T];\BH),
-        \end{align*}
-        where $\Phi_0=[u_0,h_{01},h_{11},\dots,h_{0K},h_{1k},w_0,w_1]\in D(\A)$\label{bmthrm:1}
-    \end{thrm}
-    \scriptsize
-    G. Avalos, P. G. Geredeli, B. Muha; “Wellposedness, Spectral Analysis and Asymptotic Stability of a Multilayered Heat-Wave-Wave System ”, Journal of Differential Equations 269 (2020), pp. 7129-7156.
-\end{frame}
-
-\begin{frame}{Sketch of Proof}
-    Wellposedness was shown using the Lumer-Phillips Theorem. To this end, they showed
-    \begin{itemize}
-        \item $\A$ is dissipative; i.e. $\IP{\A \Phi,\Phi}{\BH}\leq 0$ for all $\Phi\in D(\A)$\\
-        \item Use Lax-Milgram to solve to the static resolvent equation $(\lambda I-\A)\Phi=\Phi^*$ in $D(\A)$; i.e. $\A$ is maximally dissipative\\
-        \item Recover of the other structure solution variables given initial data; i.e.
-        \begin{align*}
-            h_{0j}&=\frac{1}{\lambda}h_{1j}+\frac{1}{\lambda}h_{0j}^*,\text{ for }1\leq j\leq K,\\
-            w_0&=\frac{1}{\lambda}w_1+\frac{1}{\lambda}w_0^*.
-        \end{align*}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Dissipativity of $\A$}
-    Given data $\Phi_0$ in $D(\A)$,
-    \begin{align}
-        \IP{\A\Phi_0,\Phi_0}{\BH}&= -\norm{\nabla u_0}{\Om_f}^2+2i\sum_{j=1}^K \Imag \IP{\nabla h_{1j},\nabla h_{0j}}{\G_j}\nonumber\\
-        &+2i\sum_{j=1}^K \Imag \IP{h_{1j},h_{0j}}{\G_j}+2i\Imag \IP{\nabla w_1,\nabla w_0}{\Om_s}\label{bmeq:14},
-    \end{align}
-    which gives $\Real \IP{\A\Phi_0,\Phi_0}{\BH}\leq 0.$ Since $\Phi_0$ was arbitrary, it follows that $\A$ is dissipative.
-\end{frame}
-
-\begin{frame}{Maximality of $\A$}
-    The author solves the following static problem with the Lax-Milgram Theorem. Given parameter $\lambda>0$, suppose $\Phi=[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in D(\A)$ is a solution of the equation
-        \begin{align}
-            (\lambda I-\A)\Phi=\Phi^*,\label{bmeq:15}
-        \end{align}
-        where $\Phi^*=[u_0^*,h_{01}^*,h_{11}^*,\dots,h_{0K}^*,h_{1K}^*,w_0^*,w_1^*]\in\BH$. 
-\end{frame}
-
-\begin{frame}{Maximality of $\A$}
-    \scriptsize
-    In PDE terms, the abstract equation above becomes
-    \begin{align}
-        \begin{cases}
-            \lambda u_0-\Delta u_0=u_0^*\text{ in }\Om_f\\
-            u_0|_{\G_f}=0\text{ on } \G_f\label{bmeq:16};
-        \end{cases}
-    \end{align}
-    and for $1\leq j\leq K$,
-    \begin{align}
-        \begin{cases}
-            \lambda h_{0j}-h_{1j}=h_{0j}^*\text{ in }\G_j\\
-            \lambda h_{1j}-\Delta h_{0j}+h_{0j}-\frac{\partial w_0}{\partial\nu}+\frac{\partial u_0}{\partial\nu}=h_{1j}^*\text{ in } \G_j\\
-            u_0|_{\G_j}=h_{1j}=w_1|_{\G_j}\text{ in }\G_j\\
-            h_{0j}|_{\partial\G_j\cap\partial\G_l}=h_{0l}|_{\partial\G_j\cap\partial\G_l}\text{ on }\partial\G_j\cap\partial\G_l,\text{ for all }1\leq l\leq K\text{ such that }\\
-            \qquad \partial\G_j\cap\partial\G_l\neq \emptyset\\
-            \frac{\partial h_{0j}}{\partial n_j}\bigg |_{\partial\G_j\cap\partial\G_l}=-\frac{\partial h_{0l}}{\partial n_l}\bigg |_{\partial\G_j\cap\partial\G_l}\text{ on }\partial\G_j\cap\partial\G_l,\text{ for all }1\leq l\leq K\text{ such that }\\
-            \qquad \partial\G_j\cap\partial\G_l\neq \emptyset;\label{bmeq:17}
-        \end{cases}
-    \end{align}
-    and also
-    \begin{align}
-        \begin{cases}
-            \lambda w_0-w_1=w_0^*\text{ in }\Om_s\\
-            \lambda w_1-\Delta w_0=w_1^*\text{ in }\Om_s\label{bmeq:18}
-        \end{cases}
-    \end{align}
-\end{frame}
-
-\begin{frame}{Maximality of $\A$}
-    \scriptsize Define the sets
-    \begin{align}
-        \mathcal{V}=&\{[\psi_1,\dots,\psi_K]\in\HM{1}{\G_1}\times\dots\times\HM{1}{\G_k}|\text{ For all } 1\leq j\leq K,\nonumber\\
-        &\psi_j|_{\partial\G_j\cap\partial\G_l}=\psi_l|_{\partial\G_j\cap\partial\G_l},\text{ for all }1\leq l\leq K\text{ such that }\partial\G_j\cap\partial\G_l\neq\emptyset\}\label{bmeq:20}
-    \end{align}
-    and
-    \begin{align}
-        \BW\equiv \set{[\varphi,\psi_1,\dots,\psi_K,\xi]\in H_{\G_f}^1(\Om_f)\times\mathcal{V}\times\HM{1}{\Om_s}}{\varphi|_{\G_j}=\psi_j=\xi|_{\G_j},\text{ for }1\leq j\leq K};\label{bmeq:23}
-    \end{align}
-    If $\Phi=[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in D(\A)$ solves (\ref{bmeq:15}), then necessarily its solution components $[u_0,h_{11},\dots,h_{1K},w_1]\in \BW$ satisfy for $[\varphi,\psi,\xi]\in\BH$,
-    \begin{align}
-        \IP{\textbf{B}
-        \begin{bmatrix}
-        \varphi\\\psi_1\\\vdots\\\psi_K\\\xi
-        \end{bmatrix},\begin{bmatrix}
-        u_0\\h_{11}\\\vdots\\h_{1K}\\w_1
-        \end{bmatrix}
-        }{\BW^*\times\BW}=\textbf{F}_\lambda\left (\begin{bmatrix}\varphi\\ \psi\\ \xi\end{bmatrix}\right );\label{bmeq:24}
-    \end{align}
-\end{frame}
-
-\begin{frame}{Maximality of $\A$}
-    \scriptsize where
-    \begin{align}
-        \textbf{F}_\lambda\left (\begin{bmatrix}\varphi\\ \psi\\ \xi\end{bmatrix}\right )&=\IP{u_0^*,\varphi}{\Om_f}+\sum_{j=1}^K\bigg [\IP{h_{1j}^*,\psi_j}{\G_j}-\frac{1}{\lambda}\IP{\nabla h_{0j}^*,\nabla \psi_j}{\G_j}\nonumber\\
-        &-\frac{1}{\lambda}\IP{h_{0j}^*, \psi_j}{\G_j}\bigg ]+\IP{w_1^*,\xi}{\Om_s}-\frac{1}{\lambda}\IP{\nabla w_0^*,\nabla\xi}{\Om_s}\label{bmeq:25}
-    \end{align}
-    and 
-    \begin{align*}
-        \IP{\textbf{B}
-        \begin{bmatrix}
-        \varphi\\\psi_1\\\vdots\\\psi_K\\\xi
-        \end{bmatrix},\begin{bmatrix}
-        \widetilde{\varphi}\\\widetilde{\psi}_1\\\vdots\\\widetilde{\psi}_K\\ \widetilde{\xi}
-        \end{bmatrix}
-        }{\BW^*\times\BW}&=\lambda\IP{\varphi,\widetilde{\varphi}}{\Om_f}+\IP{\nabla \varphi,\nabla \widetilde{\varphi}}{\Om_f}+\lambda\IP{\xi,\widetilde{\xi}}{\Om_s}+\IP{\nabla \xi,\nabla\widetilde{\xi}}{\Om_s}\\
-        &+\sum_{j=1}^K\left [\lambda \IP{\psi_j,\widetilde{\psi}_j}{\G_j}+\frac{1}{\lambda}\IP{\nabla\psi_j,\nabla\widetilde{\psi}_j}{\G_j}+\frac{1}{\lambda}\IP{\psi_j,\widetilde{\psi}_j}{\G_j}\right ]
-    \end{align*}
-\end{frame}
-
-\begin{frame}{Lax-Milgram}
-    \begin{thrm}[Lax-Milgram]
-        Let $X$ be a Hilbert space and $a(\cdot,\cdot)$ a continuous $X$-elliptic bilinear form. Then given $f\in X$, there exists a unique $u\in X$ such that
-        \begin{align*}
-            a(u,v)=\IP{f,v}{X},\quad \text{for every }v\in X.
-        \end{align*}\label{Lax}
-    \end{thrm}
-    Since it is clear that $\textbf{B}\in\Lin(\BW,\BW^*)$ is $\BW$-elliptic; by the Lax-Milgram Theorem, the equation $(\ref{bmeq:24})$ has a unique solution
-    \begin{align}
-        [u_0,h_{11},\dots,h_{1K},w_1]\in\BW.\label{bmeq:26}
-    \end{align}
-    It was then showed this solution is in $D(\A)$.
-\end{frame}
-
-\begin{frame}{Intoduction of Second Model}
-    The model was improved from a heat-wave-wave model to a Stokes-wave-Lam\'e model. The author has shown similar results of wellposedness for this model.
-\end{frame}
-
-\begin{frame}{Introduction of Second Model}
-    \scriptsize
-    \begin{align}
-        &\begin{cases}
-            u_t-\diver (\nabla u+\nabla^T u)+\nabla p=0 &\text{in } (0,T)\times \Om_f\\
-            \diver(u)=0 &\text{in } (0,T)\times \Om_f\\
-            u|_{\G_f}=0 &\text{on } (0,T)\times\G_f;
-        \end{cases}\label{sweq:1}\\
-        &\begin{cases}
-        h_{tt}-\Delta_{\G_s}h=[\nu\cdot\sigma(w)]|_{\G_s}-[\nu\cdot(\nabla u+\nabla ^T u)]|_{\G_s}+p\nu\quad\text{on }(0,T)\times\G_s,
-        \end{cases}\label{sweq:2}\\
-        &\begin{cases}
-            w_{tt}-\diver \sigma(w)+w=0&\text{ on } (0,T)\times\Om_s\\
-            w_t|_{\G_s}=h_t=u|_{\G_s}&\text{ on } (0,T)\times\G_s
-        \end{cases}\label{sweq:3}\\
-        &[u(0),h(0),h_t(0),w(0),w_1(0)]=[u_0,h_0,h_1,w_0,w_1]\in \BH\label{sweq:4}
-    \end{align}
-
-    Here, $\Delta_{\G_s}(\cdot)$ is the Laplace Beltrami operator, and the stress tensor $\sigma(\cdot)$ constitutes the Lam\'e system of elasticity on the ``thick'' layer. Namely, for function $v$ in $\Om_s$,
-
-    \begin{align*}
-        \sigma(v)=2\mu\epsilon(v)+\lambda[I_3\cdot\epsilon(v)]I_3,
-    \end{align*}
-
-    where strain tensor $\epsilon(\cdot)$ is given by 
-
-    \begin{align*}
-        \epsilon_{ij}=\frac{1}{2}\bigg (\frac{\partial v_j}{\partial x_i}+\frac{\partial v_i}{\partial x_j}\bigg ),\quad 1\leq i,\:j\leq 3
-    \end{align*}
-\end{frame}
-
-\begin{frame}{Functional Settings}
-    \scriptsize
-    With the following Hilbert space
-    \begin{align}
-        \nonumber \BH=\big \{[u_0,h_0,h_1,w_0,&w_1]\in[\LP{2}{\Om_f}]^3\times[\HM{1}{\G_s}]^2\times[\LP{2}{\G_s}]^2\times[\HM{1}{\Om_s}]^3\times\\
-        & [\LP{2}{\Om_s}]^3\:\big |\:\diver (u_0)=0,\:u_0\cdot\nu|_{\G_f}=0,\text{ and }w_0|_{\G_s}=h_0 \big \}\label{sweq:5}
-    \end{align}
-
-    with the inner product
-
-    \begin{align}
-        \IP{\Phi_0,\widetilde{\Phi}_0}{\BH}=\IP{u_0,\widetilde{u}_0}{\Om_f}&+\IP{\nabla _{\G_s}(h_0),\nabla _{\G_s}(\widetilde{h}_0)}{\G_s}+\IP{h_1,\widetilde{h}_1}{\G_s}\\
-        &+\IP{\sigma(w_0),\epsilon(\widetilde{w}_0)}{\Om_s}+\IP{w_0,\widetilde{w}_0}{\Om_s}+\IP{w_1,\widetilde{w}_1}{\Om_s}\label{sweq:6}
-    \end{align}
-
-    where
-
-    \begin{align}
-        \Phi_0=[u_0,h_0,h_1,w_0,w_1]\in\BH;\widetilde{\Phi}_0=[\widetilde{u}_0,\widetilde{h}_0,\widetilde{h}_1,\widetilde{w}_0,\widetilde{w}_1]\in\BH\label{sweq:7}
-    \end{align}
-\end{frame}
-
-\begin{frame}{Elimination of Pressure}
-    \scriptsize
-    Elimination of the pressure will be important to formulate the PDE in ($\ref{sweq:1})-(\ref{sweq:4}$) as an ODE. To this end, by using the matching velocity condition and $u$ being divergence free it follows $p$ is harmonic, or
-    \begin{align}
-        \Delta p(t)=0\text{ in }\Om_f.\label{sweq:8}
-    \end{align}
+\section{1.3 Some Operations with Distributions}
+    \begin{define}\ \\
+        The space of $\textbf{test-functions}$ denoted as $\D(\Om)$, where $\Om$ is any open set in $\R^n$, is a subset of $C^\infty(\Om)$ that have compact support contained within $\Om$.
+    \end{define}
     
-    Subsequently, by multiplying by $\nu|_{\G_s}$ and using the matching velocity condition the author obtains the following boundary condition for the pressure variable $p$:
-
-    \begin{align}
-        p+\frac{\partial p}{\partial \nu}=\diver(\nabla(u)+\nabla^T(u))\cdot\nu|_{\G_s}+[(\nabla u+\nabla^T u)\cdot\nu-\Delta_{\G_s}(h)-\nu\cdot\sigma(w)|_{\G_s}]\cdot\nu|_{\G_s}\label{sweq:9}
-    \end{align}
-
-    Since $u$ is divergence free,
-
-    \begin{align*}
-        \frac{\partial p}{\partial\nu}=[\diver(\nabla u+\nabla^T u)]\cdot\nu\text{ on }\G_f.
-    \end{align*}
+    \begin{define}[1.2.1]\ \\
+        A sequence of functions $\{\phi_m\}$ in $\D(\Om)$ is said to converge to $0$ if there exists a \textit{fixed} compact set $K\subset \Om$ such that supp$(\phi_m)\subset K$ for all $m$ and $\phi_m$ and all its derivatives converge \textit{uniformly} to zero on $K$.
+    \end{define}
     
-    Thus the pressure variable $p(t)$, can formally be written pointwise in time as 
-
-    \begin{align*}
-        p(t)=\mathcal{P}_1(u(t))+\mathcal{P}_2(h(t))+\mathcal{P}_3(w(t))
-    \end{align*}
-
-    where each $\mathcal{P}_i(\cdot)$ will be given on the next slide.
-\end{frame}
-
-\begin{frame}{Elimination of Pressure}
-    \scriptsize
-    $p(t)=\mathcal{P}_1(u(t))+\mathcal{P}_2(h(t))+\mathcal{P}_3(w(t))$
-    \begin{align}
-        \begin{cases}
-            \Delta\mathcal{P}_1(u)=0 &\text{in }\Om_f,\\
-            \mathcal{P}_1(u)=\diver(\nabla(u)+\nabla^T(u))\cdot\nu|_{\G_s}+([(\nabla u+\nabla^T u)]\cdot \nu)\cdot \nu|_{\G_s} &\text{on }\G_s,\\
-            \frac{\partial\mathcal{P}_1(u)}{\partial\nu}=\diver(\nabla(u)+\nabla^T(u))\cdot\nu|_{\G_f} &\text{on }\G_f,
-        \end{cases}\label{sweq:10}
-    \end{align}
-
-    \begin{align}
-       \begin{cases}
-            \Delta\mathcal{P}_2(h)=0&\text{in }\Om_f,\\
-            \mathcal{P}_2(h)=-\Delta_{\G_s}(h)\cdot\nu|_{\G_s}&\text{on }\G_s,\\
-            \frac{\partial\mathcal{P}_2(h)}{\partial\nu}=0&\text{on }\G_f,
-       \end{cases}\label{sweq:11}
-    \end{align}
-
-    and
-
-    \begin{align}
-       \begin{cases}
-            \Delta\mathcal{P}_3(w)=0&\text{in }\Om_f,\\
-            \mathcal{P}_3(w)=-[\nu\cdot\sigma(w)|_{\G_s}]\cdot\nu|_{\G_s}&\text{on }\G_s,\\
-            \frac{\partial\mathcal{P}_3(w)}{\partial\nu}=0&\text{on }\G_f.
-       \end{cases}\label{sweq:12} 
-    \end{align}
-
-    Also note
-
-    \begin{align}
-        p_0=\mathcal{P}_1(u_0)+\mathcal{P}_2(h_0)+\mathcal{P}_3(w_0).\label{sweq:15}
-    \end{align}
-\end{frame}
-
-\begin{frame}{Functional Settings}
-    \scriptsize
-    It follows, the PDE system given in $(\ref{sweq:1})-(\ref{sweq:4})$ may be associated with an abstract ODE in the Hilbert space $\BH$; namely,
-    \begin{align}
-        \begin{cases}
-            \frac{d}{dt}\Phi (t)=\A\Phi(t)\\
-            \Phi(0)=\Phi_0\label{sweq:13}
-        \end{cases}
-    \end{align}
-    where $\Phi(t)=[u(t),h(t),h_t(t),w(t),w_1(t)],\text{ and }\Phi_0=[u_0,h_0,h_1,w_0,w_1]$. Here, the operator $\A:D(\A)\subseteq \BH\to\BH$ is defined by
-    \begin{align}
-        \A=&\begin{bmatrix}
-            \diver(\nabla (\cdot)+\nabla^T(\cdot))&0&0&0&0\\
-            0&0&I&0&0\\
-            -[\nu\cdot(\nabla(\cdot)+\nabla^T(\cdot))]|_{\G_s}&\Delta_{\G_s}(\cdot)&0&\nu\cdot\sigma(\cdot)|_{\G_s}&0\\
-            0&0&0&0&I\\
-            0&0&0&\diver\:\sigma(\cdot)-I&0
-        \end{bmatrix}+\nonumber\\
-        &\begin{bmatrix}
-            -\nabla \mathcal{P}_1(\cdot)&-\nabla \mathcal{P}_2(\cdot)&0&-\nabla \mathcal{P}_3(\cdot)&0\\
-            0&0&0&0&0\\
-            \mathcal{P}_1(\cdot)\nu&\mathcal{P}_2(\cdot)\nu&0&\mathcal{P}_3(\cdot)\nu&0\\
-            0&0&0&0&0\\
-            0&0&0&0&0\\
-        \end{bmatrix}\label{sweq:14}
-    \end{align}
-    Here, the ``pressure'' operators $\mathcal{P}_i$ are as defined above.
-\end{frame}
-
-\begin{frame}{Functional Settings}
-    The domain $D(\A)$ of the generator $\A$ is characterized as follows $[u_0,h_0,h_1,w_0,w_1]\in D(\A) \Leftrightarrow$\\
-
-    (\textbf{A.i}) $u_0\in[\HM{1}{\Om_f}]^3,\:h_{1}\in[\HM{1}{\G_s}]^2\:w_1\in[\HM{1}{\Om_s}]^3;$\\
-    (\textbf{A.ii}) There exists an associated $\LP{2}{\Om_f}$-function $p_0=p_0(u_0,h_0,w_0)$ such that
-    \begin{align*}
-        [\diver(\nabla u_0+\nabla^T u_0)-\nabla p_0]\in\LP{2}{\Om_f}
-    \end{align*}
-
-    Consequently, $p_0$ is harmonic and so one has the boundary traces\\
-    \textbf{(a)} $\left [p_0|_{\G_f},\frac{\partial p_0}{\partial\nu}\big |_{\G_f}\right ]\in\HM{-1/2}{\G_f}\times\HM{-3/2}{\G_f};$\\
-    \textbf{(b)} $(\nabla u_0+\nabla^T u_0)\cdot\nu\in\HM{-3/2}{\G_f}$,\\
-    (\textbf{A.iii}) $\diver\sigma(w_0)\in\LP{2}{\Om_s}$; consequently, $\nu\cdot\sigma\in\HM{-1/2}{\G_s}$,\\
-    (\textbf{A.iv}) $\Delta_{\G_s}(h_0)+[\nu\cdot\sigma(w_0)]_{\G_s}-[(\nabla u_0+\nabla^T u_0)\cdot\nu]|_{\G_s}$\\
-    \hspace{5cm} $+[p_0\nu]|_{\G_s}\in\LP{2}{\G_s}$,\\
-    (\textbf{A.v}) $u_0|_{\G_f}=0,\:u_0|_{\G_s}=h_1=w_1|_{\G_s}$\\
-\end{frame}
-
-\begin{frame}{Wellposedness}
-    \begin{thrm}[{(Wellposedness) PGG [JEE, 2024]}]
-        With reference to the problem $(\ref{sweq:1})-(\ref{sweq:4})$, the operator $\A:D(\A)\subseteq\BH\to\BH$, defined in $(\ref{sweq:14})$, generates a $C_0$-semigroup of contractions on $\BH$. Consequently, the solution $\Phi(t)=[u(t),h(t),h_t(t),w(t),w_t(t)]$ of $(\ref{sweq:1})-(\ref{sweq:4})$, or equivalently $(\ref{sweq:13})$, is given by
+    \begin{define}[1.2.2]\ \\
+        A linear functional $T$ on $\D(\Om)$ is said to be a \textbf{distribution} on $\Om$ if whenever $\phi_m\to 0$ in $\D(\Om)$, we have $T(\phi_m)\to 0$.\\
+        The space of distributions, which is the dual of the space of test-functions, is denoted by $\D'(\Om)$. In the case $\Om=\R^n$, the symbol $\D'$ will also be used.
+    \end{define}
+    
+    \begin{define}\ \\
+        Let $x\in \R^n$ with coordinates $(x_1,...,x_n)$. A \textit{multi-index} is a $n$-tuple
         \begin{align*}
-            \Phi(t)=e^{\A t}\Phi_0\in C([0,T];\BH),
+            \alpha=(\alpha_1,...,\alpha_n), \quad \alpha_i\geq 0,\quad \alpha_i \text{ integers.}
         \end{align*}
-        where $\Phi_0=[u_0,h_0,h_1,w_0,w_1]\in D(\A)$.\label{swthrm:2}
-    \end{thrm}
-    \scriptsize
-    Geredeli, P.G. An inf-sup approach to $C_0$-semigroup generation for an interactive composite structure-Stokes PDE dynamics. J. Evol. Equ. 24, 50 (2024). https://doi.org/10.1007/s00028-024-00978-3
-\end{frame}
-
-\begin{frame}{Sketch of Proof}
-    Similarly, wellposedness was shown using the Lumer-Phillips Theorem as the problem is still linear. They showed
-    \begin{itemize}
-        \item $\A$ is dissipative\\
-        \item Show that $\A$ is maximally dissipative using Babuska-Brezzi to solve to the static resolvent equation $(\lambda I-\A)\Phi=\Phi^*$ for $\Phi\in D(\A)$\\
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Dissipativity of $\A$}
-    Similar to the previous model, the authors shows $\A$ is maximally dissipative. It follows, given data $\Phi$ in $D(\A)$,
-    \begin{align*}
-        \IP{ \A\Phi,\Phi}\BH=&-\frac{1}{2}\big |\big |\nabla (u_0)+\nabla^T (u_0)\big |\big |^2+2i\Imag\big[\IP{ \nabla_{\G_s}(h_1),\nabla_{\G_s}(h_0)}{\G_s}\\
-        &+\IP{\sigma(w_1),\epsilon(w_0)}{\Om_s}\\
-        &+\IP{ w_1,w_0}{\Om_s}+\IP{\sigma(w_1),\epsilon(w_0)}{\Om_s}+\IP{ w_1,w_0}{\Om_s}\big ]
-    \end{align*}
-    which gives $\Real \IP{\A\Phi,\Phi}{\BH}\leq 0.$ Since $\Phi$ was arbitrary, it follows that $\A$ is dissipative.
-\end{frame}
-
-\begin{frame}{Maximality of $\A$}
-    The author solves the following static problem to show $\A$ is maximal with the Babuska-Brezzi Theorem. Suppose $\Phi\in D(\A)$ is a solution of the equation
-    \begin{align}
-        (\lambda I-\A)\Phi=\Phi^*,\label{sweq:18}
-    \end{align}
-    where $\lambda>0,\:\Phi=[u_0,h_0,h_1,w_0,w_1]$, and $\Phi ^*=[u_0^*,h_0^*,h_1^*,w_0^*,w_1^*]\in\BH$. 
-\end{frame}
-
-\begin{frame}{Babuska-Brezzi}
-    \scriptsize
-    \begin{thrm}[Babuska-Brezzi]\ \\
-        Let $\Sigma,\:V$ be Hilbert spaces and $a:\Sigma\times\Sigma\to\R,\:b:\Sigma\times V\to\R$, bilinear forms which are continuous. Let 
+        Associated to a multi-index $\alpha$, we have the following symbols
         \begin{align*}
-            Z=\set{\sigma\in\Sigma}{b(\sigma,v)=0,\quad\text{for every }v\in V}.
+            |\alpha|&=\alpha_1+...+\alpha_n\\
+            \alpha !&=\alpha_1!...\alpha_n!\\
+            x^\alpha&=x_1^{\alpha_1}...x_n^{\alpha_n},\quad x\in\R^n
         \end{align*}
-        Assume that $a(\cdot,\cdot)$ is $Z$-elliptic, i.e. there exists a constant $\alpha>0$ such that
+        We say that two multi-indices $\alpha$ and $\beta$ are related by $\alpha\leq\beta$ if $\alpha_i\leq\beta_i$ for all $1\leq i\leq n$. Finally we set
         \begin{align*}
-            a(\sigma,\sigma)\geq \alpha||\sigma||_\Sigma^2,\quad\text{for every }\sigma\in Z.
+            D^\alpha=\frac{\partial^{|\alpha|}}{\partial x_1^{\alpha_1}...\partial x_n^{\alpha_n}}
         \end{align*}
-        Assume further that there exists a constant $\beta>0$ such that
+    \end{define}
+    
+    \begin{define}\ \\
+        Let $T\in \D'(\R)$. If $T=T_f$, $f$ a $C^1$ function, then $f'$ is locally integrable. Thus for $\phi\in\D(\R)$
         \begin{align*}
-            \sup_{\tau\in\Sigma}\frac{b(\tau,v)}{||\tau||_\Sigma}\geq \beta||v||_V.
+            T_{f'}(\phi)=\int_\R f'\phi=-\int_\R f\phi '=-T_f(\phi ')
         \end{align*}
-        Then if $\kappa\in\Sigma$ and $l\in V$, there exists a unique pair $(\sigma,u)\in\Sigma\times V$ such that
-        \begin{align}
-            a(\sigma,\tau)+b(\tau,u)=\IP{\kappa,\tau}{\Sigma},\quad\text{for every }\tau\in\Sigma\nonumber\\
-            b(\sigma,v)=\IP{l,v}{V},\quad\text{for every }v\in V.\label{sweq:16}
-        \end{align}
-    \end{thrm}
-\end{frame}
-
-
-\begin{frame}{Maximailty of $\A$}
-    \scriptsize
-    In PDE terms, the  resolvent equation will generate the following relations, where $p_0$ is given via $(\ref{sweq:15})$:
-    \begin{align}
-        &\begin{cases}
-            \lambda u_0-\diver (\nabla u_0+\nabla^T u_0)+\nabla p_0=u_0^*\text{ in }\Om_f\\
-            \diver (u_0)=0\text{ in }\Om_f\\
-            u_0|_{\G_f}=0\text{ on }\G_f;
-        \end{cases}\label{sweq:19}\\
-        &\begin{cases}
-            \lambda h_0-h_1=h_0^*\text{ in }\G_s\\
-            \lambda h_1+[\nu\cdot(\nabla u_0+\nabla^T u_0)]|_{\G_s}-\Delta_{\G_s}(h_0)-[\nu\cdot\sigma (w_0)]|_{\G_s}-p_0\nu=h_1^*\text{ in }\G_s
-        \end{cases}\label{sweq:20}\\
-        &\begin{cases}
-            \lambda w_0-w_1=w_0^*\text{ in }\Om_s\\
-            \lambda w_1-\diver \sigma (w_0)+w_0=w_1^*\text{ in }\Om_s\\
-            w_1|_{\G_s}=h_1=u_0|_{\G_s}\text{ on }\G_s
-        \end{cases}\label{sweq:21}
-    \end{align}
-\end{frame}
-
-\begin{frame}{Sketch of Proof}
-    The author used the following outline
-    \begin{itemize}
-        \item Solve the decomposed stokes flow for $\textbf{u}$ and $p$\\
-        \item Generate a weak formulation for the ``thin'' $(h_1)$ and ``thick'' $(w_1)$ variables\\
-        \item Recover of the other structure solution variables $h_0$ and $w_0$ given data $h_0^*\in\HM{1}{\G_s}$ and $w_0^*\in\HM{1}{\Om_s}$; i.e.
-        \begin{align}
-            h_0=\frac{1}{\lambda}h_1+\frac{1}{\lambda}h_0^*\label{sweq:22}\\
-            w_0=\frac{1}{\lambda}w_1+\frac{1}{\lambda}w_0^*\label{sweq:23}
-        \end{align}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Decomposition of Stokes Flow}
-    \scriptsize
-    Decomposition of the Stokes flow into two parts\\
-    Zero force and Dirichlet boundary data $g\in\HM{1/2}{\G_s}$: solution is $[u_1(g),p_1(g)]$\\
-    \begin{align}
-        \begin{cases}
-            \lambda u_1-\diver (\nabla u_1+\nabla^T u_1)+\nabla p_1=0\text{ in }\Om_f\\
-            \diver (u_1)=\frac{\int_{\G_s}(g\cdot\nu)d\G_s}{\text{meas}(\Om_f)}\text{ in }\Om_f\\
-            u_1|_{\G_s}=g\text{ on }\G_s\\
-            u_1|_{\G_f}=0\text{ on }\G_f,
-        \end{cases}\label{sweq:24}
-    \end{align}
-    With force term $u_0^*$, zero Dirichlet data and zero divergence: solution is $[u_2(u_0^*),p_2(u_0^*)]$
-    \begin{align}
-        \begin{cases}
-            \lambda u_2-\diver (\nabla u_2+\nabla^T u_2)+\nabla p_2=u_0^*\text{ in }\Om_f\\
-            \diver(u_2)=0\text{ in }\Om_f\\
-            u_2|_{\G_f}\text{ on }\G_f
-        \end{cases}\label{sweq:25}
-    \end{align}
-    The unique $\{u_0,p_0\}$ of $(\ref{sweq:19})$ may then be expressed as
-    \begin{align}
-        u_0=u_1(g|_{\G_s})+u_2(u_0^*);\qquad p_0=p_1(g|_{\G_s})+p_2(u_0^*)+c_0,\label{sweq:26}
-    \end{align}
-    where $c_0$ is the (presently) unknown constant component of the pressure $p_0$ of $(\ref{sweq:19})$.\\
-\end{frame}
-
-\begin{frame}{Maximailty of $\A$}
-    Define the space
+        Generalizing this, we define for any $T\in \D'(\R)$,
         \begin{align*}
-            \textbf{S}=\set{(\varphi,\psi)\in[\HM{1}{\G_s}]^2\times[\HM{1}{\Om_s}]^3}{\varphi=\psi|_{\G_s}}.
+            T'(\phi)=-T(\phi '),\quad \phi\in\D(\R)
         \end{align*}
-    The last relation now gives us the following mixed variational formulation in terms of the ``thin'' and ``thick'' structure variables $h_1$ and $w_1$: Namely,
-    \begin{align}
-        \textbf{a}([h_1,w_1],[\varphi,\psi])+&\textbf{b}([\varphi,\psi],c_0)=\textbf{F}([\varphi,\psi]),\text{ for all }[\varphi,\psi]\in\textbf{S}\nonumber\\
-        &\textbf{b}([h_1,w_1],r)=0,\text{ for all }r\in\R.\label{sweq:33}
-    \end{align}
-    Where $\textbf{a}(\cdot,\cdot):\textbf{S}\times\textbf{S}\to\R,\:\textbf{b}(\cdot,\cdot):\textbf{S}\times\R\to\R,\text{ and the functional }\textbf{F}(\cdot)$ are defined as follows
-\end{frame}
-
-\begin{frame}{Maximailty of $\A$}
-    \scriptsize
-    \begin{align*}
-        \textbf{a}([\phi,\xi],[\widetilde{\phi},\widetilde{\xi}])=&\lambda\IP{\phi,\widetilde{\phi}}{\G_s}+\frac{1}{\lambda}\IP{\nabla_{\G_s}\phi,\nabla_{\G_s}\widetilde{\phi}}{\G_s}\\
-        &+\lambda\IP{\xi,\widetilde{\xi}}{\Om_s}+\frac{1}{\lambda}\IP{\sigma(\xi),\epsilon(\widetilde{\xi})}{\Om_s}+\frac{1}{\lambda}\IP{\xi,\widetilde{\xi}}{\Om_s}\\
-        &+\IP{\nabla u_1(\xi|_{\G_s})+\nabla^T u_1(\xi|_{\G_s}),\nabla\widetilde{u}(\widetilde{\phi})+\nabla^T\widetilde{u}(\widetilde{\phi})}{\Om_f}\\
-        &+\lambda\IP{ u_1(\xi|_{\G_s}),\widetilde{u}(\widetilde{\phi})}{\Om_f},\\
-        \textbf{b}([\widetilde{\phi},\widetilde{\xi}],r)&=-r\IP{ v,\widetilde{\phi}}{\G_s},
-    \end{align*}
-    and
-    \begin{align*}
-        \textbf{F}([\widetilde{\phi},\widetilde{\xi}])=&-\IP{\nabla u_2(u_0^*)+\nabla^T u_2(u_0^*),\nabla\widetilde{u}(\widetilde{\phi})+\nabla^T \widetilde{u}(\widetilde{\phi})}{\Om_f}\\
-        &-\frac{1}{\lambda}\IP{\nabla_{\G_s}h_0^*,\nabla_{\G_s}\widetilde{\phi}}{\G_s}-\frac{1}{\lambda}\IP{\sigma(w_0^*),\epsilon(\widetilde{\xi})}{\Om_s}\\
-        &-\lambda\IP{ u_2(u_0^*),\widetilde{u}(\widetilde{\phi})}{\Om_f}+\IP{ u_0^*,\widetilde{u}(\widetilde{\phi})}{\Om_f}\\
-        &+\IP{ h_1^*,\widetilde{\phi}}{\G_s}+\IP{ w_1^*,\widetilde{\xi}}{\Om_s}-\frac{1}{\lambda}\IP{ w_0^*,\widetilde{\xi}}{\Om_s}.
-    \end{align*}
-\end{frame}
-
-\begin{frame}{$\inf\sup$ condition}
-    \scriptsize
-    Given $r\in\R$, let $z\in[\HM{1}{\G_s}]^2$ satisfy
-    \begin{align*}
-        \Delta_{\G_s}z=\text{sgn}(r)\nu\text{ on }\G_s
-    \end{align*}
-    It is easily seen that $||\nabla_{\G_s}z||_{\G_s}\leq C||\nu||_{\G_s}$. Now, taking into account that $\gamma:\HM{1}{\Om_s}\to\HM{1/2}{\G_s}$ is a surjective map, and so it has a continuous right inverse $\gamma^+(z)$, we have
-    \begin{align*}
-        \sup_{[\eta,\varsigma]}\frac{\textbf{b}([\eta,\varsigma],r)}{||[\eta,\varsigma]||_{\textbf{S}}}&\geq \frac{\textbf{b}([z,\gamma^+(z)],r)}{||z||_{[\HM{1}{\G_s}]^2}}\\
-        &=\frac{-r\int_{\G_s}\nu\cdot zd\G_s}{||z||_{[\HM{1}{\G_s}]^2}}\\
-        &=-r\text{ sgn}(r)\frac{\int_{\G_s}\Delta_{\G_s}z\cdot z d\G_s}{||z||_{[\HM{1}{\G_s}]^2}}\\
-        &=|r|\frac{\int_{\G_s}|\nabla_{\G_s}z|^2d\G_s}{||z||_{[\HM{1}{\G_s}]^2}}\\
-        &=|r|\:||z||_{[\HM{1}{\G_s}]^2}
-    \end{align*}
-    which yields that the inf-sup condition holds wth the constant $\beta=||z||_{[\HM{1}{\G_s}]^2}$. 
-\end{frame}
-
-\begin{frame}{Conclusion}
-    By the Babuska-Brezzi Theorem, it is then shown that this unique solution is in $D(\A)$.
-\end{frame}
-
-\begin{frame}{Long-time Dynamics}
-    \center\Huge Part II
-\end{frame}
-
-\begin{frame}{Stability}
-    \Large\underline{Stability Types}
-    \begin{itemize}
-        \item Strong Stability
-        \item Polynomial Stability
-        \item Exponential Stability
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Strong Stability}
-    \begin{thrm}[{(Strong Stability) G. Avalos, PGG, B. Muha [JDE, 2020]}]
-        For the modeling generator $\A:D(\A)\subseteq\BH\to\BH$ of $(\ref{bmeq:2})-(\ref{bmeq:5})$, one has $\sigma(\A)\cap i\R=\emptyset$. Consequently, the $C_0$-semigroup $\left \{e^{\A t}\right \}_{t\geq 0}$ given in Theorem $\ref{bmthrm:1}$ is strongly stable. That is, the solution $\Phi(t)$ of the PDE $(\ref{bmeq:2})-(\ref{bmeq:5})$ tends asymptotically to the zero state for all initial data $\Phi_0\in\BH$\label{bmthrm:2}
-    \end{thrm}
-    \scriptsize
-    G. Avalos, P. G. Geredeli, B. Muha; “Wellposedness, Spectral Analysis and Asymptotic Stability of a Multilayered Heat-Wave-Wave System ”, Journal of Differential Equations 269 (2020), pp. 7129-7156.
-\end{frame}
-
-\begin{frame}{Sketch of Proof}
-    \begin{thrm}[{(Strong Stability) [Arendt-Batty, 1988]}]
-        Let $T(t)_{t\geq 0}$ be a bounded $C_0$-semigroup on a reflexive Banach space $X$, with generator $\A$. Assume that $\sigma_p(\A)\cap i\R=\emptyset$, where $\sigma_p(\A)$ is the point spectrum of $\A$. If $\sigma(\A)\cap i\R$ is countable then $T(t)_{t\geq 0}$ is strongly stable.\label{ssthrm:12}
-    \end{thrm}
-    Recall: $\sigma(\A)=\sigma_p(\A)\cup\sigma_c(\A)\cup\sigma_r(\A)$\\
-    Note that  $\sigma(\A)\cap i\R=\emptyset$ is equivalent to showing $i\R\subseteq \rho(\A)$\\
-    To this end the authors checked
-    \begin{itemize}
-        \item $0\in\rho(\A)$
-        \item The continuous spectrum
-        \item The eigenvalues of $\A^*$
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{$0\in\rho(\A)$}
-    \scriptsize
-    Given $\Phi^*=[u_0^*,h_{01}^*,h_{11}^*,\dots,h_{0K}^*,h_{1K}^*,w_0^*,w_1^*]\in\BH$, the problem is to find $\Phi=[u_0,h_{01},h_{11},\dots,h_{0K},h_{1K},w_0,w_1]\in D(\A)$ which solves
-    \begin{align}
-        \A\Phi=\Phi^*\label{bmeq:42}
-    \end{align}
-    It follows
-    \begin{align}
-        w_1&=w_0^*\in\HM{1}{\Om_s}\label{bmeq:44}\\
-        h_{1j}&=h_{0j}^*\in\HM{1}{\G_j},\text{ for }1\leq j\leq K\label{bmeq:45}
-    \end{align}
-    and
-    \begin{align}
-        \begin{cases}
-            \Delta u_0=u_0^*\\
-            u_0|_{\G_f}=0\\
-            u_0|_{\G_s}=w_0^*|_{\G_s}
-        \end{cases}\label{bmeq:46}
-    \end{align}
-    Recall the set (to be used on the next slide)
-    \begin{align}
-        \mathcal{V}=&\{[\psi_1,\dots,\psi_K]\in\HM{1}{\G_1}\times\dots\times\HM{1}{\G_k}|\text{ For all } 1\leq j\leq K,\nonumber\\
-        &\psi_j|_{\partial\G_j\cap\partial\G_l}=\psi_l|_{\partial\G_j\cap\partial\G_l},\text{ for all }1\leq l\leq K\text{ such that }\partial\G_j\cap\partial\G_l\neq\emptyset\}
-    \end{align}
-\end{frame}
-
-\begin{frame}{$0\in\rho(\A)$}
-    \scriptsize
-    And define the set
-    \begin{align}
-            \chi\equiv\set{[\psi,\xi]\in\mathcal{V}\times\HM{1}{\Om_s}}{\psi_j=\xi|_{\G_j}\text{ for }1\leq j\leq K}.\label{bmeq:49}
-    \end{align}
-    Testing with these equations, it follows
-    \begin{align}
-        &\IP{\nabla w_0,\nabla \xi}{\Om_s}+\sum_{j=1}^K\left [\IP{\nabla h_{0j},\nabla \psi_j}{\G_j}+\IP{h_{0j},\psi_j}{\G_j}\right ]\nonumber\\
-        =&-\IP{w_1^*,\xi}{\Om_s}-\sum_{j=1}^K\left [\IP{h_{1j}^*,\psi_j}{\G_j}+\IP{\frac{\partial u_0}{\partial\nu},\psi_j}{\G_j}\right ],\label{bmeq:50}
-    \end{align}
-    Since the bilinear form $b(\cdot,\cdot):\chi\to\R$, given by
-    \begin{align}
-        b([\psi,\xi],\left [\widetilde{\psi},\widetilde{\xi} \right ])=\IP{\nabla\xi,\nabla\widetilde{\xi}}{\Om_s}+\sum_{j=1}^K\left [\IP{\nabla\psi_j,\nabla\widetilde{\psi}_j}{\G_j}+\IP{\psi_j,\widetilde{\psi}_j}{\G_j}\right ]\label{bmeq:51}
-    \end{align}
-    for every $[\psi,\xi],\:\left [\widetilde{\psi},\widetilde{\xi} \right ]\in\chi$, is continuous and $\chi$-elliptic, then by Lax-Milgram, there exists a unique solution
-    \begin{align}
-        \varphi=[(h_{01},h_{02},\dots,h_{0K}),w_0]\in\chi\label{bmeq:52}
-    \end{align}
-    (Then shown to be in $D(\A)$)
-\end{frame}
-
-\begin{frame}{$\beta,\:i\beta\not\in\sigma_c(\A),\:\beta\neq 0$}
-    Assume to the contrary. Then since $\sigma_c(\A)\subseteq\sigma_{\text{app}}(\A)$ there exists a sequence $\{\Phi_n\}=\{[u_{n},h_{1n},\xi_{1n},...,h_{Kn},\xi_{Kn},w_{0n},w_{1n}]\}\subseteq D(\A)$ which satisfy for $n\in\mathbb{N}$
-    \begin{align*}
-        ||\Phi_n||_{\BH}=1\text{ and }||(i\beta I-\A)\Phi_n||_{\BH}<\frac{1}{n}
-    \end{align*}
-\end{frame}
-
-\begin{frame}{$\beta,\:i\beta\not\in\sigma_r(\A),\:\beta\neq 0$}
-    It is known that for a closed and densely defined operator $\A$, if $\lambda\in\sigma_r(\A)$ then $\overline{\lambda}\in\sigma_p(\A^*)$. It follows\\
-    $\A^*: D(\A^*)\subseteq\BH\to\BH$ is given by
+        Thus $T'\in \D'(\R)$. For if $\phi_n\to 0$ in $\D(\R)$ then $\{\phi_n\}$ is also a sequence in $\D(\R)$ converging to zero. Hence $T'(\phi_n)=-T(\phi'_n)$ converges to zero. We can iterate this:
         \begin{align*}
-            \A^*=\begin{bmatrix}
-                \Delta&0&0&\dots&0&0&0&0\\
-                0&0&-I&\dots&0&0&0&0\\
-                -\frac{\partial}{\partial \nu}|_{\G_1}&(I-\Delta)&0&\dots&0&0&-\frac{\partial}{\partial \nu}|_{\G_1}&0\\
-                \vdots&\vdots&\vdots&\ddots&\vdots&\vdots&\vdots&\vdots\\
-                0&0&0&\dots&0&-I&0&0\\
-                -\frac{\partial}{\partial \nu}|_{\G_K}&0&0&\dots&(I-\Delta)&0&-\frac{\partial}{\partial \nu}|_{\G_K}&0\\
-                0&0&0&\dots&0&0&0&-I\\
-                0&0&0&\dots&0&0&-\Delta&0
-            \end{bmatrix};
+            T''(\phi)=-T'(\phi')=T(\phi'')
         \end{align*}
-    $D(\A)=D(\A^*)$, $i\beta$ is not an eigenvalue of $\A^*$ so $i\beta\not\in\sigma_r(\A)$
-\end{frame}
+        and more generally
+        \begin{align*}
+            T^{(k)}(\phi)=(-1)^kT(\phi^{(k)})
+        \end{align*}
+        In general if $T\in \D'(\Om)$, $\Om\subset \R^n$ an open set, then we define, for any multi-index $\alpha$, the distribution $D^\alpha T$ by 
+        \begin{align*}
+            (D^\alpha T)(\phi)=(-1)^{|\alpha|}T(D^\alpha \phi),\quad \phi\in\D(\Om)
+        \end{align*}
+    \end{define}
+\newpage
 
-\begin{frame}{Conclusion}
-    By the spectral analysis, the authors concluded there is strong stability for any initial data in $D(\A)$.
-\end{frame}
-
-\begin{frame}{Strong Stability}
-    \begin{thrm}[{(Strong Stability) PGG [JDE, 2025]}]
-        With reference to problem $(\ref{sweq:1})-(\ref{sweq:4})$, zero is an eigenvalue for the generator $\A:\:D(\A)\subseteq\BH\to\BH$. Consequently the solution $\{e^{\A t}\}|_{[Null(\A)]^\perp}$ decays to the zero state for any initial data $\Phi_0=[u_0,h_0,h_1,w_0,w_1]\in[Null(\A)]^\perp$.
+\section{2.1 Definition and Basic Properties}
+    \begin{note}\ \\
+        Important properties of a class of function spaces which will provide proper functional setting for study of PDEs
+    \end{note}
+    
+    \begin{define}[2.1.1]\ \\
+        Let $m>0$ be an integer and let $1\leq p\leq \infty$. The \textbf{Sobolev space} $\W{m,p}{\Om}$ is defined by\\
+        \begin{align*}
+            \W{m,p}{\Om}=\set{u \in \LP{p}{\Om}}{D^\alpha u\in \LP{p}{\Om} \: \forall\: |\alpha|\leq m}
+        \end{align*}
+        We provide the norm
+        \begin{align*}
+            ||u||_{m,p,\Om}=\sum_{|\alpha|\leq m}||D^\alpha u||_{\LP{p}{\Om}}
+        \end{align*}
+        Equivalently $1<p<\infty$ (Note not equal equivalent)
+        \begin{align*}
+            ||u||_{m,p,\Om}=\bigg (\sum _{|\alpha|\leq m} \int _\Om |D^\alpha u|^p \bigg )^{1/p} =\bigg(\sum_{|\alpha|\leq m}||D^\alpha u||_{\LP{p}{\Om}}^p\bigg)^{1/p}
+        \end{align*}
+    \end{define}
+    
+    \begin{note}\ \\
+        As new notation is added the logical extension of previous notation will be assumed.
+        \begin{itemize}
+            \item 
+                In the case $p=2$, the spaces are Hilbert spaces with notation as follows,
+                \begin{align*}
+                    \HM{m}{\Om}&=\W{m,2}{\Om}\qquad \text{(scribbled in margin $\subset \W{m,p}{\Om}$)}\\
+                    ||u||_{m,\Om}&=||u||_{m,2,\Om}
+                \end{align*}
+            \item 
+                A \textit{semi-norm} consists of the $L^p$-norms of the highest order derivatives with notation as follows,
+                \begin{align*}
+                    |u|_{m,p,\Om}=\sum_{|\alpha|=m}||D^\alpha u||_{\LP{p}{\Om}}
+                \end{align*}
+            \item
+                The space $\LP{p}{\Om}$ can be seen as a special case of the Sobolev class. We denote the $\LP{p}{\Om}$ norm as the semi-norm by $|\cdot|_{0,p,\Om}$ (as they are the same).
+            \item 
+                In $\HM{m}{\Om}$ there is a natural inner-product defined as
+                \begin{align*}
+                    (u,v)_{m,\Om}=\sum_{|\alpha|\leq m}\int_\Om D^\alpha uD^\alpha v, \quad \text{for } u,v\in \HM{m}{\Om}
+                \end{align*}
+            \item 
+                When $\Om=\R^n$ the space $\HM{m}{\R^n}$ can be defined via the Fourier transform. Let $u\in \HM{m}{\R^n}$. By definition $D^\alpha u \in \LP{2}{\R^n}\quad \forall |\alpha|\leq m$. Hence the Fourier transform of $D^\alpha u$ is well defined as follows
+                \begin{align*}
+                    \widehat{D^\alpha u}=(2\pi i)^{|\alpha|} \xi ^\alpha \hat{u}.
+                \end{align*}
+                Thus $\xi ^\alpha \hat{u}\in \LP{2}{\R^n}$ for all $|\alpha|\leq m$. Conversely if $u\in \LP{2}{\R^n}\ni\xi ^\alpha \hat{u}\in \LP{2}{\R^n}$ for all $|\alpha|\leq m$, we have $D^\alpha u\in \LP{2}{\R^n}$ for all $|\alpha|\leq m$ and so $u\in \HM{m}{\R^n}$
+        \end{itemize}
+    \end{note}
+    
+    \begin{lemma}[2.1.1]\ \\
+        There exists positive constants $M_1$ and $M_2$ depending only on $m$ and $n$ such that
+        \begin{align*}
+            M_1(1+|\xi|^2)^m\leq \sum_{|\alpha|\leq m}|\xi ^\alpha |^2\leq M_2(1+|\xi|^2)^m
+        \end{align*}
+        for all $\xi \in \R^n$
+    \end{lemma}
+    
+    \begin{proof}\ \\
+        Recall $|\xi|^2=\sum|\xi_i|^2$ and $|\xi^\alpha|=\sum |\xi_i^{\alpha_i}|$. We can see that the same powers of $\xi$ occur in $(1+|\xi|^2)^m$ and $\sum_{|\alpha|\leq m}|\xi^\alpha|^2$ with different coefficients that depend on $n$ and $m$. Since there are only finite number of terms, the inequalities follow.
+    \end{proof}
+    
+    \begin{note}\ \\
+        \begin{itemize}
+            \item 
+                From this lemma we see
+                \begin{align*}
+                    \HM{m}{\R^n}=\set{u\in \LP{2}{\R^n}}{(1+|\xi|^2)^{m/2}\hat{u}(\xi)\in \LP{2}{\R^n}}
+                \end{align*}
+                By the following theorem, it follows the norm $||\cdot||_{m,\R^n}$ on $\HM{m}{\R^n}$ is equivalent to the norm
+                \begin{align*}
+                    ||u||_{\HM{m}{\R^n}}=\bigg (\int_{\R^n}(1+|\xi|^2)^m|\hat{u}(\xi)|^2d\xi\bigg)^{1/2}
+                \end{align*}
+            \item
+                We can generalize the previous norm to all $s\geq 0$. Define
+                \begin{align*}
+                    H^s(\R^n)&=\set{u\in \LP{2}{\R^n}}{(1+|\xi|^2)^m|\hat{u}(\xi)|^2\in \LP{2}{\R^n}}\\
+                    ||u||_{H^s(\R^n)}&=\bigg (\int_{\R^n}(1+|\xi|^2)^s|\hat{u}(\xi)|^2d\xi\bigg)^{1/2}
+                \end{align*}
+            \item 
+                The map
+                \begin{align*}
+                    u\in \W{1,p}{\Om}\to \bigg (u,\frac{\partial u}{\partial x_1},...,\frac{\partial u}{\partial x_n}\bigg )\in (\LP{p}{\Om})^{n+1}
+                \end{align*}
+                is an isometry of $\W{1,p}{\Om}$ into $(\LP{p}{\Om})^{n+1}$ provided the norm
+                \begin{align*}
+                    ||u||=\sum_{i=1}^{n+1}|u_i|_{0,p,\Om} \text{\quad or\quad } ||u||=\bigg (\sum_{i=1}^{n+1}|u_i|_{0,p,\Om}\bigg )^{1/p}
+                \end{align*}
+                for $u=(u_i)\in (\LP{p}{\Om})^{n+1}$
+        \end{itemize}
+    \end{note}
+    
+    \begin{thrm}[1.10.2](Plancherel)\\
+        There exists a unique isometry
+        \begin{align*}
+            \mathcal{P}:\LP{2}{\R}\to \LP{2}{\R^n}
+        \end{align*}
+        which is onto and such that
+        \begin{align*}
+            \mathcal{P}(f)=\hat{f},\quad \text{for every }f\in \Sch
+        \end{align*}
     \end{thrm}
-    \scriptsize
-    Pelin G. Geredeli, Spectral analysis and asymptotic decay of the solutions to multilayered structure-Stokes fluid interaction PDE system, Journal of Differential Equations, Volume 427, 2025, Pages 1-25, ISSN 0022-0396, https://doi.org/10.1016/j.jde.2025.01.080.
-\end{frame}
-
-\begin{frame}{Sketch of Proof}
-    As a reminder
-    \begin{thrm}[{(Strong Stability) [Arendt-Batty, 1988]}]
-        Let $T(t)_{t\geq 0}$ be a bounded $C_0$-semigroup on a reflexive Banach space $X$, with generator $\A$. Assume that $\sigma_p(\A)\cap i\R=\emptyset$, where $\sigma_p(\A)$ is the point spectrum of $\A$. If $\sigma(\A)\cap i\R$ is countable then $T(t)_{t\geq 0}$ is strongly stable.
+    
+    \begin{proof}\ \\
+        The Fourier transform $\mathcal{F}:\Sch\to \Sch$ is an $\LP{2}{\R^n}$-isometry by corollary of Strong Parseval Relation ($\int_{\R^n}f\bar{g}=\int_{\R^n}\hat{f}\bar{\hat{g}}$). But $\Sch$ is dense in $\LP{2}{\R^n}$ and so $\mathcal{F}$ extends uniquely to an operator of $\LP{2}{\R^n}$ into itself. If $f\in \LP{2}{\R^n}$, then $f_k\in\Sch\ni f_k\to f$ in $\LP{2}{\R^n}$. Then
+        \begin{align*}
+            ||\mathcal{P}(f)||_{\LP{2}{\R^n}}&=\lim||\mathcal{P}(f_k)||_{\LP{2}{\R^n}}\\
+            &=\lim ||\widehat{f_k}||_{\LP{2}{\R^n}} \text{\quad Copy of book hard to read}\\
+            &=\lim ||f_k||_{\LP{2}{\R^n}}\\
+            &=||f||_{\LP{2}{\R^n}}\\
+        \end{align*}
+        Thus $\mathcal{P}$ is an isometry and hence has a closed range. But as $\mathcal{F}$ is onto, $R(\mathcal{P})\supset \Sch$ which is dense in $\LP{2}{\R^n}$. Thus $\mathcal{P}$ is onto as well.
+    \end{proof}
+    
+    \begin{thrm}[1.2.1]
+        For every $1\leq p\leq \infty$, the space $\W{1,p}{\Om}$ is a Banach space. If $1<p<\infty$, it is reflexive and if $1\leq p< \infty$, it is separable. In particular $\HM{1}{\Om}$ is a separable Hilbert space.
     \end{thrm}
-    It is then checked
-    \begin{itemize}
-        \item Zero is an eigenvalue
-        \item The continuous spectrum
-        \item The eigenvalues of $\A^*$
-    \end{itemize}
-\end{frame}
+    
+    \begin{proof}\ \\
+        Let $\{u_m\}$ be a Cauchy sequence in $\W{1,p}{\Om}$. By definition of the norm, it follows that $\{u_m\}$ and $\bigg \{\frac{\partial u_m}{\partial x_i}\bigg \}, \quad 1\leq i\leq n$ are all Cauchy sequences in $\LP{p}{\Om}$. Let $u_m\to u$ and $\frac{\partial u_m}{\partial x_i}\to v_i,\quad 1\leq i\leq n$, in $\LP{p}{\Om}$. The completeness of $\W{1,p}{\Om}$ will be proved if we show that $\frac{\partial u}{\partial x_i}= v_i$ in the sense of distributions so that, on one hand, $u\in \W{1,p}{\Om}$ and on the other $u_m\to u$ in $\W{1,p}{\Om}$.\\
+        Let $\phi \in \D(\Om)$. We need to show that
+        \begin{align*}
+            \int_\Om u\frac{\partial \phi}{\partial x_i}=-\int_\Om v_i\phi
+        \end{align*}
+        Now, since $u_m\in \W{1,p}{\Om}$, we know that
+        \begin{align*}
+            \int_\Om u_m\frac{\partial \phi}{\partial x_i}=-\int_\Om \frac{\partial u_m}{\partial x_i}\phi
+        \end{align*}
+        Since $\phi \in \D(\Om)$, $\phi \in \LP{q}{\Om}$ for all $1\leq q\leq \infty$ and so we pass the limit on both sides of the last set of integrals as $m\to \infty$ to obtain the first set of integrals. Thus $\W{1,p}{\Om}$ is complete and if $p=2$, we get that $\HM{1}{\Om}$ is a Hilbert space.\\
+        Now $(\LP{p}{\Om})^{n+1}$ is reflexive for $1<p<\infty$ and separable for $1\leq p<\infty$. Since $\W{1,p}{\Om}$ is complete, its image under the aforementioned isometry is a closed subspace of $(\LP{p}{\Om})^{n+1}$ which inherits the corresponding properties.
+    \end{proof}
+    
+    \begin{note}\ \\
+        \begin{itemize}
+            \item (2.1.1)\\
+                The results of this theorem can be proved by the same way for any integer $m\geq 2$. In the future, unless absolutely necessary, we will establish theorems only for the spaces $\W{1,p}{\Om}$. The extensions to higher order spaces will often be obvious.
+            \item (2.1.2)\\
+                In the course of the proof of the preceding theorem we have proved the following fact: "if $u_m\to u$ in $\LP{p}{\Om}$ and $\frac{\partial u_m}{\partial x_i}\to v_i$ in $\LP{p}{\Om}$ for each $1\leq i\leq n$, then $u\in \W{1,p}{\Om}$ and $\frac{\partial u}{\partial x_i}=v_i$". Indeed, we can weaken the hypotheses even further. What was needed to pass to the limit in the second set of integrals and obtain the first set of integrals was only the weak convergence of $\bigg \{\frac{\partial u_m}{\partial x_i}\bigg \}$ (weak $\ast$ if $p=\infty$). Since bounded sequences have weakly convergent (weak $\ast$ convergent when $p=\infty$) subsequences, it is enough to know that $u_m\to u$ in $\LP{p}{\Om}$ and $\bigg \{\frac{\partial u_m}{\partial x_i}\bigg \}$ are bounded $(1<p\leq \infty)$ to deduce $u\in \W{1,p}{\Om}$.
+            \item
+                $\LP{p}{\Om}$ is made up of equivalence classes of functions. Thus by saying "$u$ is a continuous function" in $\LP{p}{\Om}$ we mean that the corresponding equivalence class has a continuous representative function. 
+        \end{itemize}
+    \end{note}
+    
+    \begin{thrm}[2.1.2]\ \\
+        Let $I\subset \R$ be an open interval and let $u\in W^{1,p}(I)$. Then $u$ is absolutely continuous.
+    \end{thrm}
+    
+    \begin{proof}\ \\
+        Let $x_0\in I$ and define,
+        \begin{align*}
+            \bar{u}(x)=\int_{x_0}^x u'(t)dt
+        \end{align*}
+        which, by definition, is absolutely continuous. Hence its classical derivative exists a.e. and is equal a.e. to $u'$; this is also its distribution derivative. Hence, in the sense of distributions,
+        \begin{align*}
+            (u-\bar{u})'=0
+        \end{align*}
+        and so $u-\bar{u}=c$, a constant a.e.. Thus $u=\bar{u}+c$ a.e. and the latter function is absolutely continuous.
+    \end{proof}
+    
+    \begin{note}\ \\
+        \begin{itemize}
+            \item 
+                We can deduce an important property of $W^{1,p}(I)$ from the previous theorem when $I$ is a bounded interval. Consider $I=(0,1)$ and $u\in W^{1,p}(I)$. We can write
+                \begin{align*}
+                    u(x)=u(0)+\int_0^x u'(t)dt.
+                \end{align*}
+                By Hölder's inequality, if $q$ is conjugate to $p$, we have
+                \begin{align*}
+                    |u(0)|\leq |u(x)|+|u'|_{0,p,I}|x|^{1/q}
+                \end{align*}
+                It follows (on integration) that
+                \begin{align*}
+                    |u(0)|\leq C(|u|_{0,p,I}+|u'|_{0,p,I})=C||u||_{1,p,I}
+                \end{align*}
+                Where $C>0$ is a constant not depending on $u$.\\
+                Using the integral equation we can deduce that for any $x\in I$
+                \begin{align*}
+                    |u(x)|\leq C||u||_{1,p,I}
+                \end{align*}
+                Let $B$ be the unit ball in $W^{1,p}(I)$ ($B=\set{u\in W^{1,p}(I)}{||u||_{1,p,I}\leq 1}$). It follows that if $i:W^{1,p}(I)\to C(I)$ is the inclusion map established in theorem 2.1.2 and continuous by the previous inequality then $B=i(B)$ is a uniformly bounded set in $C(I)$. Again if $x,y \in I$ by the integral equation, we have
+                \begin{align*}
+                    |u(x)-u(y)|\leq |u'|_{0,p,I}|x-y|^{1/q}\leq ||u||_{1,p,I}|x-y|^{1/q}
+                \end{align*}
+                which implies that $B$ is equicontinuous in $C(I)$. By the Ascoli-Arzela Theorem it follows that $B$ is relatively compact in $C(I)$; in other words, the map $i:W^{1,p}(I)\to C(I)$ is a compact operator. This will be studied later.
+            \item
+                If $1\leq p<\infty$, we know that $\D(\Om)$ is dense in $\LP{p}{\Om}$. Also, if $\phi\in\D(\Om)$ then every derivative of $\phi$ is also in $\D(\Om)\subset \W{m,p}{\Om}$ for any $m$ and $p$. We define $\WO{m,p}{\Om}$ as the closure of $\D$ in $\W{m,p}{\Om}$. Thus $\WO{m,p}{\Om}$ is a closed subspace and its elements can be approximated in the $\W{m,p}{\Om}$ norm by $C^\infty$ functions with compact support. Generally this is a strict subspace unless $\Om =\R^n$.
+        \end{itemize}
+    \end{note}
+    
+    \begin{thrm}[2.1.3]\ \\
+        Let $1\leq p<\infty$. Then for any integer $m\geq 0$,
+        \begin{align*}
+            \W{m,p}{\R^n}=\WO{m,p}{\R^n}.
+        \end{align*}
+    \end{thrm}
+    
+    \begin{proof}\ \\
+        This proof will be done for the $m=1$ case. We want to show that if $u\in W^{1,p}(\R^n)$, then there exists $\{\phi_k\}\subset \D(\R^n)\ni \phi_k\to u$ in $W^{1,p}(\R^n)$.\\
+        Step 1\\
+        Let $(\rho_\varepsilon)$ be the family of mollifiers. Then if $u\in \LP{p}{\R^n}$, we have $\rho_\varepsilon \ast u\to u$ in $\LP{p}{\R^n}$. First of all since $\rho_\varepsilon\in \LP{1}{\R^n}$, the convolution is well-defined and is in $\LP{p}{\R^n}$, by theorem 1.5.2 (below). Let $\phi$ be a continuous function with compact support such that $|\phi-u|_{0,p,\R^n}< \delta/3$ where $\delta>0$ is a pre-assigned number. Now choose $\varepsilon >0$ small enough such that $|\phi\ast \rho_\varepsilon-\phi|_{0,p,\R^n}<\delta/3$ (which is possible by theorem 1.5.6). Hence
+        \begin{align*}
+            |u-u\ast \rho_\varepsilon|_{0,p,\R^n}\leq |u-\phi|_{0,p,\R^n}+|\phi-\rho_\varepsilon\ast\phi|_{0,p,\R^n}+|\phi\ast \rho_\varepsilon-u\ast \rho_\varepsilon|_{0,p,\R^n}<\delta
+        \end{align*}
+        since, by theorem 1.5.2,
+        \begin{align*}
+            |(\phi-u)\ast \rho_\varepsilon|_{0,p,\R^n}\leq |\phi-u|_{0,p,\R^n}+| \rho_\varepsilon|_{0,1,\R^n}<\delta/3
+        \end{align*}
+        This proves the claim made in the beginning of this step.\\
+        Step 2\\
+        Now, if $u\in \W{1,p}{\R^n}$, then $u\ast \rho_\varepsilon$ is a $C^\infty$ function and $D^\alpha(u\ast \rho_\varepsilon)=D^\alpha u\ast \rho_\varepsilon=u\ast D^\alpha \rho_\varepsilon$ for any multi-index $\alpha$. By Step 1, $u\ast \rho_\varepsilon \to u$ and $D^\alpha (u\ast \rho_\varepsilon)=\rho_\varepsilon\ast D^\alpha u$ in $\LP{p}{\R^n}$. Hence $u\ast \rho_\varepsilon\to u$ in $\W{1,p}{\R^n}$.\\
+        Step 3\\
+        Let $\zeta$ be a function in $\D(\R^n)$ such that $0\leq \zeta \leq 1$, $\zeta \equiv 1$ on $B(0;1)$ and supp$(\zeta)\subset B(0;2)$. We consider the sequence $\{\zeta_k\}$ in $\D (\R^n)$ defined by
+        \begin{align*}
+            \zeta_k(x)=\zeta(x/k)
+        \end{align*}
+        Let $\varepsilon_k \downarrow 0$. Set $u_k=\rho_{\varepsilon_k}\ast u$. Then $u_k\in \E(\R^n)$ and $u_k\to u$ in $\W{1,p}{\R^n}$ by Step 2. Now define $\phi_k\in\D(\R^n)$ by
+        \begin{align*}
+            \phi_k (x)=\zeta_k(x)u_k(x).
+        \end{align*}
+        We now show that $\phi_k\to u$ in $\W{1,p}{\R^n}$, which will complete the proof. Since $\zeta_k\equiv 1$ on $B(0;k)$ we have $u_k=\phi_k$ on $B(0;k)$. Hence
+        \begin{align*}
+            |u_k-\phi_k|_{0,p,\R^n}=\bigg (\int_{|x|>k}|u_k(x)-\phi_k(x)|^pdx\bigg )^{1/p}\leq 2\bigg (\int_{|x|>k}|u_k|^p\bigg )^{1/p}
+        \end{align*}
+        since $|\phi_k|\leq |u_k|$. Now the latter integral tends to zero as $k\to\infty$ since $u_k\to u$ in $\LP{p}{\R^n}$. Thus $\phi_k\to u$ in $\LP{p}{\R^n}$. Similarly, since
+        \begin{align*}
+            \frac{\partial \phi_k}{\partial x_i}=\frac{\partial u_k}{\partial x_i}
+        \end{align*}
+        on $b(0;k)$, we get $\frac{\partial \phi_k}{\partial x_i}\to\frac{\partial u}{\partial x_i}$ in $\LP{p}{\R^n}$ by an analogous argument. Thus $\phi_k\to u$ in $\W{1,p}{\R^n}$.
+    \end{proof}
+    
+    \begin{thrm}[1.5.2]\ \\
+        Let $1<p<\infty$ and $f\in\LP{1}{\R^n},g\in\LP{p}{\R^n}$. The $f\ast g$ is well-defined and further, $f\ast g\in\LP{p}{\R^n}$ with
+        \begin{align*}
+            ||f\ast g||_{\LP{p}{\R^n}}\leq ||f||_{\LP{1}{\R^n}}||g||_{\LP{p}{\R^n}}
+        \end{align*}
+    \end{thrm}
+    
+    \begin{proof}\ \\
+        Let $q$ be the conjugate exponent of $p$. Let $h\in \LP{q}{\R^n}$. Then $(x,y)\mapsto f(x-y)g(y)h(x)$ is measurable and
+        \begin{align*}
+            \int_{\R_x^n}\int_{\R_y^n}|f(x-y)g(y)h(x)|dydx&=\int_{\R_x^n}|h(x)|\int_{\R_y^n}|f(x-y)g(y)|dydx\\
+            &=\int_{\R_x^n}|h(x)|\int_{\R_t^n}|f(t)g(x-t)|dtdx\\
+            &=\int_{\R_t^n}|f(t)|dt\int_{\R_x^n}|h(t)||g(x-t)|dx\\
+            &\leq ||h||_{\LP{q}{\R^n}}||g||_{\LP{p}{\R^n}}||f||_{\LP{1}{\R^n}}\\
+            &<+\infty
+        \end{align*}
+        (Holder's and translation invariance).\\
+        Thus by Fubini's theorem
+        \begin{align*}
+            \int_{\R_y^n}|f(x-y)g(y)h(x)|dy
+        \end{align*}
+        exists for almost all $x$ and since we can choose $h(x)\neq 0$ for all $x$ we deduce that $f\ast g$ is well defined. Also
+        \begin{align*}
+            h\to \int (f\ast g)h
+        \end{align*}
+        is a continuous linear functional on $\LP{q}{\R^n}$ with norm bounded by $||g||_{\LP{p}{\R^n}}||f||_{\LP{1}{\R^n}}$ which shows, by the Riesz Representation Theorem, that $f\ast g\in\LP{p}{\R^n}$ and $||f\ast g||_{\LP{p}{\R^n}}\leq ||f||_{\LP{1}{\R^n}}||g||_{\LP{p}{\R^n}}$.
+    \end{proof}
+    
+    \begin{thrm}\ \\
+        Let $1\leq p< \infty$. Then $\D(\R^n)$ is dense in $\LP{p}{\R^n}$.
+    \end{thrm}
+    
+    \begin{proof}\ \\
+        Step 1\\
+        Let $S$ be the class of measurable simple functions $\phi$ such that
+        \begin{align*}
+            \mu\{\phi (x)\neq 0\}<+\infty,
+        \end{align*}
+        $\mu$ being the Lebesgue measure. If $\phi \in S$ then $\phi$ is zero outside a set of finite measure and hence $\phi\in\LP{p}{\R^n}$. Let $f\in\LP{p}{\R^n}$ and $f\geq 0$. Then there exist simple functions $\phi_m$ such that $0\leq \phi_m\leq f,\quad \phi_m\uparrow f$. Since $f\in\LP{p}{\R^n}$, it follows that $\phi_m\in S$. Also $|\phi_m-f|^p\leq 2^p|f|^p$ and since $|f|^p$ is integrable, by the Dominated Convergence Theorem it follow that $\phi_m\to f$ in $\LP{p}{\R^n}$. If $f$ is any element in $\LP{p}{\R^n}$, write $f=f^+-f^-$ with $f^+\geq 0, f^-\geq 0$ and so there exist $\phi_m,\psi_m\in S$ with $\phi_m\to f^+,\psi_m\to f^-$ in $\LP{p}{\R^n}$ and so $\phi_m-\psi_m\to f$ in $\LP{p}{\R^n}$. Thus $S$ is dense in $\LP{p}{\R^n}$.\\
+        Step 2\\
+        Let $\phi \in S$. Given $\varepsilon >0$, there exists a continuous function $g$ with compact support such that $g=\phi$ except possibly on a set of measure $\varepsilon$ and such that 
+        \begin{align*}
+            |g|\leq ||\phi||_{\LP{\infty}{\R^n}}
+        \end{align*}
+        (This is a consequence of Lusin's Theorem.) Hence
+        \begin{align*}
+            ||g-\phi||_{\LP{p}{\R^n}}\leq 2\varepsilon^{1/p}||\phi ||_{\LP{\infty}{\R^n}}
+        \end{align*}
+        and it follows from Step 1 above that continuous functions with compact support are dense in $\LP{p}{\R^n}$.\\
+        Step 3\\
+        Let $f$ be a continuous function with compact support an let $\phi_m \in\D(\R^n)$ with supp$(f)\subset K$, $K$ a fixed compact set, such that $\phi_m\to f$ uniformly on $K$. Then
+        \begin{align*}
+            \int_{\R^n}|f-\phi_m|^p=\int_K|f-\phi_m|^p\leq \sup_k|f-\phi_m|\mu(K)\to 0
+        \end{align*}
+        as $m\to\infty$. Thus $\phi_m$ approximates $f$ in the $L^p$-norm as well and the result now follows on combining this fact with the conclusion of Step 2.
+    \end{proof}
+\newpage
 
-\begin{frame}{Zero is an Eigenvalue}
-    For $\Phi=[u_0,h_0,h_1,w_0,w_1]\in D(\A)$, it follows $\A\Phi=0$ implies
-    \begin{align*}
-        &\diver (\nabla u_0+\nabla^T u_0)-\nabla p=0\text{ in }\Om_f\\
-        &\boxed{h_1=0}\text{ in }\G_s\\
-        &-\nu\cdot(\nabla u_0+\nabla^T u_0)|_{\G_s}+\Delta_{\G_s}(h_0)+\nu\cdot\sigma(w_0)|_{\G_s}+p\nu=0\text{ in }\G_s\\
-        &\boxed{w_1=0}\text{ in }\Om_s\\
-        &\diver\sigma(w_0)-w_0=0\text{ in }\Om_s
-    \end{align*}
-    Dissipativity shows
-    \begin{align*}
-        0=\Real\IP{\A\Phi,\Phi}{}&=\frac{1}{2}||\nabla u_0+\nabla^T u_0||^2\implies \boxed{u_0=0}\\
-        &\boxed{p=c_0=\text{constant}}
-    \end{align*}
-\end{frame}
+\section{2.3 Extension Theorems}
+    \begin{define}\ \\
+        Let $x\in\R^n,\quad x=(x_1,...,x_n).$ We set $x'=(x_1,...,x_{n-1
+        })$ and write $x=(x',x_n)$.\\
+        Define the sets
+        \begin{align*}
+            Q_+&=\set{x\in\R^n}{|x'|<1,0<x_n<1}\\
+            Q&=\set{x\in\R^n}{|x'|<1,|x_n|<1}
+        \end{align*}
+        Where $|x'|$ is the Euclidean norm of $|x'|$ in $\R^{n-1}$
+    \end{define}
+    
+    \begin{define}[2.3.1]\ \\
+        We say that an open set $\Om$ is of class $C^k$ ($k$ an integer $\geq$ 1) if for every $x\in\partial\Om$, there exists a neighborhood $U$ of $x$ in $\R^n$ and a map $T:Q\to U$ such that
+        \begin{itemize}
+            \item $T$ is a bijection
+            \item $T\in C^k(\bar{Q}),\quad T^{-1}\in C^k(\bar{U})$
+            \item $T(Q_+)=U\cap\Om,\quad T(Q_0)=U\cap\partial\Om$
+        \end{itemize}
+        Where $Q_+,Q$ are defined above and
+        \begin{align*}
+            Q_0=\set{x\in Q}{ x_n=0}
+        \end{align*}
+        We say that $\Om$ is of class $C^\infty$ if it is of class $C^k$ for every integer $k\geq 1$.
+    \end{define}
+    
+    \begin{cor}\ \\
+        If $\Om$ is of class $C^1$ and has $\partial\Om$ bounded, then $C^\infty(\bar{\Om})$ is dense in $\W{1,p}{\Om}$, $1\leq p<\infty$.
+    \end{cor}
+    
+    \begin{thrm}[2.3.4 (\textbf{Poincaré's Inequality}).]\ \\
+        Let $\Om$ be a \textit{bounded} open set in $\R^n$. Then there exists a positive constant $C=C(\Om,p)$ such that
+        \begin{align*}
+            |u|_{0,p,\Om}\leq C|u|_{1,p,\Om}\quad \text{for every } u\in \WO{1,p}{\Om}.
+        \end{align*}
+        In particular, $u\to |u|_{1,p,\Om}$ defines a \textit{norm} on $\WO{1,p}{\Om}$, which is equivalent to the norm $||\cdot||_{1,p,\Om}$. On $H^1_0(\Om)$, the bilinear form
+        \begin{align*}
+            (u,v)\mapsto \int_\Om \sum_{i=1}^n\frac{\partial u}{\partial x_l}\frac{\partial v}{\partial x_i},
+        \end{align*}
+        defines an inner-product giving rise to the norm $|\cdot|_{1,\Om}$, equivalent to the norm $||\cdot||_{l,\Om}$.
+    \end{thrm}
+    
+    \begin{proof}\ \\
+        Let $\Om=(-a,a)^n,\: a>0$. Let $u\in\D(\Om)$. Then
+        \begin{align*}
+            u(x)=\int_{-a}^{x_n}\frac{\partial u}{\partial x_n}(x',t)dt,\:x=(x',x_n), \text{ since } u(x',-a)=0
+        \end{align*}
+        Hence
+        \begin{align*}
+            |u(x)|\leq \bigg (\int_{-a}^{x_n}\bigg |\frac{\partial u}{\partial x_n}(x',t)\bigg |^p dt\bigg )^{1/p}|x_n+a|^{1/q}
+        \end{align*}
+        Where $p$ and $q$ are Hölder conjugates. Or,
+        \begin{align*}
+            |u(x)|^p\leq |x_n+a|^{p/q}\int_{-a}^{x_n}\bigg |\frac{\partial u}{\partial x_n}(x',t)\bigg |^p dt
+        \end{align*}
+        Integrating over $x'$,
+        \begin{align*}
+            \int|u(x',x_n)|^p dx'\leq (2a)^{p/q}\int_\Om \bigg |\frac{\partial u}{\partial x_n}\bigg |^p,
+        \end{align*}
+        and so
+        \begin{align*}
+            \int_\Om |u(x)|^p dx\leq (2a)^{p/q+1}\int_\Om \bigg |\frac{\partial u}{\partial x_n}\bigg |^p
+        \end{align*}
+        which proves the inequality in the theorem for $u\in\D(\Om)$. But $\D(\Om)$ is dense in $\WO{1,p}{\Om}$ and the inequality follows for all $u\in \WO{1,p}{\Om}$. If $\Om$ is not a 'box' let $\Om\subset \tilde{\Om}$, box of the form $(-a,a)^n$ and extend $u\in \WO{1,p}{\Om}$ by zero to get $\tilde{u}\in \WO{1,p}{\tilde{\Om}}$ and apply the result which is available for $\tilde{\Om}$ and the inequality follows.
+    \end{proof}
+\newpage
 
-\begin{frame}{Zero is an Eigenvalue}
-    Define $S=\set{[f,g]\in\HM{1}{\G_s}\times\HM{1}{\Om_s}}{f=g|_{\G_s}}$.\\
-    Testing the previous equations with $f,g$,
-    \begin{align*}
-        \textbf{B}([h_0,w_0],[f,g])&=\IP{\nabla_{\G_s}(h_0),\nabla_{\G_s}(f)}{\G_s}+\IP{\sigma(w_0),\epsilon(g)}{\Om_s}+\IP{w_0,g}{\Om_s}\\
-        &=\IP{c_0\nu,f}{\G_s}
-    \end{align*}
-    As $B(\cdot,\cdot)$ is continuous and S-elliptic, using Lax-Milgram finds $\{h_0,w_0\}\in S$. (Then in $D(\A)$)
-    \begin{align*}
-        \text{Null}(\A)=\text{Span}\left \{\begin{bmatrix}
-        0\\h_0\\0\\w_0\\0
-        \end{bmatrix} \right \}
-    \end{align*}
-    $\text{Null}(\A)^\perp=\set{[\tilde{u}_0,\tilde{h}_0,\tilde{h}_1,\tilde{w}_0,\tilde{w}_1]\in\BH}{\int_{\G_s}\nu\cdot\tilde{h}_0d\G_s=0}$
-\end{frame}
+\section{2.4 Embedding Theorems}
+    \begin{thrm}[2.4.5]\ \\
+        Let $m\geq 1$ be an integer and $1\leq p<\infty$. Then
+        \begin{itemize}
+            \item if $\frac{1}{p}-\frac{m}{n}>0,\: \W{m,p}{\Om}\subset \LP{q}{\Om},\:\frac{1}{q}=\frac{1}{p}-\frac{m}{n},$
+            \item if $\frac{1}{p}-\frac{m}{n}=0,\: \W{m,p}{\Om}\subset \LP{q}{\Om},\text{ for } q\in[p,\infty)$,
+            \item if $\frac{1}{p}-\frac{m}{n}<0,\: \W{m,p}{\Om}\subset L^\infty(\Om),$
+        \end{itemize}
+        and in the latter case, i.e. when $m>(n/p)$ if we set
+        \begin{align*}
+            k=\bigg [m-\frac{n}{p}\bigg],\:\theta=\bigg (m-\frac{n}{p}\bigg )-k,
+        \end{align*}
+        What?\\
+        $[.]$, denoting the integral part of a real number, we have
+        \begin{align*}
+            |D^\alpha u|_{0,\infty,\R^n}\leq C||u||_{m,p,\R^n}\quad \text{for } |\alpha|\leq k
+        \end{align*}
+        and
+        \begin{align*}
+            |D^\alpha u(x)-D^\alpha (y)|\leq C|x-y|^\theta||u||_{m,p,\R^n}\text{ a.e. } (x,y),
+        \end{align*}
+        for $|\alpha|=k$. (If $|\alpha|<k$, the previous inequality holds with $\theta=1$ by virtue of the previous inequality. In particular we have the continuous inclusion
+        \begin{align*}
+            \W{m,p}{\Om}\to C^k(\Om),\:m>(n/p).
+        \end{align*}
+        No proof given
+    \end{thrm}
+\newpage
 
-\begin{frame}{$\beta,\:i\beta\not\in\sigma_p(\A),\:\beta\neq 0$}
-    For $\Phi=[u_0,h_0,h_1,w_0,w_1]$,
-    \begin{align*}
-        [i\beta I-\A]\Phi=0
-    \end{align*}
-    Thus we see there is an overdetermined eigenvalue problem
-    \begin{align*}
-        -\beta^2 w_0-\diver\sigma(w_0)+w_0=0\text{ in }\Om_s\\
-        w_0|_{\G_s}=0\text{ on }\G_s\\
-        \nu\cdot\sigma(w_0)=-c_0\nu\text{ on }\G_s
-    \end{align*}
-    \textbf{Assumption} for (fixed) given $\beta$, assume that the only solution to the above overdetermined problem is $w_0=0$ (and necessarily $c_0=0$).
-\end{frame}
 
-\begin{frame}{$\beta,\:i\beta\not\in\sigma_c(\A),\:\beta\neq 0$}
-    Assume to the contrary. Then since $\sigma_c(\A)\subseteq\sigma_{\text{app}}(\A)$ there exists a sequence $\{\Phi_n\}=\{[u_{0n},h_{0n},h_{1n},w_{0n},w_{1n}]\}\subseteq D(\A)$ such that
-    \begin{align*}
-        ||\Phi_n||=1\text{ and }||(i\beta I-\A)\Phi_n||_{\BH}<\frac{1}{n}
-    \end{align*}
-\end{frame}
+\section{2.5 Compactness Theorems}
 
-\begin{frame}{$\beta,\:i\beta\not\in\sigma_r(\A),\:\beta\neq 0$}
-    It is known that for a closed and densely defined operator $\A$, if $\lambda\in\sigma_r(\A)$ then $\overline{\lambda}\in\sigma_p(\A^*)$. It follows\\
-    $\A^*: D(\A^*)\subseteq\BH\to\BH$ is given by
-        \begin{align}
-            \A^*=&\begin{bmatrix}
-                \diver(\nabla (\cdot)+\nabla^T(\cdot))&0&0&0&0\\
-                0&0&-I&0&0\\
-                -[\nu\cdot(\nabla(\cdot)+\nabla^T(\cdot))]|_{\G_s}&-\Delta_{\G_s}(\cdot)&0&-\nu\cdot\sigma(\cdot)|_{\G_s}&0\\
-                0&0&0&0&-I\\
-                0&0&0&-\diver\sigma(\cdot)+I&0
-            \end{bmatrix}+\nonumber\\
-            &\begin{bmatrix}
-                -\nabla \mathcal{P}_1(\cdot)&\nabla \mathcal{P}_2(\cdot)&0&\nabla \mathcal{P}_3(\cdot)&0\\
-                0&0&0&0&0\\
-                \mathcal{P}_1(\cdot)\nu&-\mathcal{P}_2(\cdot)\nu&0&-\mathcal{P}_3(\cdot)\nu&0\\
-                0&0&0&0&0\\
-                0&0&0&0&0\\
-            \end{bmatrix}\label{sseq:38}
-        \end{align}
-    $D(\A)=D(\A^*)$, $i\beta$ is not an eigenvalue of $\A^*$ so $i\beta\not\in\sigma_r(\A)$
-\end{frame}
+    \begin{define}\ \\
+        Let $1\leq p< n.$ Then we define the exponent $p^*$ by
+        \begin{align*}
+            \frac{1}{p^*}=\frac{1}{p}-\frac{1}{n}\text{ or } p^*=\frac{np}{n-p}
+        \end{align*}
+    \end{define}
+    
+    \begin{thrm}[2.5.3 (\textbf{Rellich-Kondrasov})]\ \\
+        Let $\Om\subset\R^n$ be a bounded open set of class $C^1$. Then the following inclusions are compact.
+        \begin{itemize}
+            \item if $p<n,\:\W{1,p}{\Om}\to\LP{q}{\Om},\quad 1\leq q <p^*$,
+            \item if $p=n,\:\W{1,n}{\Om}\to\LP{q}{\Om},\quad 1\leq q <\infty$,
+            \item if $p>n,\:\W{1,p}{\Om}\to C(\bar{\Om})$.
+        \end{itemize}
+    \end{thrm}
+    
+    \begin{proof}\ \\
+        When $p>n$, as observed earlier the functions of $\W{1,p}{\Om}$ are Holder continuous. If $B$ is the unit ball in $\W{1,p}{\Om}$, it follows from theorem 2.4.4 and the analogue of the inequality (2.4.17) that the functions in $B$ are uniformly bounded and equicontinuous in $C(\bar{\Om})$. Thus $B$ is relatively compact in $C(\bar{\Om})$ by the Ascoli-Arzela Theorem.\\
+        Assume for the moment that the result is true for $p<n$. Notice that as $p\to n$, $p^*\to\infty$. Hence, since $\Om$ is bounded $\W{1,n}{\Om}\subset \W{1,n-q}{\Om}$ for every $\varepsilon>0$ and given any $q<\infty$ we can find $\varepsilon>0$ such that $1\leq q<(n-\varepsilon)^*$. Hence by using the case for $p=n-\varepsilon<n$, we deduce that $\W{1,n}{\Om}$ is compactly embedded in $\LP{q}{\Om}$ for any $1\leq q<\infty$.\\
+        Thus the theorem will be proved if we prove it for the case $p<n$. Let $B$ be the unit ball in $\W{1,p}{\Om}$. We now verify the first and second conditions of  the previous theorem (2.5.2. not typed out). Let $1\leq q<p^*$. Then choose $\alpha$ such that $0<\alpha\leq 1$ and
+        \begin{align*}
+            \frac{1}{q}=\frac{\alpha}{1}+\frac{1-\alpha}{p^*}.
+        \end{align*}
+        Then (as in the corollary to Theorem 2.4.1 (not typed out)) if $u\in B, \Om'\subset\subset\Om$ and $h\in\R^n$ such that $|h|<\text{dist}(\Om',\R^n \backslash \Om),$
+        \begin{align*}
+            |\tau_{-h}u-u|_{0,p,\Om'}&\leq |\tau_{-h}u-u|_{0,p,\Om'}^\alpha |\tau_{-h}u-u|_{0,p,\Om'}^{1-\alpha}\\
+            &\leq (|h|^\alpha |u|_{1,1,\Om}^\alpha)(2|u|_{0,p^*,\Om})^{1-\alpha}\\
+            &\leq C|h|^\alpha
+        \end{align*}
+        using Lemma 2.5.1 (not typed). We choose $h$ small enough such that $C|h|^\alpha<\varepsilon$. This will verify 2.5.5 ($|\tau_{-h}f-f|_{0,p,\Om'}<\varepsilon$).\\
+        Now if $u\in B$ and $\Om'\subset \subset \Om$, it follows by Holder's inequality that
+        \begin{align*}
+            |u|_{0,q,\Om\backslash\bar{\Om}'}&\leq |u|_{0,p^*,\Om\backslash\bar{\Om}'}\:\text{meas}(\Om\backslash\bar{\Om}')^{1-(q/p^*)}\\
+            &\leq C\:\text{meas}(\Om\backslash\bar{\Om}')^{1-(q/p^*)}
+        \end{align*}
+        which can be made to be less than any given $\varepsilon>0$ by choosing $\Om'\subset\subset\Om$ to be 'as closely filling $\Om$' as needed. This verifies (2.5.6 ( $|f|_{0,p,\Om\backslash\bar{\Om}'}<\varepsilon\quad\text{for every }f\in\mathscr{F}$ bounded set in $\LP{p}{\Om}$)). Thus $B$ is relatively compact in $\LP{q}{\Om}$ for $1\leq q<p^*$ and the theorem is proved.
+    \end{proof}
+    
+\newpage
 
-\begin{frame}{Conclusion}
-    It is important to note that $0\in\rho(\A|_{\text{Null(\A)}^\perp})$. In other words, the resolvent of $\A|_{\text{Null(\A)}^\perp}$.\\
-    \vspace{1cm}
-    By the spectral analysis, the author showed that there is strong stability for any initial data taken in Null($\A)^\perp$.
-\end{frame}
+\section{2.6 Dual Spaces, Fractional Order Spaces and Trace Spaces}
 
-\begin{frame}{Future Work and Open Questions}
-    \Large\underline{Topics}
-    \center
-    \begin{itemize}
-        \item Stokes Model polynomial decay
-        \item Lack of exponential decay
-        \item Navier-Stokes model
-    \end{itemize}
-\end{frame}
+    \begin{define}[2.6.1]\ \\
+        Let $1\leq p<\infty$. Let $p'$ be the conjugate exponent of $p$. The dual of the space $\WO{m,p}{\Om}$ where $m\geq 1$ is an integer, is denoted by $\W{-m,p'}{\Om}$. If $p=2, \HM{-m}{\Om}$ is the dual of the space $H_0^m(\Om)$. 
+    \end{define}
+    
+    \begin{thrm}[2.6.1]\ \\
+        Let $F\in\W{-1,p'}{\Om}$. Then there exist functions $f_0,f_1,...,f_n\in \LP{p'}{\Om}$ such that
+        \begin{align*}
+            F(v)=\int_\Om f_0v+\sum_{i=1}^n\int_\Om f_i \frac{\partial v}{\partial x_i},\:v\in \WO{1,p}{\Om}
+        \end{align*}
+        and
+        \begin{align*}
+            ||F||=\max_{0\leq i\leq n}|f_i|_{0,p',\Om}
+        \end{align*}
+        Further, if $\Om$ is bounded, we assume $f_0=0$.
+    \end{thrm}
+    
+    \begin{define}[1.9.1]\ \\
+        The \textbf{Schwartz Space}, or the space of rapidly decreasing functions, $\Sch$, is given by
+        \begin{align*}
+            \Sch=\set{f\in\E(\R^n)}{\lim_{|x|\to\infty}|x^\beta D^\alpha f(x)|=0\quad \text{for all multi-indices $\alpha$ and $\beta$}}.
+        \end{align*}
+    \end{define}
+    
+    \begin{thrm}[2.6.2]\ \\
+        (This was switched from $\R^n$ to $\Om$) Let $s>0$ be a real number. Then
+        \begin{align*}
+            \HM{-s}{\Om}=\set{u\in \Sch'(\Om)}{(1+|\xi|^2)^{-s/2}\hat{u}(\xi)\in\LP{2}{\Om}}
+        \end{align*}
+    \end{thrm}
+    
+    \begin{thrm}[2.6.3]\ \\
+        (This was switched from $\R^n$ to $\Om$) Let $s_1<s_2$ and $s=\theta s_1+(1-\theta)s_2,\quad \theta\in(0,1)$. If $u\in\HM{s_2}{\Om}$, then
+        \begin{align*}
+            ||u||_{\HM{s}{\Om}}\leq ||u||^\theta_{\HM{s_1}{\Om}}||u||^{1-\theta}_{\HM{s_2}{\Om}}
+        \end{align*}
+    \end{thrm}
+    
+    \begin{note}[2.6.2]\ \\
+        (This was switched from $\R^n$ to $\Om$) Let $s_1<s_2$ and $t_1<t_2$. Let $\theta\in(0,1)$ and set $s=\theta s_1+(1-\theta)s_2,\:t=\theta t_1+(1-\theta)t_2$. Assume that $T$ is a linear operator such that
+        \begin{align*}
+            T\in\Lin(\HM{s_1}{\Om},\HM{t_1}{\Om})\cap \Lin(\HM{s_2}{\Om},\HM{t_2}{\Om})
+        \end{align*}
+        Then it is true that $T\in \Lin(\HM{s}{\Om},\HM{t}{\Om})$ and we also have
+        \begin{align*}
+            ||T||_{\Lin(\HM{s}{\Om},\HM{t}{\Om})}\leq ||T||_{\Lin(\HM{s_1}{\Om},\HM{t_1}{\Om})}^\theta ||T||_{\Lin(\HM{s_2}{\Om},\HM{t_2}{\Om})}^{1-\theta}
+        \end{align*}
+    \end{note}
+    
+    \begin{define}
+        Let $V=(\HM{1}{\Om})^3$, where $\Om\subset \R^3$ is a bounded open set of class $C^1$. If $v\in V$, let $v=(v_1,v_2,v_3)$ be its components. For $1\leq i,j\leq 3$ we define
+        \begin{align*}
+            \epsilon_{ij}(v)=\frac{1}{2}\bigg (\frac{\partial v_i}{\partial x_j}+\frac{\partial v_j}{\partial x_i}\bigg ).
+        \end{align*}
+        We denote by $||\cdot||_V$ the usual product norm on $V$.
+    \end{define}
+    
+    \begin{thrm}[2.6.5 (\textbf{Korn's Inequality})]\ \\
+        Let $\Om$ be a bounded open subset of $\R^3$, of class $C^1$. Then there exists a constant $C>0$, depending only on $\Om$, such that
+        \begin{align*}
+            \int_\Om \sum_{i,j=1}^3|\epsilon_{ij}(v)|^2+\int_\Om \sum_{i=1}^3|v_i|^2\geq C||v||_V^2
+        \end{align*}
+        for every $v\in V$.
+    \end{thrm}
 
-\begin{frame}{Conclusion}
-    \center\Huge Thank You!
-\end{frame}
+\newpage
+
+\section{2.7 Trace Theory}
+
+    \begin{thrm}[2.7.1]\ \\
+        (This was changed from $\R$ case to $\Om$) Let $\Om\subset\R^n$ be bounded. Then there exists a continuous linear map $\gamma_0:\HM{1}{\Om}\to \LP{2}{\R^{n-1}}$ which is such that if $v$ is continuous on $\Om$ then
+        \begin{align*}
+            \gamma_0(v)=v|_{\R^{n-1}}
+        \end{align*}
+    \end{thrm}
+    
+    \begin{thrm}[2.7.2]\ \\
+        The range of the map $\gamma_0$ is the space $\HM{1/2}{\R^{n-1}}$.
+    \end{thrm}
+    
+    \begin{note}[2.7.1]\ \\
+        \begin{itemize}
+            \item 
+                (This was changed from $\R$ case to $\Om$) Similarly we can prove that $\gamma_0$ maps $\HM{m}{\Om}$ onto $\HM{m-1/2}{\R^{n-1}}$. Also if $u\in\HM{2}{\Om}$ we can show that $\frac{\partial u}{\partial x_n}(x',0)$ is in $\LP{2}{\R^{n-1}}$ and again $\frac{\partial u}{\partial x_n}(x',0)\in\HM{1/2}{\R^{n-1}}$. We can then extend $-\frac{\partial u}{\partial x_n}(x',0)$ to a continuous linear map $\gamma_1:\HM{2}{\Om}\to\LP{2}{\R^{n-1}}$ whose range is $\HM{1/2}{\R^{n-1}}$. More generally we have a series of continuous linear maps $\{\gamma_i\}$ into $\LP{2}{\R^{n-1}}$. such that the map $\gamma=(\gamma_0,\gamma_1,...,\gamma_{m-1})$ maps $\HM{m}{\Om}$ into $(\LP{2}{\R^{n-1}})^m$ and the range in the space
+                \begin{align*}
+                    \prod_{j=0}^{m-1}\HM{m-j-1/2}{\R^{n-1}}
+                \end{align*}
+            \item 
+                Looking at the kernel of the map $\gamma_0$. If $u$ is continuous on $\bar{\Om}$ and $u$ vanishes on $\Gamma$, then $u\in H_0^1(\Om)$. A few steps not included here lead to $H_0^1(\Om)=\ker (\gamma_0)$
+        \end{itemize}
+    \end{note}
+    
+    \begin{thrm}[2.7.4 (\textbf{Trace Theorem})]\ \\
+        Let $\Om\subset \R^n$ be a bounded open set of class $C^{m+1}$ with boundary $\Gamma$. Then there exists a trace map $\gamma=(\gamma_0,\gamma_1,...,\gamma_{m-1})$ from $\HM{m}{\Om}$ into $(\LP{2}{\Om})^m$ such that
+        \begin{itemize}
+            \item 
+                If $v\in C^\infty (\bar{\Om})$, then $\gamma_0(v)=v|_\Gamma,\:\gamma_1(v)=\frac{\partial v}{\partial \nu}|_\Gamma$,..., and $\gamma_{m-1}(v)=\frac{\partial^{m-1}}{\partial \nu^{m-1}}(v)|_\Gamma$, where $\nu$ is the unit exterior normal to the boundary $\Gamma$.
+            \item 
+                The range of $\gamma$ is the space
+                \begin{align*}
+                    \prod_{j=0}^{m-1}\HM{m-j-1/2}{\Gamma}
+                \end{align*}
+            \item 
+                The kernel of $\gamma$ is $H_0^m(\Om)$.
+        \end{itemize}
+    \end{thrm}
+    
+    \begin{thrm}[2.7.5 (\textbf{Green's Theorem}, or, \textbf{Green's Formula})]\ \\
+        Let $\Om$ be a bounded open set of $\R^n$ set of class $C^1$ lying on the same side of its boundary $\Gamma$. Let $u,v\in\HM{1}{\Om}$. Then for $1\leq i\leq n$,
+        \begin{align*}
+            \int_\Om u\frac{\partial v}{\partial x_i}=-\int_\Om \frac{\partial u}{\partial x_i}v+\int_\Gamma (\gamma_0u)(\gamma_0v)\nu_i.
+        \end{align*}
+    \end{thrm}
+    
+\newpage
+
+\section{Bibliography}
+\printbibliography
 
 \end{document}
